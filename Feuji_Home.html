@@ -1,0 +1,2431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feuji — Applied AI Engineering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─────────────────────────────────────────
+       DESIGN TOKENS
+    ───────────────────────────────────────── */
+    :root {
+      --f-display: 'Cormorant Garamond', Georgia, serif;
+      --f-ui:      'DM Sans', system-ui, sans-serif;
+
+      /* neutral palette */
+      --ink:       #0A0A0A;
+      --ink-90:    #1A1A1A;
+      --ink-70:    #333333;
+      --mid:       #555555;
+      --muted:     #888888;
+      --border:    #E0E0E0;
+      --border-dk: #242424;
+      --surface:   #F5F5F5;
+      --white:     #FFFFFF;
+
+      /* layout */
+      --nav-h:     80px;
+      --max-w:     1280px;
+      --pad-x:     80px;
+      --sec-py:    128px;
+      --gap:       32px;
+
+      /* easing */
+      --ease:     cubic-bezier(0.25,0.1,0.25,1);
+      --ease-out: cubic-bezier(0,0,0.2,1);
+    }
+
+    /* ─────────────────────────────────────────
+       RESET
+    ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: var(--f-ui);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+    a   { text-decoration: none; color: inherit; }
+    ul  { list-style: none; }
+    img, svg { display: block; max-width: 100%; }
+    button { cursor: pointer; background: none; border: none; font-family: inherit; }
+
+    /* ─────────────────────────────────────────
+       TYPOGRAPHY — exact token values
+    ───────────────────────────────────────── */
+
+    /* Label S: DM Sans 600 12/13 +1px uppercase */
+    .t-label-s {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Label M: DM Sans 600 14/15 +1px uppercase */
+    .t-label-m {
+      font-family: var(--f-ui);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 15px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Display M: Cormorant 500 72/72 -3px */
+    .t-display-m {
+      font-family: var(--f-display);
+      font-size: 72px;
+      font-weight: 500;
+      line-height: 72px;
+      letter-spacing: -3px;
+    }
+
+    /* H2: Cormorant 500 64/64 -3px */
+    .t-h2 {
+      font-family: var(--f-display);
+      font-size: 64px;
+      font-weight: 500;
+      line-height: 64px;
+      letter-spacing: -3px;
+    }
+
+    /* H3: Cormorant 500 40/40 -2px */
+    .t-h3 {
+      font-family: var(--f-display);
+      font-size: 40px;
+      font-weight: 500;
+      line-height: 40px;
+      letter-spacing: -2px;
+    }
+
+    /* H4: DM Sans 500 32/35 -1px */
+    .t-h4 {
+      font-family: var(--f-ui);
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 35px;
+      letter-spacing: -1px;
+    }
+
+    /* H5: DM Sans 500 24/29 -1px */
+    .t-h5 {
+      font-family: var(--f-ui);
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 29px;
+      letter-spacing: -1px;
+    }
+
+    /* Body XL: DM Sans 400 20/28 -1px */
+    .t-body-xl {
+      font-family: var(--f-ui);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: -1px;
+    }
+
+    /* Body L: DM Sans 400 18/25 -1px */
+    .t-body-l {
+      font-family: var(--f-ui);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 25px;
+      letter-spacing: -1px;
+    }
+
+    /* Body M: DM Sans 400 16/24 0 */
+    .t-body-m {
+      font-family: var(--f-ui);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: 0;
+    }
+
+    /* Body S: DM Sans 400 14/21 0 */
+    .t-body-s {
+      font-family: var(--f-ui);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      letter-spacing: 0;
+    }
+
+    /* Stats L: Cormorant 500 80/80 -3px */
+    .t-stats-l {
+      font-family: var(--f-display);
+      font-size: 80px;
+      font-weight: 500;
+      line-height: 80px;
+      letter-spacing: -3px;
+    }
+
+    /* Btn: DM Sans 400 16/18 0 */
+    .t-btn {
+      font-family: var(--f-ui);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 18px;
+      letter-spacing: 0;
+    }
+
+    /* Nav: DM Sans 400 18/20 -1px */
+    .t-nav {
+      font-family: var(--f-ui);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: -1px;
+    }
+
+    /* Legal: DM Sans 400 14/20 0 */
+    .t-legal {
+      font-family: var(--f-ui);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0;
+    }
+
+    /* ─────────────────────────────────────────
+       LAYOUT HELPERS
+    ───────────────────────────────────────── */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+    }
+
+    .eyebrow {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .eyebrow--inv { color: rgba(255,255,255,0.45); }
+
+    /* ─────────────────────────────────────────
+       BUTTONS
+    ───────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s var(--ease), color 0.2s var(--ease),
+                  border-color 0.2s var(--ease), transform 0.18s var(--ease);
+      font-family: var(--f-ui);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 18px;
+      letter-spacing: 0;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-arrow { display: inline-block; transition: transform 0.2s var(--ease); }
+    .btn:hover .btn-arrow { transform: translateX(4px); }
+
+    /* Primary — dark fill, light BG */
+    .btn--primary {
+      background: var(--ink);
+      color: var(--white);
+      border-color: var(--ink);
+    }
+    .btn--primary:hover { background: var(--ink-70); border-color: var(--ink-70); }
+
+    /* Primary Inverse — white fill, dark BG */
+    .btn--primary-inv {
+      background: var(--white);
+      color: var(--ink);
+      border-color: var(--white);
+    }
+    .btn--primary-inv:hover { background: #E8E8E8; border-color: #E8E8E8; }
+
+    /* Primary Orange — orange fill, any BG */
+    .btn--primary-orange {
+      background: var(--orange);
+      color: var(--white);
+      border-color: var(--orange);
+    }
+    .btn--primary-orange:hover { background: var(--orange-dark); border-color: var(--orange-dark); }
+
+    /* Secondary — outline, light BG */
+    .btn--secondary {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+    .btn--secondary:hover { background: var(--ink); color: var(--white); }
+
+    /* Secondary Inverse — outline, dark BG */
+    .btn--secondary-inv {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255,255,255,0.4);
+    }
+    .btn--secondary-inv:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.7); }
+
+    /* Tertiary Inverse — text link, dark BG */
+    .btn--tertiary-inv {
+      padding: 0;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.75);
+      gap: 8px;
+    }
+    .btn--tertiary-inv:hover { color: var(--white); }
+    .btn--tertiary-inv:hover { transform: none; }
+
+    /* ─────────────────────────────────────────
+       NAVIGATION
+    ───────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      transition: background 0.35s var(--ease), border-color 0.35s var(--ease),
+                  backdrop-filter 0.35s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav.is-scrolled {
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-color: var(--border);
+    }
+
+    .nav__inner {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .nav__logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav__logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
+      transition: filter 0.3s var(--ease);
+    }
+
+    /* On dark hero: logo shows white; past hero: orange logo restores */
+    .nav--dark .nav__logo-img {
+      filter: brightness(0) invert(1);
+    }
+    .nav--light .nav__logo-img {
+      filter: none;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .nav__link {
+      font-family: var(--f-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: -0.3px;
+      position: relative;
+      transition: opacity 0.2s;
+    }
+    .nav__link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0; right: 0;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.22s var(--ease);
+    }
+    .nav__link:hover::after,
+    .nav__link.is-active::after { transform: scaleX(1); }
+
+    /* nav colours — default: on dark hero */
+    .nav--dark .nav__logo,
+    .nav--dark .nav__link { color: var(--white); }
+
+    .nav--light .nav__logo,
+    .nav--light .nav__link { color: var(--ink); }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+    .hero {
+      min-height: 60vh;
+      background: var(--ink);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Video background */
+    .hero__video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Dark scrim over video for text legibility */
+    .hero__video-scrim {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero__inner {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 40px;
+      max-width: var(--max-w);
+      width: 100%;
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 80px) var(--pad-x) 80px;
+      position: relative;
+      z-index: 4;
+    }
+
+    /* Display L — Cormorant 120/120 −6px */
+    .hero__headline {
+      font-family: var(--f-display);
+      font-size: 120px;
+      font-weight: 400;
+      line-height: 120px;
+      letter-spacing: -6px;
+      color: var(--white);
+      /* Parallax: JS sets --parallax-y */
+      will-change: transform;
+      transform: translateY(calc(var(--parallax-y, 0) * 1px));
+    }
+
+    .hero__bottom {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Body XL descriptor line */
+    .hero__sub {
+      font-family: var(--f-ui);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: -1px;
+      color: rgba(255,255,255,0.90);
+      max-width: 620px;
+    }
+
+    .hero__actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* scroll indicator */
+    .hero__scroll {
+      position: absolute;
+      bottom: 40px;
+      right: var(--pad-x);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,0.65);
+      z-index: 4;
+    }
+    .hero__scroll-line {
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.45);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero__scroll-line::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--white);
+      animation: scroll-line 2s ease-in-out infinite;
+    }
+    @keyframes scroll-line {
+      0%   { transform: translateX(-100%); }
+      50%  { transform: translateX(0); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* ─────────────────────────────────────────
+       SECTION BASE
+    ───────────────────────────────────────── */
+    .section-light { background: var(--white); }
+    .section-surface { background: var(--surface); }
+    .section-dark { background: var(--ink); }
+
+    .section__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: var(--sec-py) var(--pad-x);
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+      margin-bottom: 72px;
+    }
+
+    /* ─────────────────────────────────────────
+       ABOUT — WHO WE ARE
+    ───────────────────────────────────────── */
+    .about .section__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about__heading em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .about__heading { margin-bottom: 36px; }
+
+    .about__body {
+      color: var(--mid);
+      margin-bottom: 0;
+    }
+    .about__body p + p { margin-top: 20px; }
+
+    .about__img {
+      aspect-ratio: 630 / 400;
+      min-height: 320px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    /* ─────────────────────────────────────────
+       CARDS (shared)
+    ───────────────────────────────────────── */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s var(--ease);
+      cursor: default;
+    }
+    .card:hover {
+      border-color: var(--ink-70);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+      transform: translateY(-3px);
+    }
+
+    .card__num {
+      font-family: var(--f-display);
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -2px;
+      color: var(--border);
+      transition: color 0.22s;
+    }
+    .card:hover .card__num { color: #C0C0C0; }
+
+    .card__title {
+      font-family: var(--f-ui);
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    .card__body {
+      font-family: var(--f-ui);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      letter-spacing: 0;
+      color: var(--mid);
+    }
+
+    /* ─────────────────────────────────────────
+       OPEN ITEM — typographic, no border
+    ───────────────────────────────────────── */
+    /* ─────────────────────────────────────────
+       AI ENGINEERING — tabbed layout
+    ───────────────────────────────────────── */
+
+    /* Image panel */
+    .ai-tabs__image {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #EDEBE7;
+      margin-bottom: 40px;
+    }
+
+    .ai-tab-img {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.5s var(--ease);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ai-tab-img.is-active { opacity: 1; }
+
+    /* Dot-grid texture on image panels */
+    .ai-tab-img::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(0,0,0,0.07) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+
+    /* Subtle label in each image panel */
+    .ai-tab-img__label {
+      position: absolute;
+      bottom: 24px;
+      left: 32px;
+      font-family: var(--f-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.28);
+    }
+
+    /* Tab cards row */
+    .ai-tabs__cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0 var(--gap);
+    }
+
+    .ai-tab {
+      position: relative;
+      padding: 28px 32px 32px 0;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    /* Grey track — full width, always visible */
+    .ai-tab::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--border);
+      border-radius: 999px;
+    }
+
+    /* Ink fill — animates left → right on active tab */
+    .ai-tab::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: var(--ink);
+      border-radius: 999px;
+    }
+    .ai-tab.is-active::after {
+      animation: ai-progress var(--ai-dur, 4s) linear forwards;
+    }
+    @keyframes ai-progress {
+      from { width: 0; }
+      to   { width: 100%; }
+    }
+
+    .ai-tab__title {
+      font-family: var(--f-display);
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 30px;
+      letter-spacing: -1px;
+      color: var(--muted);
+      transition: color 0.25s var(--ease);
+      margin-bottom: 12px;
+    }
+    .ai-tab.is-active .ai-tab__title { color: var(--ink); }
+
+    .ai-tab__body {
+      font-family: var(--f-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 22px;
+      color: var(--mid);
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+    }
+    .ai-tab.is-active .ai-tab__body {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─────────────────────────────────────────
+       SERVICES — numbered horizontal list
+    ───────────────────────────────────────── */
+    .svc-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .svc-item {
+      display: grid;
+      /* num | title | preview zone | body */
+      grid-template-columns: 40px 1fr 200px 1fr;
+      gap: 0 32px;
+      align-items: center;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      transition: border-color 0.2s;
+      cursor: default;
+      overflow: visible; /* allow preview to bleed past row borders */
+      position: relative;
+      z-index: 0;
+    }
+    .svc-item:last-child { border-bottom: 1px solid var(--border); }
+    .svc-item:hover { border-color: var(--ink-70); z-index: 1; }
+
+    /* ── Service row hover preview — dedicated center column ── */
+    .svc-item__preview {
+      width: 100%;
+      /* taller than the row — overflows above and below the border lines */
+      height: 160px;
+      margin-top: -40px;
+      margin-bottom: -40px;
+      background: #F0EDE8;
+      border: 1px solid #E0DBD4;
+      border-radius: 8px;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(-30%) translateY(8px) scale(0.96);
+      transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+      position: relative;
+    }
+
+    /* Dot-grid texture */
+    .svc-item__preview::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(0,0,0,0.09) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+
+    /* Label inside preview */
+    .svc-item__preview-label {
+      position: absolute;
+      bottom: 10px;
+      left: 12px;
+      font-family: var(--f-ui);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.32);
+    }
+
+    /* Show on hover — only rows with a real preview */
+    .svc-item:hover .svc-item__preview {
+      opacity: 1;
+      transform: translateX(-30%) translateY(0) scale(1);
+    }
+
+    /* Empty slot for rows without preview — holds grid space, invisible */
+    .svc-item__preview-slot {
+      height: 80px; /* matches row content height without the bleed margins */
+      pointer-events: none;
+    }
+
+    .svc-item__num {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .svc-item__title {
+      font-family: var(--f-display);
+      font-size: 40px;
+      font-weight: 500;
+      line-height: 40px;
+      letter-spacing: -2px;
+      color: var(--ink);
+      transition: transform 0.22s var(--ease);
+    }
+    .svc-item:hover .svc-item__title { transform: translateX(6px); }
+
+    .svc-item__body {
+      font-family: var(--f-ui);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 25px;
+      letter-spacing: -1px;
+      color: var(--mid);
+    }
+
+    /* ─────────────────────────────────────────
+       CASE STUDIES
+    ───────────────────────────────────────── */
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+    }
+
+    .case-card {
+      border: 1px solid var(--border-dk);
+      border-radius: 12px;
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      transition: border-color 0.22s var(--ease), background 0.22s var(--ease),
+                  transform 0.22s var(--ease);
+      cursor: pointer;
+    }
+    .case-card:hover {
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.025);
+      transform: translateY(-2px);
+    }
+
+    .case-card__label {
+      color: rgba(255,255,255,0.35);
+    }
+
+    .case-card__heading {
+      font-family: var(--f-display);
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 38px;
+      letter-spacing: -1px;
+      color: var(--white);
+      flex: 1;
+    }
+
+    /* ─────────────────────────────────────────
+       PARTNERS / CLIENTS
+    ───────────────────────────────────────── */
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    /* ─────────────────────────────────────────
+       CLIENTS MARQUEE
+    ───────────────────────────────────────── */
+    .logo-marquee {
+      overflow: hidden;
+      width: 100%;
+      /* fade edges */
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+
+    .logo-marquee__track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      animation: marquee-scroll 32s linear infinite;
+    }
+
+    .logo-marquee:hover .logo-marquee__track {
+      animation-play-state: paused;
+    }
+
+    @keyframes marquee-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .logo-marquee .logo-pill {
+      flex-shrink: 0;
+      min-width: 160px;
+      width: 160px;
+    }
+
+    .logo-pill {
+      height: 72px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: transparent;
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .logo-pill img {
+      max-height: 36px;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ─────────────────────────────────────────
+       NUMBERS — Feuji at a glance
+    ───────────────────────────────────────── */
+    .numbers-header {
+      margin-bottom: 72px;
+    }
+
+    .numbers-flex {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--gap);
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .stat__val {
+      font-family: var(--f-display);
+      font-size: 80px;
+      font-weight: 500;
+      line-height: 80px;
+      letter-spacing: -3px;
+      color: var(--ink);
+    }
+
+    .stat__label {
+      font-family: var(--f-ui);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: -1px;
+      color: var(--mid);
+    }
+
+    /* ─────────────────────────────────────────
+       COMMUNITY — 3-col typographic cards
+    ───────────────────────────────────────── */
+    /* ── Community sticky scroll ── */
+    .comm-section { padding: 0; }
+
+    .comm-scroll-wrapper {
+      /* 100vh (sticky stage) + room for 3 card reveals at ~160px each */
+      height: calc(100vh + 600px);
+    }
+
+    .comm-sticky-stage {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: var(--white);
+      /* Top-anchored — heading always sits near the top of the viewport */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .comm-stage-inner {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: var(--sec-py) var(--pad-x) 0;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
+
+    /* Heading inside sticky stage — always visible, skip the reveal fade */
+    .comm-sticky-stage .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    .comm-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap);
+    }
+
+    .comm-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(28px);
+      transition: border-color 0.2s,
+                  opacity 0.7s cubic-bezier(0,0,0.2,1),
+                  transform 0.7s cubic-bezier(0,0,0.2,1);
+    }
+    .comm-card.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .comm-card.is-revealed:hover { border-color: var(--ink-70); }
+
+    .comm-card__title {
+      font-family: var(--f-display);
+      font-size: 40px;
+      font-weight: 500;
+      line-height: 40px;
+      letter-spacing: -2px;
+      color: var(--ink);
+    }
+
+    .comm-card__body {
+      font-family: var(--f-ui);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 25px;
+      letter-spacing: -1px;
+      color: var(--mid);
+      flex: 1;
+    }
+
+    .comm-card__link {
+      font-family: var(--f-ui);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 18px;
+      letter-spacing: 0;
+      color: var(--mid);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .comm-card__link:hover { color: var(--ink); }
+    .comm-card__link .btn-arrow { transition: transform 0.2s var(--ease); }
+    .comm-card__link:hover .btn-arrow { transform: translateX(4px); }
+
+    /* ─────────────────────────────────────────
+       JOIN US
+    ───────────────────────────────────────── */
+    .join .section__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .join__img {
+      aspect-ratio: 4/3;
+      order: 2;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .join__content { order: 1; }
+
+    .join__heading {
+      margin-bottom: 28px;
+    }
+
+    .join__body {
+      color: var(--mid);
+      margin-bottom: 44px;
+    }
+
+    /* ─────────────────────────────────────────
+       CONNECT — split layout
+    ───────────────────────────────────────── */
+    .connect .section__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .connect__img {
+      aspect-ratio: 630/400;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .connect__content {}
+
+    .connect__heading {
+      font-family: var(--f-display);
+      font-size: 64px;
+      font-weight: 500;
+      line-height: 64px;
+      letter-spacing: -3px;
+      color: var(--ink);
+      margin-bottom: 48px;
+    }
+    .connect__heading em { font-style: italic; font-weight: 400; }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    /* ─────────────────────────────────────────
+       FOOTER REVEAL — curtain / sticky layer
+    ───────────────────────────────────────── */
+
+    /* All page content sits above the footer image */
+    .page-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Image layer — always at the bottom, behind .page-content */
+    .footer-reveal {
+      position: sticky;
+      bottom: 0;
+      z-index: 0;
+      height: 70vh;
+      overflow: hidden;
+    }
+
+    /* The photograph */
+    .footer-reveal__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 70%;
+      display: block;
+    }
+
+    /* Dark gradient at bottom — ensures legal text is legible over the image */
+    .footer-reveal::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 30%;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.55));
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Legal bar — pinned to bottom of image layer */
+    .footer-reveal__legal {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--pad-x) 40px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .footer-reveal__copyright {
+      font-family: var(--f-ui);
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .footer-reveal__policy {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-reveal__policy a {
+      font-family: var(--f-ui);
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.18s;
+      text-decoration: none;
+    }
+    .footer-reveal__policy a:hover { color: rgba(255,255,255,0.85); }
+
+    /* Footer — light theme, merges with section above */
+    .footer {
+      background: var(--white);
+    }
+
+    .footer__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 60px var(--pad-x);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer__top {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 32px;
+    }
+
+    .footer__col-title {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer__link {
+      font-family: var(--f-ui);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      letter-spacing: 0;
+      color: var(--mid);
+      transition: color 0.18s;
+    }
+    .footer__link:hover { color: var(--ink); }
+
+
+    /* ─────────────────────────────────────────
+       DIVIDERS
+    ───────────────────────────────────────── */
+    .divider { height: 1px; background: var(--border); }
+    .divider--dark { background: var(--border-dk); }
+
+    /* ─────────────────────────────────────────
+       BRAND ORANGE ACCENTS
+    ───────────────────────────────────────── */
+    :root {
+      --orange:      #F3752C;  /* Orange 600 — Brand Primary */
+      --orange-light: #FEF3EC;
+      --orange-dark:  #DA6A29; /* Orange 700 */
+    }
+
+    /* Active nav underline → orange */
+    .nav__link.is-active::after { background: var(--orange); }
+
+    /* Stat values → ink black */
+    .stat__val { color: var(--ink); }
+
+    /* Community "Learn more" links → orange on hover */
+    .comm-card__link:hover { color: var(--orange); }
+
+    /* Service item number → orange on hover */
+    .svc-item:hover .svc-item__num { color: var(--orange); }
+
+
+    /* Footer logo accent */
+    .footer__logo { color: var(--white); }
+
+
+    /* ─────────────────────────────────────────
+       SCROLL REVEAL ANIMATIONS
+    ───────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+    .reveal-d4 { transition-delay: 0.32s; }
+    .reveal-d5 { transition-delay: 0.40s; }
+    .reveal-d6 { transition-delay: 0.48s; }
+
+    /* ─────────────────────────────────────────
+       TYPEWRITER — all headings
+       Scroll-driven for h2, timed for hero h1
+    ───────────────────────────────────────── */
+
+    /* Each character span — hidden by default, soft 80ms fade-in */
+    .tw-char {
+      opacity: 0;
+      transition: opacity 0.08s ease;
+      display: inline;
+    }
+    .tw-char.is-visible { opacity: 1; }
+
+
+    /* ─────────────────────────────────────────
+       HERO — ATMOSPHERIC FOG
+       Japanese ma (間): space, pause, atmosphere
+    ───────────────────────────────────────── */
+
+    /* Grain texture overlay — very fine, 2% opacity */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      /* SVG-based noise — renders a fine grain in every browser */
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+      opacity: 0.35;
+      pointer-events: none;
+      mix-blend-mode: overlay;
+      z-index: 3;
+    }
+
+    /* Warm atmospheric radial glow — top-left anchor, orange warmth */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 0% 100%, rgba(245,131,69,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 100% 0%, rgba(255,255,255,0.03) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* Fog veil — soft ambient depth at bottom of hero.
+       Creates a slightly lifted horizon: text feels like it
+       sits on fog rather than a flat plane. */
+    .hero__fog {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 180px;
+      background: linear-gradient(to top,
+        rgba(245,131,69,0.04) 0%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    /* ─────────────────────────────────────────
+       IMAGE PLACEHOLDERS
+       Descriptive labels, dot-grid pattern,
+       warm neutral surface — 90% white, 10% colour
+    ───────────────────────────────────────── */
+    .img-placeholder {
+      position: relative;
+      overflow: hidden;
+      background: #F7F5F2;
+      border: 1px solid #EBEBEB;
+    }
+
+    /* Fine dot grid */
+    .img-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.7;
+    }
+
+    /* Label chip */
+    .img-placeholder__label {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .img-placeholder__tag {
+      display: inline-block;
+      font-family: var(--f-ui);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.3);
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 4px 8px;
+      border-radius: 2px;
+      width: fit-content;
+    }
+
+    .img-placeholder__desc {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 17px;
+      color: rgba(0,0,0,0.38);
+      max-width: 320px;
+    }
+
+    /* Corner pin icon */
+    .img-placeholder__pin {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 32px;
+      height: 32px;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .img-placeholder__pin svg {
+      width: 14px;
+      height: 14px;
+      opacity: 0.4;
+    }
+
+    /* ─────────────────────────────────────────
+       MA (間) — Japanese breathing room
+       Wider section gap, deliberate pause
+       between content and canvas edge
+    ───────────────────────────────────────── */
+    .ma-top    { padding-top:    160px; }
+    .ma-bottom { padding-bottom: 160px; }
+
+    /* Mist divider — a soft blur-bleed between sections */
+    .mist-divider {
+      height: 1px;
+      background: linear-gradient(to right,
+        transparent 0%,
+        var(--border) 15%,
+        var(--border) 85%,
+        transparent 100%
+      );
+      margin: 0 var(--pad-x);
+    }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero__headline {
+        font-size: 80px;
+        line-height: 80px;
+        letter-spacing: -4px;
+      }
+      .about .section__inner,
+      .join .section__inner,
+      .connect .section__inner { grid-template-columns: 1fr; gap: 48px; }
+      .join__img   { order: 1; }
+      .join__content { order: 2; }
+      .ai-tabs__cards { grid-template-columns: repeat(2, 1fr); }
+      .numbers-flex { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .hero__headline {
+        font-size: 56px;
+        line-height: 56px;
+        letter-spacing: -2px;
+      }
+      :root { --pad-x: 24px; --sec-py: 80px; }
+      .svc-item { grid-template-columns: 40px 1fr; gap: 0 24px; }
+      .svc-item__body { display: none; }
+      .ai-tabs__cards { grid-template-columns: 1fr 1fr; }
+      .comm-cards { grid-template-columns: 1fr; }
+      .comm-scroll-wrapper { height: auto; }
+      .comm-sticky-stage { position: relative; height: auto; }
+      .comm-stage-inner { padding-top: var(--sec-py); padding-bottom: var(--sec-py); }
+      .comm-card { opacity: 1; transform: none; }
+      .numbers-flex { grid-template-columns: 1fr 1fr; }
+      .section-header { grid-template-columns: 1fr; gap: 24px; }
+      .t-h2 { font-size: 40px; line-height: 42px; letter-spacing: -2px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       PAGE CONTENT — sits above footer image
+  ══════════════════════════════════════ -->
+  <div class="page-content">
+
+  <!-- ══════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════ -->
+  <nav class="nav nav--dark" id="mainNav" aria-label="Primary navigation">
+    <div class="nav__inner">
+
+      <a href="#hero" class="nav__logo">
+        <img src="Assets/images/feuji orange logo .png" alt="Feuji" class="nav__logo-img" />
+      </a>
+
+      <ul class="nav__links" role="list">
+        <li><a href="#ai-engineering" class="nav__link t-nav" data-section="ai-engineering">Applied AI</a></li>
+        <li><a href="#services"       class="nav__link t-nav" data-section="services">Services</a></li>
+        <li><a href="#services"       class="nav__link t-nav">Industries</a></li>
+        <li><a href="#community"      class="nav__link t-nav" data-section="community">Community</a></li>
+        <li><a href="#case-studies"   class="nav__link t-nav" data-section="case-studies">Insights</a></li>
+        <li><a href="#about"          class="nav__link t-nav" data-section="about">Who we are</a></li>
+      </ul>
+
+      <div class="nav__cta-wrap">
+        <a href="#connect" class="btn btn--primary-orange t-btn">Let's connect</a>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
+  <section id="hero" class="hero" aria-labelledby="hero-heading">
+
+    <!-- Full-bleed video background -->
+    <video class="hero__video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <source src="Assets/images/gettyimages-2227344643-640_adpp.mp4" type="video/mp4">
+    </video>
+    <!-- Scrim for text legibility -->
+    <div class="hero__video-scrim" aria-hidden="true"></div>
+
+    <div class="hero__inner">
+
+      <h1 id="hero-heading" class="hero__headline">
+        Applied AI<br>Engineering
+      </h1>
+
+      <div class="hero__bottom">
+        <p class="hero__sub">
+          Building production-grade AI systems that solve real, meaningful business problems.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Atmospheric fog veil at bottom of hero -->
+    <div class="hero__fog" aria-hidden="true"></div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <span class="t-label-s" style="font-size:11px; letter-spacing:1px; color:inherit;">Scroll</span>
+      <span class="hero__scroll-line"></span>
+    </div>
+  </section>
+
+
+
+  <!-- ══════════════════════════════════════
+       WHO WE ARE
+  ══════════════════════════════════════ -->
+  <section id="about" class="section-light about" aria-labelledby="about-heading">
+    <div class="section__inner">
+
+      <div class="about__left">
+        <span class="t-label-s eyebrow reveal">Who we are</span>
+        <h2 id="about-heading" class="t-h2 about__heading reveal">
+          We are<br><em>Feuji</em>
+        </h2>
+        <div class="about__body t-body-l reveal reveal-d1">
+          <p>
+            Enterprises are investing in AI, yet outcomes remain limited. Efforts stall in pilots,
+            systems stay disconnected, and value is hard to measure. The gap is not ambition.
+            It is execution.
+          </p>
+          <p>
+            At Feuji, we close this gap through applied AI engineering. We design, build, and run
+            production-grade systems that embed AI into core workflows. This delivers faster
+            decisions, lower operational cost, and measurable business impact at scale.
+          </p>
+        </div>
+      </div>
+
+      <div class="about__img img-placeholder reveal reveal-d2" role="img" aria-label="About Feuji">
+        <div class="img-placeholder__pin" aria-hidden="true">
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="1" width="12" height="12" rx="1" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M4 9L6.5 6L8.5 8L10 6.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="4.5" cy="4.5" r="1" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="img-placeholder__label">
+          <span class="img-placeholder__tag">Photography</span>
+          <p class="img-placeholder__desc">Team culture — candid moments of collaboration, craft, and shared purpose in the workspace</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="mist-divider" aria-hidden="true"></div>
+
+
+  <!-- ══════════════════════════════════════
+       AI ENGINEERING
+  ══════════════════════════════════════ -->
+  <section id="ai-engineering" class="section-surface ai-eng" aria-labelledby="ai-heading">
+    <div class="section__inner">
+
+      <div class="section-header">
+        <div>
+          <span class="t-label-s eyebrow reveal">AI Engineering</span>
+          <h2 id="ai-heading" class="t-h2 reveal">
+            Engineering AI<br><em>for outcomes</em>
+          </h2>
+        </div>
+        <div class="reveal reveal-d1" style="align-self: end;">
+          <p class="t-body-l" style="color: var(--mid);">
+            From idea to production, we help you build and deliver real world impact.
+          </p>
+        </div>
+      </div>
+
+      <div class="ai-tabs reveal">
+
+        <!-- ── Image panel ── -->
+        <div class="ai-tabs__image">
+
+          <div class="ai-tab-img is-active" data-tab="0" style="background: #EAE7E1;">
+            <img src="Assets/images/AdobeStock_535425457 1.png" alt="Feuji AI Labs" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+            <span class="ai-tab-img__label">Feuji AI Labs</span>
+          </div>
+
+          <div class="ai-tab-img" data-tab="1" style="background: #E5E2DF;">
+            <span class="ai-tab-img__label">AI &amp; ML Solutions</span>
+          </div>
+
+          <div class="ai-tab-img" data-tab="2" style="background: #E8E4DE;">
+            <span class="ai-tab-img__label">AI Innovation Suite</span>
+          </div>
+
+          <div class="ai-tab-img" data-tab="3" style="background: #E3E1DD;">
+            <span class="ai-tab-img__label">AI Partnership Ecosystem</span>
+          </div>
+
+        </div>
+
+        <!-- ── Tab cards ── -->
+        <div class="ai-tabs__cards">
+
+          <div class="ai-tab is-active" data-tab="0">
+            <h3 class="ai-tab__title">Feuji AI Labs</h3>
+            <p class="ai-tab__body">Rapidly build and validate AI use cases ready for real-world deployment.</p>
+          </div>
+
+          <div class="ai-tab" data-tab="1">
+            <h3 class="ai-tab__title">AI &amp; ML Solutions</h3>
+            <p class="ai-tab__body">Production-grade AI systems that improve cost, speed, and decision-making.</p>
+          </div>
+
+          <div class="ai-tab" data-tab="2">
+            <h3 class="ai-tab__title">AI Innovation Suite</h3>
+            <p class="ai-tab__body">Pre-built AI components that accelerate deployment and reduce risk.</p>
+          </div>
+
+          <div class="ai-tab" data-tab="3">
+            <h3 class="ai-tab__title">AI Partnership Ecosystem</h3>
+            <p class="ai-tab__body">Strategic integrations that scale AI performance across platforms and workflows.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       SERVICES
+  ══════════════════════════════════════ -->
+  <section id="services" class="section-light" aria-labelledby="services-heading">
+    <div class="section__inner">
+
+      <div class="section-header">
+        <div>
+          <span class="t-label-s eyebrow reveal">Services</span>
+          <h2 id="services-heading" class="t-h2 reveal">
+            Accelerate to <em>value</em><br>with our services
+          </h2>
+        </div>
+        <div class="reveal reveal-d1" style="align-self: end;">
+          <p class="t-body-xl" style="color: var(--mid);">
+            We help build core capabilities that design, build, and run modern digital systems.
+          </p>
+        </div>
+      </div>
+
+      <div class="svc-list">
+
+        <div class="svc-item reveal">
+          <span class="svc-item__num">01</span>
+          <h3 class="svc-item__title">Consulting</h3>
+          <div class="svc-item__preview" aria-hidden="true">
+            <span class="svc-item__preview-label">Strategy &amp; Roadmap</span>
+          </div>
+          <p class="svc-item__body">Translate business priorities into clear technology and execution roadmaps.</p>
+        </div>
+
+        <div class="svc-item reveal reveal-d1">
+          <span class="svc-item__num">02</span>
+          <h3 class="svc-item__title">Cloud Solutions</h3>
+          <div class="svc-item__preview" aria-hidden="true">
+            <span class="svc-item__preview-label">Cloud Infrastructure</span>
+          </div>
+          <p class="svc-item__body">Build scalable, resilient cloud environments optimized for performance and cost.</p>
+        </div>
+
+        <div class="svc-item reveal reveal-d2">
+          <span class="svc-item__num">03</span>
+          <h3 class="svc-item__title">Digital Engineering</h3>
+          <div class="svc-item__preview" aria-hidden="true">
+            <span class="svc-item__preview-label">Build &amp; Deploy</span>
+          </div>
+          <p class="svc-item__body">Design and develop high-quality applications built for speed and scale.</p>
+        </div>
+
+        <div class="svc-item reveal reveal-d3">
+          <span class="svc-item__num">04</span>
+          <h3 class="svc-item__title">Data and Insights</h3>
+          <div class="svc-item__preview" aria-hidden="true">
+            <span class="svc-item__preview-label">Analytics &amp; AI</span>
+          </div>
+          <p class="svc-item__body">Turn data into actionable intelligence that improves decisions and outcomes.</p>
+        </div>
+
+        <div class="svc-item reveal reveal-d4">
+          <span class="svc-item__num">05</span>
+          <h3 class="svc-item__title">Cybersecurity</h3>
+          <div class="svc-item__preview" aria-hidden="true">
+            <span class="svc-item__preview-label">Protect &amp; Detect</span>
+          </div>
+          <p class="svc-item__body">Protect systems and data with built-in security across the digital stack.</p>
+        </div>
+
+        <div class="svc-item reveal reveal-d5">
+          <span class="svc-item__num">06</span>
+          <h3 class="svc-item__title">Managed Services</h3>
+          <div class="svc-item__preview" aria-hidden="true">
+            <span class="svc-item__preview-label">Always-On Ops</span>
+          </div>
+          <p class="svc-item__body">Operate and optimize systems continuously to ensure reliability and efficiency.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       CASE STUDIES
+  ══════════════════════════════════════ -->
+  <section id="case-studies" class="section-dark" aria-labelledby="cases-heading">
+    <div class="section__inner">
+
+      <div style="margin-bottom: 72px;">
+        <span class="t-label-s eyebrow eyebrow--inv reveal">Case Studies</span>
+        <h2 id="cases-heading" class="t-h2 reveal" style="color: var(--white); margin-top: 16px;">
+          Delivering outcomes<br><em>that matter to you</em>
+        </h2>
+      </div>
+
+      <div class="case-grid">
+
+        <article class="case-card reveal" tabindex="0" role="article">
+          <p class="t-label-s case-card__label">Case Study</p>
+          <h3 class="case-card__heading">
+            How did we achieve a 50% reduction in migration time to Snowflake for a
+            billion-dollar data analytics company?
+          </h3>
+          <a href="#" class="btn btn--tertiary-inv t-btn">
+            Discover now <span class="btn-arrow">→</span>
+          </a>
+        </article>
+
+        <article class="case-card reveal reveal-d2" tabindex="0" role="article">
+          <p class="t-label-s case-card__label">Case Study</p>
+          <h3 class="case-card__heading">
+            How did we achieve a 50% reduction in migration time to Snowflake for a
+            billion-dollar data analytics company?
+          </h3>
+          <a href="#" class="btn btn--tertiary-inv t-btn">
+            Discover now <span class="btn-arrow">→</span>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       PARTNERS
+  ══════════════════════════════════════ -->
+  <section id="partners" class="section-light" aria-labelledby="partners-heading">
+    <div class="section__inner" style="padding-top: 96px; padding-bottom: 96px;">
+
+      <span class="t-label-s eyebrow reveal">Partner Ecosystem</span>
+      <h2 id="partners-heading" class="t-h2 reveal" style="max-width: 840px; margin-bottom: 56px;">
+        Leveraging our robust partner ecosystem to <em>deliver excellence</em>
+      </h2>
+
+      <div class="logo-row reveal reveal-d1" aria-label="Partner logos">
+        <div class="logo-pill">
+          <img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Partners/Logo-Check_Point.png" alt="Check Point" />
+        </div>
+        <div class="logo-pill">
+          <img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Partners/Logo-Cinde.png" alt="Cinde" />
+        </div>
+        <div class="logo-pill">
+          <img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Partners/Logo-Horizon3ai.png" alt="Horizon3.ai" />
+        </div>
+        <div class="logo-pill">
+          <img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Partners/Logo-T-Hub.png" alt="T-Hub" />
+        </div>
+        <div class="logo-pill">
+          <img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Partners/Logo-incorta.png" alt="Incorta" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="mist-divider" aria-hidden="true"></div>
+
+
+  <!-- ══════════════════════════════════════
+       CLIENTS
+  ══════════════════════════════════════ -->
+  <section id="clients" class="section-surface" aria-labelledby="clients-heading">
+    <div class="section__inner" style="padding-top: 96px; padding-bottom: 96px;">
+
+      <span class="t-label-s eyebrow reveal">Our Clients</span>
+      <h2 id="clients-heading" class="t-h2 reveal" style="max-width: 840px; margin-bottom: 56px;">
+        Building <em>trust</em> through deep partnerships with our clients
+      </h2>
+
+      <div class="logo-marquee reveal reveal-d1" aria-label="Client logos">
+        <div class="logo-marquee__track">
+
+          <!-- Set 1 -->
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-%20AGCO.png" alt="AGCO" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-BankUnited.png" alt="BankUnited" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Cotiviti.png" alt="Cotiviti" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-DXC_Technology.png" alt="DXC Technology" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-GSK.png" alt="GSK" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-HP%20enterprise.png" alt="HP Enterprise" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Haleon.svg" alt="Haleon" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Micro_Focus.svg" alt="Micro Focus" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Nagase-America-LLC.png" alt="Nagase America" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-PLZ.png" alt="PLZ" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Rygen.png" alt="Rygen" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-TNET.png" alt="TNET" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo_encore.png" alt="Encore" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-leaselock_owler.png" alt="LeaseLock" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-ontrac.png" alt="OnTrac" /></div>
+
+          <!-- Set 2 — duplicate for seamless loop -->
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-%20AGCO.png" alt="AGCO" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-BankUnited.png" alt="BankUnited" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Cotiviti.png" alt="Cotiviti" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-DXC_Technology.png" alt="DXC Technology" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-GSK.png" alt="GSK" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-HP%20enterprise.png" alt="HP Enterprise" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Haleon.svg" alt="Haleon" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Micro_Focus.svg" alt="Micro Focus" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Nagase-America-LLC.png" alt="Nagase America" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-PLZ.png" alt="PLZ" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Rygen.png" alt="Rygen" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-TNET.png" alt="TNET" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo_encore.png" alt="Encore" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-leaselock_owler.png" alt="LeaseLock" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-ontrac.png" alt="OnTrac" /></div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       FEUJI AT A GLANCE
+  ══════════════════════════════════════ -->
+  <section id="numbers" class="section-light" aria-labelledby="numbers-heading">
+    <div class="section__inner">
+
+      <div class="numbers-header">
+        <span class="t-label-m eyebrow reveal">Feuji numbers</span>
+        <h2 id="numbers-heading" class="t-h2 reveal" style="margin-top: 20px; max-width: 560px;">
+          Feuji <em>at a glance</em>
+        </h2>
+      </div>
+
+      <div class="numbers-flex" aria-label="Key statistics">
+        <div class="stat reveal">
+          <span class="stat__val">500+</span>
+          <p class="stat__label">Employees</p>
+        </div>
+        <div class="stat reveal reveal-d1">
+          <span class="stat__val">3</span>
+          <p class="stat__label">Countries</p>
+        </div>
+        <div class="stat reveal reveal-d2">
+          <span class="stat__val">50+</span>
+          <p class="stat__label">Clients</p>
+        </div>
+        <div class="stat reveal reveal-d3">
+          <span class="stat__val">20+</span>
+          <p class="stat__label">Partners</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       COMMUNITY
+  ══════════════════════════════════════ -->
+  <section id="community" class="section-light comm-section" aria-labelledby="community-heading">
+
+    <div class="comm-scroll-wrapper">
+      <div class="comm-sticky-stage">
+        <div class="comm-stage-inner">
+
+          <div class="numbers-header">
+            <span class="t-label-m eyebrow reveal">Community</span>
+            <h2 id="community-heading" class="t-h2 reveal" style="margin-top: 20px; max-width: 840px;">
+              Investing in communities<br>to drive <em>inclusive growth</em>
+            </h2>
+          </div>
+
+          <div class="comm-cards">
+
+            <div class="comm-card" data-comm-idx="0">
+              <h3 class="comm-card__title">Smart Village</h3>
+              <p class="comm-card__body">
+                We partner with rural communities to bring digital infrastructure, connectivity,
+                and technology-enabled services that improve livelihoods and create new economic
+                opportunities at the grassroots level.
+              </p>
+              <a href="#" class="comm-card__link t-btn">
+                Learn more <span class="btn-arrow">→</span>
+              </a>
+            </div>
+
+            <div class="comm-card" data-comm-idx="1">
+              <h3 class="comm-card__title">Education</h3>
+              <p class="comm-card__body">
+                Through scholarships, mentorship programmes, and skills training, we invest in
+                the next generation of technology talent — expanding access to quality education
+                and building capability in underserved communities.
+              </p>
+              <a href="#" class="comm-card__link t-btn">
+                Learn more <span class="btn-arrow">→</span>
+              </a>
+            </div>
+
+            <div class="comm-card" data-comm-idx="2">
+              <h3 class="comm-card__title">Sustainability</h3>
+              <p class="comm-card__body">
+                We embed sustainable practices into how we operate and how we build — reducing
+                our environmental footprint, supporting green initiatives, and contributing to
+                a more responsible technology industry.
+              </p>
+              <a href="#" class="comm-card__link t-btn">
+                Learn more <span class="btn-arrow">→</span>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       JOIN US
+  ══════════════════════════════════════ -->
+  <section id="careers" class="section-light join" aria-labelledby="join-heading">
+    <div class="section__inner">
+
+      <div class="join__content reveal">
+        <h2 id="join-heading" class="t-h2 join__heading"><em>Join Us</em></h2>
+        <p class="t-body-l join__body">
+          We are building a team that solves real problems and delivers measurable impact.
+          Join us to be a part of the exciting new future we are building for our customers,
+          colleagues, and communities.
+        </p>
+        <a href="#" class="btn btn--secondary t-btn">
+          Explore opportunities <span class="btn-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="join__img reveal reveal-d2">
+        <img src="Assets/images/image 31.png" alt="Feuji team — people and belonging" style="width:100%;height:100%;object-fit:cover;display:block;" />
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       CONNECT CTA
+  ══════════════════════════════════════ -->
+  <section id="connect" class="section-light connect" aria-labelledby="connect-heading">
+    <div class="section__inner">
+
+      <div class="connect__img reveal" role="img" aria-label="Connect with Feuji">
+        <img src="Assets/images/3 AdobeStock_1715180662.png" alt="Connect with Feuji" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;border-radius:12px;" />
+      </div>
+
+      <div class="connect__content reveal reveal-d1">
+        <span class="t-label-m eyebrow" style="margin-bottom: 28px; display: block;">Get in touch</span>
+        <h2 id="connect-heading" class="connect__heading t-h2 reveal">
+          Ready for Applied<br><em>AI Engineering?</em>
+        </h2>
+        <a href="mailto:hello@feuji.com" class="btn btn--secondary t-btn">
+          Let's connect <span class="btn-arrow">→</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       FOOTER — part of page content (z-index 1)
+  ══════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+
+      <div class="footer__top">
+
+        <div>
+          <p class="footer__col-title">Applied AI</p>
+          <ul class="footer__links" role="list">
+            <li><a href="#ai-engineering" class="footer__link">Feuji AI Labs</a></li>
+            <li><a href="#ai-engineering" class="footer__link">AI &amp; ML Solutions</a></li>
+            <li><a href="#ai-engineering" class="footer__link">AI Innovation Suite</a></li>
+            <li><a href="#ai-engineering" class="footer__link">AI Partnership Ecosystem</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Services</p>
+          <ul class="footer__links" role="list">
+            <li><a href="#services" class="footer__link">Consulting</a></li>
+            <li><a href="#services" class="footer__link">Cloud Solutions</a></li>
+            <li><a href="#services" class="footer__link">Digital Engineering</a></li>
+            <li><a href="#services" class="footer__link">Data and Insights</a></li>
+            <li><a href="#services" class="footer__link">Cybersecurity</a></li>
+            <li><a href="#services" class="footer__link">Managed Services</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Industries</p>
+          <ul class="footer__links" role="list">
+            <li><a href="#" class="footer__link">Healthcare</a></li>
+            <li><a href="#" class="footer__link">Insurance</a></li>
+            <li><a href="#" class="footer__link">Pharma</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Community</p>
+          <ul class="footer__links" role="list">
+            <li><a href="#community" class="footer__link">Smart Village</a></li>
+            <li><a href="#community" class="footer__link">Education &amp; Training</a></li>
+            <li><a href="#community" class="footer__link">Sustainability</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Insights</p>
+          <ul class="footer__links" role="list">
+            <li><a href="#" class="footer__link">Our perspectives</a></li>
+            <li><a href="#" class="footer__link">Research and Whitepapers</a></li>
+            <li><a href="#case-studies" class="footer__link">Case Studies and blogs</a></li>
+            <li><a href="#" class="footer__link">Events and webinars</a></li>
+            <li><a href="#" class="footer__link">Feuji Expert Connect</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Who we are</p>
+          <ul class="footer__links" role="list">
+            <li><a href="#about"     class="footer__link">Our Story</a></li>
+            <li><a href="#"          class="footer__link">People</a></li>
+            <li><a href="#partners"  class="footer__link">Partners</a></li>
+            <li><a href="#"          class="footer__link">Leadership</a></li>
+            <li><a href="#careers"   class="footer__link">Careers</a></li>
+            <li><a href="#"          class="footer__link">Locations</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </footer>
+
+  </div><!-- /page-content -->
+
+
+  <!-- ══════════════════════════════════════
+       FOOTER REVEAL — image only, sticky behind
+  ══════════════════════════════════════ -->
+  <div class="footer-reveal">
+    <img class="footer-reveal__img"
+         src="Assets/images/footer 1.jpeg"
+         alt=""
+         aria-hidden="true" />
+
+    <div class="footer-reveal__legal">
+      <p class="footer-reveal__copyright">© 2025 Feuji. All rights reserved.</p>
+      <div class="footer-reveal__policy">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div><!-- /footer-reveal -->
+
+
+  <!-- ══════════════════════════════════════
+       JAVASCRIPT — Interactivity
+  ══════════════════════════════════════ -->
+  <script>
+    'use strict';
+
+    /* ── PARALLAX — hero headline drifts up at ~0.3× scroll rate ── */
+    const heroHeadline = document.querySelector('.hero__headline');
+    function applyParallax() {
+      if (!heroHeadline) return;
+      const scrollY = window.scrollY;
+      // Drift upward at 0.28× scroll speed — subtle, not nauseating
+      heroHeadline.style.setProperty('--parallax-y', (scrollY * -0.28).toFixed(2));
+    }
+    window.addEventListener('scroll', applyParallax, { passive: true });
+
+
+    /* ── NAV: scroll-aware dark/light + frosted glass ── */
+    const nav     = document.getElementById('mainNav');
+    const hero    = document.getElementById('hero');
+    const links   = document.querySelectorAll('.nav__link');
+
+    function updateNav() {
+      const heroBottom = hero.getBoundingClientRect().bottom;
+
+      if (heroBottom > nav.offsetHeight) {
+        // still over dark hero
+        nav.classList.add('nav--dark');
+        nav.classList.remove('nav--light', 'is-scrolled');
+      } else {
+        // past hero – frosted white nav
+        nav.classList.remove('nav--dark');
+        nav.classList.add('nav--light', 'is-scrolled');
+      }
+    }
+
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+
+
+    /* ── NAV: active section highlight ── */
+    const sections = Array.from(document.querySelectorAll('section[id]'));
+
+    const activeObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        links.forEach(l => {
+          l.classList.toggle('is-active',
+            l.getAttribute('href') === '#' + id);
+        });
+      });
+    }, { rootMargin: '-35% 0px -60% 0px' });
+
+    sections.forEach(s => activeObserver.observe(s));
+
+
+    /* ── SMOOTH SCROLL for anchor links ── */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const offset = nav.offsetHeight;
+        const top    = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+
+
+    /* ── SCROLL REVEAL ── */
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+
+    /* ── CASE CARDS: keyboard interaction ── */
+    document.querySelectorAll('.case-card[tabindex]').forEach(card => {
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          const link = card.querySelector('a');
+          if (link) { e.preventDefault(); link.click(); }
+        }
+      });
+    });
+
+
+    /* ── NAV: keyboard accessibility ── */
+    links.forEach(link => {
+      link.addEventListener('focus', () => {
+        nav.classList.add('is-scrolled', 'nav--light');
+        nav.classList.remove('nav--dark');
+      });
+    });
+
+
+    /* ══════════════════════════════════════
+       TYPEWRITER — all headings
+       Scroll-driven for h2s.
+       Timed (page-load) for hero h1.
+       Handles: plain text, <br>, <em> italic.
+    ══════════════════════════════════════ */
+
+    // ── Step 1: Build DOM — wrap each character in a .tw-char span
+    //   Preserves <br> in place. Recurses into <em> so italic is kept.
+    function buildTypewriterDOM(el) {
+      const chars = [];
+
+      function processChildren(parent) {
+        const nodes = Array.from(parent.childNodes);
+        nodes.forEach(node => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            // If the node starts with a newline it's HTML indentation — strip all
+            // leading whitespace. If it starts with a space (inline, after </em>)
+            // that space is meaningful — preserve it.
+            const raw = node.textContent;
+            const text = /^\n/.test(raw)
+              ? raw.replace(/^\s+/, '').replace(/[\n\r\t]+$/, '')  // indentation node
+              : raw.replace(/[\n\r\t]+$/, '');                     // inline node — keep leading space
+            if (!text.trim()) { parent.removeChild(node); return; }
+
+            const frag = document.createDocumentFragment();
+            for (const char of text) {
+              const span = document.createElement('span');
+              span.className = 'tw-char';
+              span.textContent = char;
+              frag.appendChild(span);
+              chars.push(span);
+            }
+            parent.replaceChild(frag, node);
+          } else if (node.nodeName === 'BR') {
+            // Leave <br> untouched
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            processChildren(node); // recurse into <em> etc.
+          }
+        });
+      }
+
+      processChildren(el);
+      el.classList.add('typewriter-heading');
+      return chars;
+    }
+
+    // ── Step 2a: Scroll-driven typewriter for h2 headings
+    function setupScrollTypewriter(el) {
+      const chars = buildTypewriterDOM(el);
+      const total = chars.length;
+
+      // Make container visible when heading enters viewport
+      const visObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { el.classList.add('is-visible'); visObs.unobserve(el); }
+        });
+      }, { threshold: 0.05 });
+      visObs.observe(el);
+
+      function onScroll() {
+        const rect = el.getBoundingClientRect();
+        const vh   = window.innerHeight;
+        // typing zone: heading enters bottom → reaches 38% from top
+        const raw  = (vh - rect.top) / (vh * 0.62);
+        const prog = Math.max(0, Math.min(1, raw));
+        const show = Math.round(prog * total);
+
+        chars.forEach((s, i) => s.classList.toggle('is-visible', i < show));
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    // ── Step 2b: Timed typewriter for the hero h1 (already on screen at load)
+    function setupHeroTypewriter(el) {
+      const chars = buildTypewriterDOM(el);
+      const total = chars.length;
+
+      el.classList.add('is-visible'); // container always visible
+      let i = 0;
+      const tick = setInterval(() => {
+        if (i < total) {
+          chars[i].classList.add('is-visible');
+          i++;
+        } else {
+          clearInterval(tick);
+        }
+      }, 40); // 40ms per character — calm, deliberate pace
+    }
+
+    // ── Apply to all h2s (scroll-driven)
+    document.querySelectorAll('.t-h2').forEach(el => setupScrollTypewriter(el));
+
+    // ── Apply to hero h1 (timed, starts 600ms after page load settles)
+    setTimeout(() => setupHeroTypewriter(document.querySelector('.hero__headline')), 600);
+
+    /* ─────────────────────────────────────────
+       AI TABS — auto-advancing with progress bar
+    ───────────────────────────────────────── */
+    (function () {
+      const DURATION = 4000;
+      const tabs   = document.querySelectorAll('.ai-tab');
+      const images = document.querySelectorAll('.ai-tab-img');
+      let current = 0;
+      let timer   = null;
+
+      function activate(idx) {
+        tabs.forEach(t => {
+          t.classList.remove('is-active');
+          void t.offsetWidth; // force reflow — resets CSS animation
+        });
+        images.forEach(img => img.classList.remove('is-active'));
+        tabs[idx].classList.add('is-active');
+        images[idx].classList.add('is-active');
+        current = idx;
+      }
+
+      function advance() { activate((current + 1) % tabs.length); }
+
+      function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(advance, DURATION);
+      }
+
+      tabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => { activate(i); startTimer(); });
+      });
+
+      // Pause auto-advance while user hovers the component
+      const component = document.querySelector('.ai-tabs');
+      if (component) {
+        component.addEventListener('mouseenter', () => clearInterval(timer));
+        component.addEventListener('mouseleave', () => startTimer());
+      }
+
+      activate(0);
+      startTimer();
+    })();
+
+    /* ─────────────────────────────────────────
+       COMMUNITY — sticky scroll card reveal
+       Pixel-based thresholds ≈ one scroll tick
+       per card. Fully bidirectional — cards
+       disappear one-by-one on scroll back up.
+    ───────────────────────────────────────── */
+    (function () {
+      const wrapper = document.querySelector('.comm-scroll-wrapper');
+      const cards   = document.querySelectorAll('.comm-card');
+      if (!wrapper || !cards.length) return;
+
+      // px scrolled into the sticky zone that triggers each card
+      // ~160px ≈ one mouse wheel tick — adjust if needed
+      const STEP = 160;
+      const thresholds = [20, 20 + STEP, 20 + STEP * 2];
+
+      function update() {
+        const scrolled = -wrapper.getBoundingClientRect().top;
+
+        cards.forEach((card, i) => {
+          if (scrolled >= thresholds[i]) {
+            card.classList.add('is-revealed');
+          } else {
+            card.classList.remove('is-revealed'); // reverse on scroll up
+          }
+        });
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+
+  </script>
+
+</body>
+</html>
