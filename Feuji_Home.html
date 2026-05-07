@@ -260,8 +260,22 @@
       background: var(--orange);
       color: var(--white);
       border-color: var(--orange);
+      transition: background 0.3s var(--ease), border-color 0.3s var(--ease), color 0.3s var(--ease);
     }
     .btn--primary-orange:hover { background: var(--orange-dark); border-color: var(--orange-dark); }
+
+    /* On dark hero: primary buttons (hero + nav) turn white */
+    .hero--dark-mode .btn--primary-orange,
+    .nav--dark .btn--primary-orange {
+      background: var(--white);
+      color: var(--ink);
+      border-color: var(--white);
+    }
+    .hero--dark-mode .btn--primary-orange:hover,
+    .nav--dark .btn--primary-orange:hover {
+      background: #E8E8E8;
+      border-color: #E8E8E8;
+    }
 
     /* Secondary — outline, light BG */
     .btn--secondary {
@@ -286,9 +300,12 @@
       border: none;
       color: rgba(255,255,255,0.75);
       gap: 8px;
+      transition: color 0.22s var(--ease);
     }
     .btn--tertiary-inv:hover { color: var(--white); }
     .btn--tertiary-inv:hover { transform: none; }
+    .case-card:hover .btn--tertiary-inv { color: var(--ink); }
+    .case-card:hover .btn--tertiary-inv:hover { color: var(--ink-70); }
 
     /* ─────────────────────────────────────────
        NAVIGATION
@@ -406,7 +423,7 @@
     .hero__video-scrim {
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.25);
+      background: rgba(0,0,0,0.10);
       z-index: 1;
       pointer-events: none;
     }
@@ -630,15 +647,7 @@
 
     /* Subtle label in each image panel */
     .ai-tab-img__label {
-      position: absolute;
-      bottom: 24px;
-      left: 32px;
-      font-family: var(--f-ui);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.28);
+      display: none;
     }
 
     /* Tab cards row */
@@ -727,16 +736,21 @@
       grid-template-columns: 40px 1fr 200px 1fr;
       gap: 0 32px;
       align-items: center;
-      padding: 20px 0;
+      padding: 20px 32px;
       border-top: 1px solid var(--border);
-      transition: border-color 0.2s;
+      border-radius: 8px;
+      transition: border-color 0.22s var(--ease), background 0.22s var(--ease);
       cursor: default;
-      overflow: visible; /* allow preview to bleed past row borders */
+      overflow: visible;
       position: relative;
       z-index: 0;
     }
     .svc-item:last-child { border-bottom: 1px solid var(--border); }
-    .svc-item:hover { border-color: var(--ink-70); z-index: 1; }
+    .svc-item:hover {
+      border-color: #EA580C;
+      background: #EA580C;
+      z-index: 1;
+    }
 
     /* ── Service row hover preview — dedicated center column ── */
     .svc-item__preview {
@@ -806,9 +820,12 @@
       line-height: 40px;
       letter-spacing: -2px;
       color: var(--ink);
-      transition: transform 0.22s var(--ease);
+      transition: transform 0.22s var(--ease), color 0.22s var(--ease);
     }
-    .svc-item:hover .svc-item__title { transform: translateX(6px); }
+    .svc-item:hover .svc-item__title {
+      transform: translateX(6px);
+      color: var(--white);
+    }
 
     .svc-item__body {
       font-family: var(--f-ui);
@@ -817,7 +834,9 @@
       line-height: 25px;
       letter-spacing: -1px;
       color: var(--mid);
+      transition: color 0.22s var(--ease);
     }
+    .svc-item:hover .svc-item__body { color: rgba(255,255,255,0.75); }
 
     /* ─────────────────────────────────────────
        CASE STUDIES
@@ -829,24 +848,31 @@
     }
 
     .case-card {
-      border: 1px solid var(--border-dk);
+      border: 1px solid #EAB308;
       border-radius: 12px;
       padding: 52px 48px;
       display: flex;
       flex-direction: column;
       gap: 40px;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       transition: border-color 0.22s var(--ease), background 0.22s var(--ease),
-                  transform 0.22s var(--ease);
+                  color 0.22s var(--ease), transform 0.22s var(--ease);
       cursor: pointer;
     }
     .case-card:hover {
-      border-color: rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.025);
+      border-color: #EAB308;
+      background: #EAB308;
       transform: translateY(-2px);
     }
 
     .case-card__label {
       color: rgba(255,255,255,0.35);
+      transition: color 0.22s var(--ease);
+    }
+    .case-card:hover .case-card__label {
+      color: rgba(0,0,0,0.45);
     }
 
     .case-card__heading {
@@ -857,6 +883,10 @@
       letter-spacing: -1px;
       color: var(--white);
       flex: 1;
+      transition: color 0.22s var(--ease);
+    }
+    .case-card:hover .case-card__heading {
+      color: var(--ink);
     }
 
     /* ─────────────────────────────────────────
@@ -939,15 +969,18 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: var(--gap);
-      padding-top: 48px;
-      border-top: 1px solid var(--border);
     }
 
     .stat {
       display: flex;
       flex-direction: column;
       gap: 16px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+      transition: border-color 0.22s var(--ease);
     }
+    .stat:hover { border-color: #14532D; }
+    .stat:hover .stat__val { color: #14532D; }
 
     .stat__val {
       font-family: var(--f-display);
@@ -956,6 +989,7 @@
       line-height: 80px;
       letter-spacing: -3px;
       color: var(--ink);
+      transition: color 0.22s var(--ease);
     }
 
     .stat__label {
@@ -982,7 +1016,7 @@
       position: sticky;
       top: 0;
       height: 100vh;
-      background: var(--white);
+      background: #14532D;
       /* Top-anchored — heading always sits near the top of the viewport */
       display: flex;
       flex-direction: column;
@@ -1016,7 +1050,7 @@
       flex-direction: column;
       gap: 16px;
       padding-top: 24px;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid rgba(255,255,255,0.2);
       opacity: 0;
       transform: translateY(28px);
       transition: border-color 0.2s,
@@ -1027,7 +1061,7 @@
       opacity: 1;
       transform: translateY(0);
     }
-    .comm-card.is-revealed:hover { border-color: var(--ink-70); }
+    .comm-card.is-revealed:hover { border-color: rgba(255,255,255,0.5); }
 
     .comm-card__title {
       font-family: var(--f-display);
@@ -1035,7 +1069,7 @@
       font-weight: 500;
       line-height: 40px;
       letter-spacing: -2px;
-      color: var(--ink);
+      color: var(--white);
     }
 
     .comm-card__body {
@@ -1044,7 +1078,7 @@
       font-weight: 400;
       line-height: 25px;
       letter-spacing: -1px;
-      color: var(--mid);
+      color: rgba(255,255,255,0.7);
       flex: 1;
     }
 
@@ -1054,13 +1088,13 @@
       font-weight: 400;
       line-height: 18px;
       letter-spacing: 0;
-      color: var(--mid);
+      color: rgba(255,255,255,0.6);
       display: inline-flex;
       align-items: center;
       gap: 8px;
       transition: color 0.2s;
     }
-    .comm-card__link:hover { color: var(--ink); }
+    .comm-card__link:hover { color: var(--white); }
     .comm-card__link .btn-arrow { transition: transform 0.2s var(--ease); }
     .comm-card__link:hover .btn-arrow { transform: translateX(4px); }
 
@@ -1267,11 +1301,17 @@
     /* Stat values → ink black */
     .stat__val { color: var(--ink); }
 
-    /* Community "Learn more" links → orange on hover */
-    .comm-card__link:hover { color: var(--orange); }
+    /* Community "Learn more" links → white on hover */
+    .comm-card__link:hover { color: var(--white); }
+
+    /* Community section — inverse text on green background */
+    .comm-sticky-stage .eyebrow { color: rgba(255,255,255,0.55); }
+    .comm-sticky-stage .t-h2 { color: var(--white); }
+    .comm-sticky-stage .t-h2 em { color: var(--white); }
 
     /* Service item number → orange on hover */
-    .svc-item:hover .svc-item__num { color: var(--orange); }
+    .svc-item__num { transition: color 0.22s var(--ease); }
+    .svc-item:hover .svc-item__num { color: rgba(255,255,255,0.55); }
 
 
     /* Footer logo accent */
@@ -1594,18 +1634,8 @@
         </div>
       </div>
 
-      <div class="about__img img-placeholder reveal reveal-d2" role="img" aria-label="About Feuji">
-        <div class="img-placeholder__pin" aria-hidden="true">
-          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="1" y="1" width="12" height="12" rx="1" stroke="currentColor" stroke-width="1.2"/>
-            <path d="M4 9L6.5 6L8.5 8L10 6.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-            <circle cx="4.5" cy="4.5" r="1" fill="currentColor"/>
-          </svg>
-        </div>
-        <div class="img-placeholder__label">
-          <span class="img-placeholder__tag">Photography</span>
-          <p class="img-placeholder__desc">Team culture — candid moments of collaboration, craft, and shared purpose in the workspace</p>
-        </div>
+      <div class="about__img reveal reveal-d2">
+        <img src="Assets/images/5ee687a83a0c11d5360d57b6e627469d.jpg" alt="We are Feuji" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;border-radius:12px;" />
       </div>
 
     </div>
@@ -1645,14 +1675,17 @@
           </div>
 
           <div class="ai-tab-img" data-tab="1" style="background: #E5E2DF;">
+            <img src="Assets/images/lores hf_20260303_063827_ed5811b6-1fd1-4ed4-b775-e6ab23656249.jpg" alt="AI & ML Solutions" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
             <span class="ai-tab-img__label">AI &amp; ML Solutions</span>
           </div>
 
           <div class="ai-tab-img" data-tab="2" style="background: #E8E4DE;">
+            <img src="Assets/images/5 AdobeStock_1871876700.png" alt="AI Innovation Suite" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
             <span class="ai-tab-img__label">AI Innovation Suite</span>
           </div>
 
           <div class="ai-tab-img" data-tab="3" style="background: #E3E1DD;">
+            <img src="Assets/images/3 AdobeStock_1715180662.png" alt="AI Partnership Ecosystem" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
             <span class="ai-tab-img__label">AI Partnership Ecosystem</span>
           </div>
 
@@ -1713,7 +1746,7 @@
           <span class="svc-item__num">01</span>
           <h3 class="svc-item__title">Consulting</h3>
           <div class="svc-item__preview" aria-hidden="true">
-            <span class="svc-item__preview-label">Strategy &amp; Roadmap</span>
+            <img src="Assets/images/home-services/Consulting.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
           </div>
           <p class="svc-item__body">Translate business priorities into clear technology and execution roadmaps.</p>
         </div>
@@ -1722,7 +1755,7 @@
           <span class="svc-item__num">02</span>
           <h3 class="svc-item__title">Cloud Solutions</h3>
           <div class="svc-item__preview" aria-hidden="true">
-            <span class="svc-item__preview-label">Cloud Infrastructure</span>
+            <img src="Assets/images/home-services/Cloud Solutions.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
           </div>
           <p class="svc-item__body">Build scalable, resilient cloud environments optimized for performance and cost.</p>
         </div>
@@ -1731,7 +1764,7 @@
           <span class="svc-item__num">03</span>
           <h3 class="svc-item__title">Digital Engineering</h3>
           <div class="svc-item__preview" aria-hidden="true">
-            <span class="svc-item__preview-label">Build &amp; Deploy</span>
+            <img src="Assets/images/home-services/Digital Engineering.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
           </div>
           <p class="svc-item__body">Design and develop high-quality applications built for speed and scale.</p>
         </div>
@@ -1740,7 +1773,7 @@
           <span class="svc-item__num">04</span>
           <h3 class="svc-item__title">Data and Insights</h3>
           <div class="svc-item__preview" aria-hidden="true">
-            <span class="svc-item__preview-label">Analytics &amp; AI</span>
+            <img src="Assets/images/home-services/Data and Insights.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
           </div>
           <p class="svc-item__body">Turn data into actionable intelligence that improves decisions and outcomes.</p>
         </div>
@@ -1749,7 +1782,7 @@
           <span class="svc-item__num">05</span>
           <h3 class="svc-item__title">Cybersecurity</h3>
           <div class="svc-item__preview" aria-hidden="true">
-            <span class="svc-item__preview-label">Protect &amp; Detect</span>
+            <img src="Assets/images/home-services/Cybersecurity.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
           </div>
           <p class="svc-item__body">Protect systems and data with built-in security across the digital stack.</p>
         </div>
@@ -1758,7 +1791,7 @@
           <span class="svc-item__num">06</span>
           <h3 class="svc-item__title">Managed Services</h3>
           <div class="svc-item__preview" aria-hidden="true">
-            <span class="svc-item__preview-label">Always-On Ops</span>
+            <img src="Assets/images/home-services/Managed Services.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
           </div>
           <p class="svc-item__body">Operate and optimize systems continuously to ensure reliability and efficiency.</p>
         </div>
@@ -2177,10 +2210,12 @@
         // still over dark hero
         nav.classList.add('nav--dark');
         nav.classList.remove('nav--light', 'is-scrolled');
+        hero.classList.add('hero--dark-mode');
       } else {
         // past hero – frosted white nav
         nav.classList.remove('nav--dark');
         nav.classList.add('nav--light', 'is-scrolled');
+        hero.classList.remove('hero--dark-mode');
       }
     }
 
