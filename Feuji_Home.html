@@ -1248,7 +1248,7 @@
     /* Content floats inside the dome */
     .join-orbit__content {
       position: absolute;
-      bottom: 12%;
+      bottom: 10%;
       left: 0;
       right: 0;
       z-index: 1;
@@ -1268,6 +1268,7 @@
     .join-orbit__body {
       color: rgba(255,255,255,0.6);
       margin-bottom: 0;
+      max-width: 500px;
     }
 
     .join-orbit__btn {
@@ -1299,6 +1300,7 @@
     .page-content {
       position: relative;
       z-index: 1;
+      box-shadow: 0 24px 80px 20px rgba(0,0,0,0.85);
     }
 
     /* Image layer — always at the bottom, behind .page-content */
@@ -1306,7 +1308,7 @@
       position: sticky;
       bottom: 0;
       z-index: 0;
-      height: 70vh;
+      height: 56vh;
       overflow: hidden;
       background: var(--ink);
     }
@@ -1314,14 +1316,14 @@
     /* The photograph */
     .footer-reveal__img {
       position: absolute;
-      top: 80px;
+      top: 0;
       left: 0;
       right: 0;
       bottom: 0;
       width: 100%;
-      height: calc(100% - 80px);
+      height: 100%;
       object-fit: cover;
-      object-position: center 70%;
+      object-position: center 60%;
       display: block;
     }
 
@@ -1716,7 +1718,7 @@
 
     <!-- Full-bleed video background -->
     <video class="hero__video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-      <source src="Assets/images/gettyimages-1852028609-640_adpp.mp4" type="video/mp4">
+      <source src="Assets/images/Screen%20Recording%202026-05-08%20at%205.50.53%20PM.mp4" type="video/mp4">
     </video>
     <!-- Scrim for text legibility -->
     <div class="hero__video-scrim" aria-hidden="true"></div>
@@ -1807,22 +1809,26 @@
         <div class="ai-tabs__image">
 
           <div class="ai-tab-img is-active" data-tab="0" style="background: #EAE7E1;">
-            <img src="Assets/images/AdobeStock_535425457-1.png" alt="Feuji AI Labs" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+            <video autoplay muted loop playsinline preload="auto" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+              <source src="Assets/images/ai%20engineering/gettyimages-2188313395-640_adpp.mp4" type="video/mp4">
+            </video>
             <span class="ai-tab-img__label">Feuji AI Labs</span>
           </div>
 
           <div class="ai-tab-img" data-tab="1" style="background: #E5E2DF;">
-            <img src="Assets/images/lores-hf_20260303_063827_ed5811b6-1fd1-4ed4-b775-e6ab23656249.jpg" alt="AI & ML Solutions" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+            <video autoplay muted loop playsinline preload="auto" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+              <source src="Assets/images/ai%20engineering/gettyimages-2151855243-640_adpp.mp4" type="video/mp4">
+            </video>
             <span class="ai-tab-img__label">AI &amp; ML Solutions</span>
           </div>
 
           <div class="ai-tab-img" data-tab="2" style="background: #E8E4DE;">
-            <img src="Assets/images/5-AdobeStock_1871876700.png" alt="AI Innovation Suite" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+            <img src="Assets/images/home-ai%20engineering/AI%20innovation.png" alt="AI Innovation Suite" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
             <span class="ai-tab-img__label">AI Innovation Suite</span>
           </div>
 
           <div class="ai-tab-img" data-tab="3" style="background: #E3E1DD;">
-            <img src="Assets/images/3-AdobeStock_1715180662.png" alt="AI Partnership Ecosystem" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+            <img src="Assets/images/ai%20engineering/ai%20partnership%20v02%20summer%20.png" alt="AI Partnership Ecosystem" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
             <span class="ai-tab-img__label">AI Partnership Ecosystem</span>
           </div>
 
@@ -1883,7 +1889,7 @@
           <span class="svc-item__num">01</span>
           <h3 class="svc-item__title">Consulting</h3>
           <div class="svc-item__preview" aria-hidden="true">
-            <img src="Assets/images/home-services/Consulting.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+            <img src="Assets/images/home-services-v002/Consulting.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
           </div>
           <p class="svc-item__body">Translate business priorities into clear technology and execution roadmaps.</p>
         </div>
@@ -1892,7 +1898,7 @@
           <span class="svc-item__num">02</span>
           <h3 class="svc-item__title">Cloud Solutions</h3>
           <div class="svc-item__preview" aria-hidden="true">
-            <img src="Assets/images/home-services/Cloud-Solutions.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+            <img src="Assets/images/home-services-v002/Cloud%20Solutions.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
           </div>
           <p class="svc-item__body">Build scalable, resilient cloud environments optimized for performance and cost.</p>
         </div>
@@ -1901,7 +1907,7 @@
           <span class="svc-item__num">03</span>
           <h3 class="svc-item__title">Digital Engineering</h3>
           <div class="svc-item__preview" aria-hidden="true">
-            <img src="Assets/images/home-services/Digital-Engineering.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+            <img src="Assets/images/home-services-v002/Digital%20Engineering.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
           </div>
           <p class="svc-item__body">Design and develop high-quality applications built for speed and scale.</p>
         </div>
@@ -1910,7 +1916,7 @@
           <span class="svc-item__num">04</span>
           <h3 class="svc-item__title">Data and Insights</h3>
           <div class="svc-item__preview" aria-hidden="true">
-            <img src="Assets/images/home-services/Data-and-Insights.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+            <img src="Assets/images/home-services-v002/Data%20and%20Insights.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
           </div>
           <p class="svc-item__body">Turn data into actionable intelligence that improves decisions and outcomes.</p>
         </div>
@@ -1919,7 +1925,7 @@
           <span class="svc-item__num">05</span>
           <h3 class="svc-item__title">Cybersecurity</h3>
           <div class="svc-item__preview" aria-hidden="true">
-            <img src="Assets/images/home-services/Cybersecurity.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+            <img src="Assets/images/home-services-v002/Cybersecurity.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
           </div>
           <p class="svc-item__body">Protect systems and data with built-in security across the digital stack.</p>
         </div>
@@ -1928,7 +1934,7 @@
           <span class="svc-item__num">06</span>
           <h3 class="svc-item__title">Managed Services</h3>
           <div class="svc-item__preview" aria-hidden="true">
-            <img src="Assets/images/home-services/Managed-Services.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+            <img src="Assets/images/home-services-v002/Managed%20Services.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
           </div>
           <p class="svc-item__body">Operate and optimize systems continuously to ensure reliability and efficiency.</p>
         </div>
@@ -2171,27 +2177,6 @@
   <!-- ══════════════════════════════════════
        JOIN US
   ══════════════════════════════════════ -->
-  <section id="careers" class="section-dark join" aria-labelledby="join-heading">
-    <div class="section__inner">
-
-      <div class="join__content reveal">
-        <h2 id="join-heading" class="t-h2 join__heading"><em>Join Us</em></h2>
-        <p class="t-body-l join__body">
-          We are building a team that solves real problems and delivers measurable impact.
-          Join us to be a part of the exciting new future we are building for our customers,
-          colleagues, and communities.
-        </p>
-        <a href="#" class="btn btn--secondary t-btn" style="color:var(--white); border-color:rgba(255,255,255,0.3);">
-          Explore opportunities <span class="btn-arrow">→</span>
-        </a>
-      </div>
-
-      <div class="join__img reveal reveal-d2">
-        <img src="Assets/images/image-31.png" alt="Feuji team — people and belonging" style="width:100%;height:100%;object-fit:cover;display:block;" />
-      </div>
-
-    </div>
-  </section>
 
 
   <!-- ══════════════════════════════════════
@@ -2213,80 +2198,72 @@
     -->
     <div class="join-orbit__stage">
 
+      <!--
+        viewBox 0 0 1440 560 — arc centre (720, 560)
+        All arcs sweep=0 (upward):
+          Inner  r=200  M 520 560 A 200 200 0 0 0  920 560   peak y=360
+          Middle r=340  M 380 560 A 340 340 0 0 0 1060 560   peak y=220
+          Outer  r=500  M 220 560 A 500 500 0 0 0 1220 560   peak y= 60
+
+        Circle positions — x=720+r·cos(θ), y=560−r·sin(θ)
+          Outer  θ=62°  → (955, 118)   r=22  top-right medium
+          Outer  θ=143° → (321, 259)   r=40  left large
+          Outer  θ=14°  → (1205, 439)  r=40  right large (near edge)
+          Middle θ=150° → (426, 390)   r=18  left-lower small
+        No circles on inner arc — keeps text area clear
+      -->
       <svg class="join-orbit__svg" viewBox="0 0 1440 560" fill="none"
            xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
 
-        <!-- ── Arc strokes ── -->
-        <path d="M 520 560 A 200 200 0 0 0 920 560"
-              stroke="rgba(255,255,255,0.30)" stroke-width="1.5"/>
-        <path d="M 380 560 A 340 340 0 0 0 1060 560"
-              stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
-        <path d="M 220 560 A 500 500 0 0 0 1220 560"
-              stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+        <defs>
+          <!-- Orange glow centred on the content area -->
+          <radialGradient id="orbit-glow" gradientUnits="userSpaceOnUse"
+                          cx="720" cy="470" r="300">
+            <stop offset="0%"   stop-color="#C84020" stop-opacity="0.60"/>
+            <stop offset="45%"  stop-color="#8A2010" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+          </radialGradient>
+          <!-- Circular clip paths for orbit image placeholders -->
+          <clipPath id="orb-clip1"><circle cx="955"  cy="118" r="22"/></clipPath>
+          <clipPath id="orb-clip2"><circle cx="321"  cy="259" r="40"/></clipPath>
+          <clipPath id="orb-clip3"><circle cx="1205" cy="439" r="40"/></clipPath>
+          <clipPath id="orb-clip4"><circle cx="391"  cy="370" r="18"/></clipPath>
+        </defs>
 
-        <!-- ── Separator line at base — indented margins ── -->
+        <!-- ── Orange radial glow ── -->
+        <ellipse cx="720" cy="480" rx="360" ry="260" fill="url(#orbit-glow)"/>
+
+        <!-- ── Arc strokes — sweep=1 = clockwise = curves UPWARD in SVG screen coords ── -->
+        <path d="M 340 560 A 380 380 0 0 1 1100 560"
+              stroke="#242424" stroke-width="1"/>
+        <path d="M 220 560 A 500 500 0 0 1 1220 560"
+              stroke="#242424" stroke-width="1"/>
+
+        <!-- ── Separator line at base with horizontal margin ── -->
         <line x1="80" y1="558" x2="1360" y2="558"
-              stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+              stroke="#242424" stroke-width="1"/>
 
-        <!-- ─────────────────────────────────────────────
-             Image placeholder circles
-             Sizes: LARGE (r=30) at low outer arc sides
-                    MEDIUM (r=20–22) at mid-arc
-                    SMALL (r=14–16) near top / inner arc
-        ───────────────────────────────────────────── -->
+        <!-- ── Orbit image circles — clipped to circle shape ── -->
 
-        <!-- Outer arc (r=500) -->
-        <!-- θ=14° → (1205, 439)  LARGE -->
-        <circle cx="1205" cy="439" r="30" fill="#1C1C1C" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-        <line x1="1193" y1="439" x2="1217" y2="439" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-        <line x1="1205" y1="427" x2="1205" y2="451" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+        <!-- Outer arc (r=500), θ=62° → (955, 118)  top-right r=22 -->
+        <image href="Assets/images/join-us-orbit-images/Extra.png"
+               x="933" y="96" width="44" height="44"
+               clip-path="url(#orb-clip1)" preserveAspectRatio="xMidYMid slice"/>
 
-        <!-- θ=52° → (1027, 166)  MEDIUM -->
-        <circle cx="1027" cy="166" r="19" fill="#1C1C1C" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-        <line x1="1018" y1="166" x2="1036" y2="166" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-        <line x1="1027" y1="157" x2="1027" y2="175" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+        <!-- Outer arc (r=500), θ=143° → (321, 259)  left large r=40 -->
+        <image href="Assets/images/join-us-orbit-images/image%2031.png"
+               x="281" y="219" width="80" height="80"
+               clip-path="url(#orb-clip2)" preserveAspectRatio="xMidYMid slice"/>
 
-        <!-- θ=90° → (720,  60)  SMALL -->
-        <circle cx="720" cy="60" r="15" fill="#1C1C1C" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-        <line x1="712" y1="60" x2="728" y2="60" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-        <line x1="720" y1="52" x2="720" y2="68" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+        <!-- Outer arc (r=500), θ=14° → (1205, 439)  right large r=40 -->
+        <image href="Assets/images/join-us-orbit-images/image%2033.png"
+               x="1165" y="399" width="80" height="80"
+               clip-path="url(#orb-clip3)" preserveAspectRatio="xMidYMid slice"/>
 
-        <!-- θ=128° → (413, 166)  MEDIUM -->
-        <circle cx="413" cy="166" r="19" fill="#1C1C1C" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-        <line x1="404" y1="166" x2="422" y2="166" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-        <line x1="413" y1="157" x2="413" y2="175" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-
-        <!-- θ=166° → (235, 439)  LARGE -->
-        <circle cx="235" cy="439" r="30" fill="#1C1C1C" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-        <line x1="223" y1="439" x2="247" y2="439" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-        <line x1="235" y1="427" x2="235" y2="451" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-
-        <!-- Middle arc (r=340) -->
-        <!-- θ=32° → (1008, 380)  MEDIUM -->
-        <circle cx="1008" cy="380" r="22" fill="#1C1C1C" stroke="rgba(255,255,255,0.16)" stroke-width="1"/>
-        <line x1="998" y1="380" x2="1018" y2="380" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-        <line x1="1008" y1="370" x2="1008" y2="390" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-
-        <!-- θ=90° → (720, 220)  SMALL -->
-        <circle cx="720" cy="220" r="15" fill="#1C1C1C" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-        <line x1="712" y1="220" x2="728" y2="220" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-        <line x1="720" y1="212" x2="720" y2="228" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-
-        <!-- θ=148° → (432, 380)  MEDIUM -->
-        <circle cx="432" cy="380" r="22" fill="#1C1C1C" stroke="rgba(255,255,255,0.16)" stroke-width="1"/>
-        <line x1="422" y1="380" x2="442" y2="380" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-        <line x1="432" y1="370" x2="432" y2="390" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-
-        <!-- Inner arc (r=200) -->
-        <!-- θ=55° → (835, 396)  SMALL -->
-        <circle cx="835" cy="396" r="14" fill="#1C1C1C" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-        <line x1="828" y1="396" x2="842" y2="396" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-        <line x1="835" y1="389" x2="835" y2="403" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-
-        <!-- θ=125° → (605, 396)  SMALL -->
-        <circle cx="605" cy="396" r="14" fill="#1C1C1C" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-        <line x1="598" y1="396" x2="612" y2="396" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-        <line x1="605" y1="389" x2="605" y2="403" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+        <!-- Inner arc (r=380), θ=150° → (391, 370)  left-lower small r=18 -->
+        <image href="Assets/images/join-us-orbit-images/AdobeStock_535425457%201.png"
+               x="373" y="352" width="36" height="36"
+               clip-path="url(#orb-clip4)" preserveAspectRatio="xMidYMid slice"/>
 
       </svg>
 
