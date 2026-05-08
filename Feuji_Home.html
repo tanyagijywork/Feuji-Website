@@ -738,8 +738,8 @@
       align-items: center;
       padding: 20px 32px;
       border-top: 1px solid var(--border);
-      border-radius: 8px;
-      transition: border-color 0.22s var(--ease), background 0.22s var(--ease);
+      border-radius: 0;
+      transition: border-color 0.22s var(--ease), background 0.22s var(--ease), border-radius 0.22s var(--ease);
       cursor: default;
       overflow: visible;
       position: relative;
@@ -749,6 +749,7 @@
     .svc-item:hover {
       border-color: #EA580C;
       background: #EA580C;
+      border-radius: 8px;
       z-index: 1;
     }
 
@@ -760,7 +761,7 @@
       margin-top: -40px;
       margin-bottom: -40px;
       background: #F0EDE8;
-      border: 1px solid #E0DBD4;
+      border: none;
       border-radius: 8px;
       overflow: hidden;
       pointer-events: none;
@@ -836,7 +837,7 @@
       color: var(--mid);
       transition: color 0.22s var(--ease);
     }
-    .svc-item:hover .svc-item__body { color: rgba(255,255,255,0.75); }
+    .svc-item:hover .svc-item__body { color: var(--white); }
 
     /* ─────────────────────────────────────────
        CASE STUDIES
@@ -981,6 +982,28 @@
     }
     .stat:hover { border-color: #14532D; }
     .stat:hover .stat__val { color: #14532D; }
+
+    /* ── Stat fade-up animation ── */
+    @keyframes stat-fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(32px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .stat--animate {
+      opacity: 0;
+    }
+    .stat--animate.is-visible {
+      animation: stat-fade-up 0.7s cubic-bezier(0,0,0.2,1) forwards;
+    }
+    .stat--animate.is-visible:nth-child(1) { animation-delay: 0.1s; }
+    .stat--animate.is-visible:nth-child(2) { animation-delay: 0.4s; }
+    .stat--animate.is-visible:nth-child(3) { animation-delay: 0.7s; }
+    .stat--animate.is-visible:nth-child(4) { animation-delay: 1.0s; }
 
     .stat__val {
       font-family: var(--f-display);
@@ -1831,8 +1854,7 @@
         <article class="case-card reveal reveal-d2" tabindex="0" role="article">
           <p class="t-label-s case-card__label">Case Study</p>
           <h3 class="case-card__heading">
-            How did we achieve a 50% reduction in migration time to Snowflake for a
-            billion-dollar data analytics company?
+            How did we streamlined processes and reduced costs for a $120M online ticketing platform?
           </h3>
           <a href="#" class="btn btn--tertiary-inv t-btn">
             Discover now <span class="btn-arrow">→</span>
@@ -1948,19 +1970,19 @@
       </div>
 
       <div class="numbers-flex" aria-label="Key statistics">
-        <div class="stat reveal">
+        <div class="stat stat--animate">
           <span class="stat__val">500+</span>
           <p class="stat__label">Employees</p>
         </div>
-        <div class="stat reveal reveal-d1">
+        <div class="stat stat--animate">
           <span class="stat__val">3</span>
           <p class="stat__label">Countries</p>
         </div>
-        <div class="stat reveal reveal-d2">
+        <div class="stat stat--animate">
           <span class="stat__val">50+</span>
           <p class="stat__label">Clients</p>
         </div>
-        <div class="stat reveal reveal-d3">
+        <div class="stat stat--animate">
           <span class="stat__val">20+</span>
           <p class="stat__label">Partners</p>
         </div>
@@ -2238,6 +2260,23 @@
     }, { rootMargin: '-35% 0px -60% 0px' });
 
     sections.forEach(s => activeObserver.observe(s));
+
+
+    /* ── STAT FADE-UP — fires once when the stats grid is actually in view ── */
+    (function () {
+      const animStats = document.querySelectorAll('.stat--animate');
+      const grid = document.querySelector('.numbers-flex');
+      if (!animStats.length || !grid) return;
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animStats.forEach(stat => stat.classList.add('is-visible'));
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.5, rootMargin: '0px 0px -80px 0px' });
+      observer.observe(grid);
+    })();
 
 
     /* ── SMOOTH SCROLL for anchor links ── */
