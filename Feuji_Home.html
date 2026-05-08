@@ -31,7 +31,7 @@
       --nav-h:     80px;
       --max-w:     1280px;
       --pad-x:     80px;
-      --sec-py:    128px;
+      --sec-py:    64px;
       --gap:       32px;
 
       /* easing */
@@ -399,7 +399,7 @@
        HERO
     ───────────────────────────────────────── */
     .hero {
-      min-height: 60vh;
+      min-height: 80vh;
       background: var(--ink);
       display: flex;
       flex-direction: column;
@@ -421,25 +421,38 @@
 
     /* Dark scrim over video for text legibility */
     .hero__video-scrim {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.10);
-      z-index: 1;
-      pointer-events: none;
+      display: none;
     }
 
     .hero__inner {
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      gap: 40px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 30px;
       max-width: var(--max-w);
       width: 100%;
       margin: 0 auto;
-      padding: calc(var(--nav-h) + 80px) var(--pad-x) 80px;
+      padding: calc(var(--nav-h) + 40px) var(--pad-x) 40px;
+      margin-top: -60px;
       position: relative;
       z-index: 4;
+    }
+
+    /* Liquid glass pill on "Applied AI" */
+    .hero__glass {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(16px) saturate(1.6);
+      -webkit-backdrop-filter: blur(16px) saturate(1.6);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      padding: 0 28px;
+      box-shadow:
+        0 4px 24px rgba(0,0,0,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.3);
     }
 
     /* Display L — Cormorant 120/120 −6px */
@@ -468,7 +481,8 @@
       line-height: 28px;
       letter-spacing: -1px;
       color: rgba(255,255,255,0.90);
-      max-width: 620px;
+      max-width: 420px;
+      text-align: center;
     }
 
     .hero__actions {
@@ -480,17 +494,19 @@
     /* scroll indicator */
     .hero__scroll {
       position: absolute;
-      bottom: 40px;
-      right: var(--pad-x);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
+      flex-direction: column;
       align-items: center;
       gap: 12px;
       color: rgba(255,255,255,0.65);
       z-index: 4;
     }
     .hero__scroll-line {
-      width: 40px;
-      height: 1px;
+      width: 1px;
+      height: 40px;
       background: rgba(255,255,255,0.45);
       position: relative;
       overflow: hidden;
@@ -503,9 +519,9 @@
       animation: scroll-line 2s ease-in-out infinite;
     }
     @keyframes scroll-line {
-      0%   { transform: translateX(-100%); }
-      50%  { transform: translateX(0); }
-      100% { transform: translateX(100%); }
+      0%   { transform: translateY(-100%); }
+      50%  { transform: translateY(0); }
+      100% { transform: translateY(100%); }
     }
 
     /* ─────────────────────────────────────────
@@ -532,6 +548,8 @@
     /* ─────────────────────────────────────────
        ABOUT — WHO WE ARE
     ───────────────────────────────────────── */
+    .ai-eng .section__inner { padding-top: 0; }
+
     .about .section__inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -553,10 +571,17 @@
     .about__body p + p { margin-top: 20px; }
 
     .about__img {
-      aspect-ratio: 630 / 400;
-      min-height: 320px;
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
+      clip-path: inset(50px 0 70px 0 round 16px);
+    }
+
+    .about__video {
+      width: 120%;
+      height: auto;
+      display: block;
+      border-radius: 16px;
+      transform: translateX(-60px);
     }
 
     /* ─────────────────────────────────────────
@@ -659,7 +684,7 @@
 
     .ai-tab {
       position: relative;
-      padding: 28px 32px 32px 0;
+      padding: 28px 32px 0 0;
       cursor: pointer;
       overflow: hidden;
     }
@@ -1602,7 +1627,7 @@
 
     <!-- Full-bleed video background -->
     <video class="hero__video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-      <source src="Assets/images/gettyimages-2227344643-640_adpp.mp4" type="video/mp4">
+      <source src="Assets/images/gettyimages-1852028609-640_adpp.mp4" type="video/mp4">
     </video>
     <!-- Scrim for text legibility -->
     <div class="hero__video-scrim" aria-hidden="true"></div>
@@ -1635,7 +1660,7 @@
   <!-- ══════════════════════════════════════
        WHO WE ARE
   ══════════════════════════════════════ -->
-  <section id="about" class="section-light about" aria-labelledby="about-heading">
+  <section id="about" class="about" style="background:#F9F9F9;" aria-labelledby="about-heading">
     <div class="section__inner">
 
       <div class="about__left">
@@ -1658,19 +1683,18 @@
       </div>
 
       <div class="about__img reveal reveal-d2">
-        <img src="Assets/images/5ee687a83a0c11d5360d57b6e627469d.jpg" alt="We are Feuji" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;border-radius:12px;" />
+        <video class="about__video" autoplay muted loop playsinline preload="auto">
+          <source src="Assets/images/hf_20260303_071415_7a7d4099-8c41-47e9-b050-3c4aae423622.mp4" type="video/mp4">
+        </video>
       </div>
 
     </div>
   </section>
 
-  <div class="mist-divider" aria-hidden="true"></div>
-
-
   <!-- ══════════════════════════════════════
        AI ENGINEERING
   ══════════════════════════════════════ -->
-  <section id="ai-engineering" class="section-surface ai-eng" aria-labelledby="ai-heading">
+  <section id="ai-engineering" class="ai-eng" style="background:#F9F9F9;" aria-labelledby="ai-heading">
     <div class="section__inner">
 
       <div class="section-header">
