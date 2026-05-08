@@ -1667,7 +1667,7 @@
     /* Each character span — hidden by default, soft 80ms fade-in */
     .tw-char {
       opacity: 0;
-      transition: opacity 0.08s ease;
+      transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       display: inline;
     }
     .tw-char.is-visible { opacity: 1; }
@@ -2932,7 +2932,7 @@
         } else {
           clearInterval(tick);
         }
-      }, 40); // 40ms per character — calm, deliberate pace
+      }, 80); // 80ms per character — slow, deliberate pace
     }
 
     // ── Apply to all h2s (scroll-driven)
