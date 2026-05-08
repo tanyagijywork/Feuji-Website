@@ -31,7 +31,7 @@
       --nav-h:     80px;
       --max-w:     1280px;
       --pad-x:     80px;
-      --sec-py:    64px;
+      --sec-py:    80px;
       --gap:       32px;
 
       /* easing */
@@ -405,7 +405,7 @@
        HERO
     ───────────────────────────────────────── */
     .hero {
-      min-height: 80vh;
+      min-height: 100vh;
       background: var(--ink);
       display: flex;
       flex-direction: column;
@@ -429,6 +429,75 @@
     .hero__video-scrim {
       display: none;
     }
+
+    /* ── Floating glassmorphism capsules ── */
+    .hero__capsule {
+      position: absolute;
+      z-index: 5;
+      padding: 10px 22px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: url(#frosted) blur(2px);
+      -webkit-backdrop-filter: url(#frosted) blur(2px);
+      border: 2px solid transparent;
+      box-shadow:
+        0 0 0 2px rgba(255,255,255,0.6),
+        0 16px 32px rgba(0,0,0,0.12);
+      font-family: var(--f-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.95);
+      white-space: nowrap;
+      pointer-events: none;
+      will-change: transform;
+      overflow: hidden;
+    }
+
+    .hero__capsule::before { display: none; }
+
+    /* Subtle inner glow */
+    .hero__capsule::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.18) 0%,
+        rgba(255,255,255,0.04) 50%,
+        rgba(255,255,255,0.10) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Four distinct float rhythms */
+    @keyframes float-a {
+      0%,100% { transform: translateY(0px)   rotate(0deg);    }
+      40%     { transform: translateY(-14px)  rotate(0.6deg);  }
+      70%     { transform: translateY(-6px)   rotate(-0.3deg); }
+    }
+    @keyframes float-b {
+      0%,100% { transform: translateY(0px)   rotate(-0.4deg); }
+      35%     { transform: translateY(-10px)  rotate(0.2deg);  }
+      65%     { transform: translateY(-16px)  rotate(-0.5deg); }
+    }
+    @keyframes float-c {
+      0%,100% { transform: translateY(0px)   rotate(0.3deg);  }
+      45%     { transform: translateY(-12px)  rotate(-0.4deg); }
+      75%     { transform: translateY(-5px)   rotate(0.2deg);  }
+    }
+    @keyframes float-d {
+      0%,100% { transform: translateY(0px)   rotate(-0.2deg); }
+      30%     { transform: translateY(-18px)  rotate(0.5deg);  }
+      60%     { transform: translateY(-8px)   rotate(-0.3deg); }
+    }
+
+    .hero__capsule--intelligence { top: 20%;  left: 20%;  animation: float-a 5.2s ease-in-out infinite; }
+    .hero__capsule--purpose      { top: 35%;  right: 8%;  animation: float-b 4.6s ease-in-out infinite 0.9s; }
+    .hero__capsule--engineering  { top: 62%;  left: 10%;  animation: float-c 4.9s ease-in-out infinite 1.8s; }
+    .hero__capsule--impact       { top: 75%;  right: 15%; animation: float-d 4.2s ease-in-out infinite 0.4s; }
 
     .hero__inner {
       flex: 1;
@@ -472,6 +541,26 @@
       /* Parallax: JS sets --parallax-y */
       will-change: transform;
       transform: translateY(calc(var(--parallax-y, 0) * 1px));
+    }
+
+    /* Glassmorphism text on "Applied AI" */
+    .hero__headline em {
+      font-style: italic;
+      background: linear-gradient(
+        155deg,
+        rgba(255,255,255,1.00)  0%,
+        rgba(255,255,255,0.50) 28%,
+        rgba(255,255,255,0.82) 48%,
+        rgba(255,255,255,0.38) 68%,
+        rgba(255,255,255,0.88) 85%,
+        rgba(255,255,255,0.60) 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter:
+        drop-shadow(0 1px 0px rgba(255,255,255,0.9))
+        drop-shadow(0 4px 16px rgba(255,255,255,0.18));
     }
 
     .hero__bottom {
@@ -715,7 +804,7 @@
       left: 0;
       height: 2px;
       width: 0;
-      background: var(--ink);
+      background: #D8582B;
       border-radius: 999px;
     }
     .ai-tab.is-active::after {
@@ -884,35 +973,62 @@
     }
 
     .case-card {
-      border: 1px solid #292929;
+      border: 1px solid transparent;
       border-radius: 12px;
       padding: 52px 48px;
       display: flex;
       flex-direction: column;
       gap: 40px;
-      background: rgba(255,255,255,0.04);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      transition: border-color 0.22s var(--ease), background 0.22s var(--ease),
-                  color 0.22s var(--ease), transform 0.22s var(--ease);
-      cursor: pointer;
-    }
-    .case-card:hover {
-      border-color: #F3752C;
       background:
-        radial-gradient(ellipse 70% 60% at 25% 40%, #F5622A 0%, transparent 65%),
-        radial-gradient(ellipse 50% 50% at 80% 80%, #C03010 0%, transparent 60%),
-        radial-gradient(ellipse 60% 70% at 90% 10%, #D94020 0%, transparent 55%),
-        #C83818;
+        linear-gradient(#0A0806, #0A0806) padding-box,
+        linear-gradient(to bottom, transparent 0%, rgba(200, 70, 20, 0.35) 100%) border-box;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: background 0.6s ease, transform 0.4s var(--ease);
+    }
+
+    /* Rising sun glow — expands radially from bottom on hover */
+    .case-card::before {
+      content: '';
+      position: absolute;
+      bottom: -10%;
+      left: 50%;
+      transform: translateX(-50%) translateY(60%) scale(1);
+      transform-origin: center bottom;
+      width: 100%;
+      height: 70%;
+      background: radial-gradient(ellipse at center bottom,
+        rgba(190, 60, 15, 0.85) 0%,
+        rgba(140, 35, 10, 0.45) 45%,
+        transparent 72%
+      );
+      border-radius: 50%;
+      transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity  1.4s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .case-card:hover {
+      background:
+        linear-gradient(#0A0806, #0A0806) padding-box,
+        linear-gradient(to bottom, transparent 0%, rgba(243, 117, 44, 0.65) 100%) border-box;
       transform: translateY(-2px);
+    }
+    .case-card:hover::before {
+      transform: translateX(-50%) translateY(0%) scale(2);
+      opacity: 1;
     }
 
     .case-card__label {
       color: #F3752C;
-      transition: color 0.22s var(--ease);
+      transition: color 0.4s var(--ease);
+      position: relative;
+      z-index: 1;
     }
     .case-card:hover .case-card__label {
-      color: rgba(255,255,255,0.8);
+      color: rgba(255,255,255,0.9);
     }
 
     .case-card__heading {
@@ -923,10 +1039,8 @@
       letter-spacing: -1px;
       color: var(--white);
       flex: 1;
-      transition: color 0.22s var(--ease);
-    }
-    .case-card:hover .case-card__heading {
-      color: var(--white);
+      position: relative;
+      z-index: 1;
     }
 
     /* ─────────────────────────────────────────
@@ -938,6 +1052,34 @@
       gap: 16px;
       flex-wrap: wrap;
     }
+
+    /* ── Partner image cards ── */
+    .partner-cards {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    .partner-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .partner-card__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 1;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    }
+    .partner-card:hover .partner-card__bg { transform: scale(1.04); }
 
     .logo-grid {
       display: grid;
@@ -1004,6 +1146,9 @@
     .numbers-header {
       margin-bottom: 72px;
     }
+    .comm-stage-inner .numbers-header {
+      margin-bottom: 40px;
+    }
 
     .numbers-flex {
       display: grid;
@@ -1017,10 +1162,36 @@
       gap: 16px;
       padding-top: 48px;
       border-top: 1px solid var(--border);
-      transition: border-color 0.22s var(--ease);
+      transition: border-color 0.4s var(--ease);
+      position: relative;
+      overflow: hidden;
     }
-    .stat:hover { border-color: #14532D; }
-    .stat:hover .stat__val { color: #14532D; }
+    .stat:hover { border-color: #D8582B; }
+    .stat:hover .stat__val { color: #D8582B; }
+
+    /* ── Top glow on all stat cards ── */
+    .stat::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500%;
+      height: 75%;
+      background: radial-gradient(ellipse at 50% 0%,
+        rgba(216, 88, 43, 0.30) 0%,
+        rgba(216, 88, 43, 0.10) 40%,
+        rgba(216, 88, 43, 0.02) 65%,
+        transparent 80%
+      );
+      opacity: 0;
+      transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .stat:hover::before {
+      opacity: 1;
+    }
 
     /* ── Stat fade-up animation ── */
     @keyframes stat-fade-up {
@@ -1096,7 +1267,7 @@
       padding: var(--sec-py) var(--pad-x) 0;
       display: flex;
       flex-direction: column;
-      gap: 56px;
+      gap: 32px;
     }
 
     /* Heading inside sticky stage — always visible, skip the reveal fade */
@@ -1108,14 +1279,14 @@
     .comm-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: var(--gap);
+      gap: 64px;
       align-items: start;
     }
 
     /* Staggered vertical offset — each card sits lower than the previous */
     .comm-card:nth-child(1) { margin-top: 0; }
-    .comm-card:nth-child(2) { margin-top: 40px; }
-    .comm-card:nth-child(3) { margin-top: 80px; }
+    .comm-card:nth-child(2) { margin-top: 80px; }
+    .comm-card:nth-child(3) { margin-top: 160px; }
 
     .comm-card {
       display: flex;
@@ -1150,7 +1321,7 @@
       font-weight: 400;
       line-height: 25px;
       letter-spacing: -1px;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255,255,255,0.8);
       flex: 1;
     }
 
@@ -1274,6 +1445,18 @@
     .join-orbit__btn {
       color: var(--white);
       border-color: rgba(255,255,255,0.3);
+    }
+
+    /* ── Orbit glow: scroll-scrubbed ── */
+    .join-orbit__glow {
+      opacity: 0;
+      will-change: opacity;
+    }
+
+    /* ── Orbit arcs + orbs: scroll-scrubbed opacity ── */
+    .join-orbit__arc,
+    .join-orbit__orb {
+      opacity: 0;
     }
 
     /* Connect section — dark theme */
@@ -1716,6 +1899,40 @@
   ══════════════════════════════════════ -->
   <section id="hero" class="hero" aria-labelledby="hero-heading">
 
+    <!-- SVG filters: frosted capsules + 3D glass text -->
+    <svg width="0" height="0" style="position:absolute;pointer-events:none;" aria-hidden="true">
+      <defs>
+        <!-- Capsule frosted filter -->
+        <filter id="frosted" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" result="noise"/>
+          <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+          <feBlend in="SourceGraphic" in2="grayNoise" mode="overlay" result="blended"/>
+          <feComposite in="blended" in2="SourceGraphic" operator="in"/>
+          <feGaussianBlur stdDeviation="1.5" result="blurred"/>
+          <feComposite in="blurred" in2="SourceGraphic" operator="in"/>
+        </filter>
+
+        <!-- 3D glass text: specular surface lighting + depth shadow -->
+        <filter id="glass-text-3d" x="-8%" y="-30%" width="116%" height="160%" color-interpolation-filters="sRGB">
+          <!-- Height map from letter shapes -->
+          <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="heightMap"/>
+          <!-- Specular highlight: simulates light hitting glass surface from top-left -->
+          <feSpecularLighting in="heightMap" surfaceScale="6" specularConstant="1.4"
+                              specularExponent="50" lighting-color="#ffffff" result="specular">
+            <fePointLight x="-300" y="-400" z="500"/>
+          </feSpecularLighting>
+          <!-- Clip specular to letter shapes only -->
+          <feComposite in="specular" in2="SourceAlpha" operator="in" result="clippedSpecular"/>
+          <!-- Merge specular highlights onto the gradient text -->
+          <feComposite in="SourceGraphic" in2="clippedSpecular"
+                       operator="arithmetic" k1="0" k2="1" k3="0.55" k4="0" result="lit"/>
+          <!-- Soft depth shadow beneath letters -->
+          <feDropShadow dx="0" dy="5" stdDeviation="10"
+                        flood-color="rgba(0,0,0,0.55)" in="lit"/>
+        </filter>
+      </defs>
+    </svg>
+
     <!-- Full-bleed video background -->
     <video class="hero__video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
       <source src="Assets/images/banner-video.mp4" type="video/mp4">
@@ -1723,10 +1940,16 @@
     <!-- Scrim for text legibility -->
     <div class="hero__video-scrim" aria-hidden="true"></div>
 
+    <!-- Floating glassmorphism capsules -->
+    <span class="hero__capsule hero__capsule--intelligence" aria-hidden="true">Intelligence</span>
+    <span class="hero__capsule hero__capsule--purpose"      aria-hidden="true">Purpose</span>
+    <span class="hero__capsule hero__capsule--engineering"  aria-hidden="true">Engineering</span>
+    <span class="hero__capsule hero__capsule--impact"       aria-hidden="true">Impact</span>
+
     <div class="hero__inner">
 
       <h1 id="hero-heading" class="hero__headline">
-        Applied AI<br>Engineering
+        <em>Applied AI</em><br>Engineering
       </h1>
 
       <div class="hero__bottom">
@@ -1823,12 +2046,16 @@
           </div>
 
           <div class="ai-tab-img" data-tab="2" style="background: #E8E4DE;">
-            <img src="Assets/images/home-ai-engineering/AI-innovation.png" alt="AI Innovation Suite" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+              <source src="Assets/images/ai-engineering/gettyimages-2182400108-640_adpp.mp4" type="video/mp4">
+            </video>
             <span class="ai-tab-img__label">AI Innovation Suite</span>
           </div>
 
-          <div class="ai-tab-img" data-tab="3" style="background: #E3E1DD;">
-            <img src="Assets/images/ai-engineering/ai-partnership-v02-summer.png" alt="AI Partnership Ecosystem" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;" />
+          <div class="ai-tab-img" data-tab="3" style="background: #0A0A0A;">
+            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+              <source src="Assets/images/ai-engineering/gettyimages-1415599817-640_adpp.mp4" type="video/mp4">
+            </video>
             <span class="ai-tab-img__label">AI Partnership Ecosystem</span>
           </div>
 
@@ -1952,7 +2179,7 @@
     <div class="section__inner">
 
       <div style="margin-bottom: 72px;">
-        <h2 id="cases-heading" class="t-h2 reveal" style="color: var(--white); margin-top: 16px;">
+        <h2 id="cases-heading" class="t-h2 reveal" style="color: var(--white); margin-top: 16px; text-align: center;">
           Delivering outcomes<br><em>that matter to you</em>
         </h2>
       </div>
@@ -1991,27 +2218,33 @@
   <section id="partners" class="section-light" aria-labelledby="partners-heading">
     <div class="section__inner" style="padding-top: 96px; padding-bottom: 96px;">
 
-      <span class="t-label-s eyebrow reveal">Partner Ecosystem</span>
-      <h2 id="partners-heading" class="t-h2 reveal" style="max-width: 840px; margin-bottom: 56px;">
+      <span class="t-label-s eyebrow reveal" style="display:block; text-align:center;">Partner Ecosystem</span>
+      <h2 id="partners-heading" class="t-h2 reveal" style="max-width: 840px; margin-bottom: 56px; text-align:center; margin-left:auto; margin-right:auto;">
         Leveraging our robust partner ecosystem to <em>deliver excellence</em>
       </h2>
 
-      <div class="logo-row reveal reveal-d1" aria-label="Partner logos">
-        <div class="logo-pill">
-          <img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Partners/Logo-Check_Point.png" alt="Check Point" />
+      <div class="partner-cards reveal reveal-d1" aria-label="Partner logos">
+
+        <div class="partner-card">
+          <img class="partner-card__bg" src="Assets/images/partner-logos-superflex/checkpoint-logo.png" alt="Check Point" />
         </div>
-        <div class="logo-pill">
-          <img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Partners/Logo-Cinde.png" alt="Cinde" />
+
+        <div class="partner-card">
+          <img class="partner-card__bg" src="Assets/images/partner-logos-superflex/cinde-logo.png" alt="Cinde" />
         </div>
-        <div class="logo-pill">
-          <img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Partners/Logo-Horizon3ai.png" alt="Horizon3.ai" />
+
+        <div class="partner-card">
+          <img class="partner-card__bg" src="Assets/images/partner-logos-superflex/horizon3ai-logo.png" alt="Horizon3.ai" />
         </div>
-        <div class="logo-pill">
-          <img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Partners/Logo-T-Hub.png" alt="T-Hub" />
+
+        <div class="partner-card">
+          <img class="partner-card__bg" src="Assets/images/partner-logos-superflex/thub-logo.png" alt="T-Hub" />
         </div>
-        <div class="logo-pill">
-          <img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Partners/Logo-incorta.png" alt="Incorta" />
+
+        <div class="partner-card">
+          <img class="partner-card__bg" src="Assets/images/partner-logos-superflex/incorta-logo.png" alt="Incorta" />
         </div>
+
       </div>
 
     </div>
@@ -2026,8 +2259,8 @@
   <section id="clients" class="section-surface" aria-labelledby="clients-heading">
     <div class="section__inner" style="padding-top: 96px; padding-bottom: 96px;">
 
-      <span class="t-label-s eyebrow reveal">Our Clients</span>
-      <h2 id="clients-heading" class="t-h2 reveal" style="max-width: 840px; margin-bottom: 56px;">
+      <span class="t-label-s eyebrow reveal" style="display:block; text-align:center;">Our Clients</span>
+      <h2 id="clients-heading" class="t-h2 reveal" style="max-width: 840px; margin-bottom: 56px; text-align:center; margin-left:auto; margin-right:auto;">
         Building <em>trust</em> through deep partnerships with our clients
       </h2>
 
@@ -2040,7 +2273,7 @@
           <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Cotiviti.png" alt="Cotiviti" /></div>
           <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-DXC_Technology.png" alt="DXC Technology" /></div>
           <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-GSK.png" alt="GSK" /></div>
-          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-HP%20enterprise.png" alt="HP Enterprise" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-HP-enterprise.png" alt="HP Enterprise" /></div>
           <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Haleon.svg" alt="Haleon" /></div>
           <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Micro_Focus.svg" alt="Micro Focus" /></div>
           <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Nagase-America-LLC.png" alt="Nagase America" /></div>
@@ -2057,7 +2290,7 @@
           <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Cotiviti.png" alt="Cotiviti" /></div>
           <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-DXC_Technology.png" alt="DXC Technology" /></div>
           <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-GSK.png" alt="GSK" /></div>
-          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-HP%20enterprise.png" alt="HP Enterprise" /></div>
+          <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-HP-enterprise.png" alt="HP Enterprise" /></div>
           <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Haleon.svg" alt="Haleon" /></div>
           <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Micro_Focus.svg" alt="Micro Focus" /></div>
           <div class="logo-pill"><img src="Assets/Feuji-%20clients%20%26%20partner%20logos/Clients/Logo-Nagase-America-LLC.png" alt="Nagase America" /></div>
@@ -2081,9 +2314,9 @@
   <section id="numbers" class="section-light" aria-labelledby="numbers-heading">
     <div class="section__inner">
 
-      <div class="numbers-header">
+      <div class="numbers-header" style="text-align:center;">
         <span class="t-label-m eyebrow reveal">Feuji numbers</span>
-        <h2 id="numbers-heading" class="t-h2 reveal" style="margin-top: 20px; max-width: 560px;">
+        <h2 id="numbers-heading" class="t-h2 reveal" style="margin-top: 20px; max-width: 560px; margin-left:auto; margin-right:auto;">
           Feuji <em>at a glance</em>
         </h2>
       </div>
@@ -2231,12 +2464,12 @@
         </defs>
 
         <!-- ── Orange radial glow ── -->
-        <ellipse cx="720" cy="480" rx="360" ry="260" fill="url(#orbit-glow)"/>
+        <ellipse class="join-orbit__glow" cx="720" cy="480" rx="360" ry="260" fill="url(#orbit-glow)"/>
 
         <!-- ── Arc strokes — sweep=1 = clockwise = curves UPWARD in SVG screen coords ── -->
-        <path d="M 340 560 A 380 380 0 0 1 1100 560"
+        <path class="join-orbit__arc" d="M 340 560 A 380 380 0 0 1 1100 560"
               stroke="#242424" stroke-width="1"/>
-        <path d="M 220 560 A 500 500 0 0 1 1220 560"
+        <path class="join-orbit__arc" d="M 220 560 A 500 500 0 0 1 1220 560"
               stroke="#242424" stroke-width="1"/>
 
         <!-- ── Separator line at base with horizontal margin ── -->
@@ -2246,22 +2479,22 @@
         <!-- ── Orbit image circles — clipped to circle shape ── -->
 
         <!-- Outer arc (r=500), θ=62° → (955, 118)  top-right r=22 -->
-        <image href="Assets/images/join-us-orbit-images/Extra.png"
+        <image class="join-orbit__orb" href="Assets/images/join-us-orbit-images/Extra.png"
                x="933" y="96" width="44" height="44"
                clip-path="url(#orb-clip1)" preserveAspectRatio="xMidYMid slice"/>
 
         <!-- Outer arc (r=500), θ=143° → (321, 259)  left large r=40 -->
-        <image href="Assets/images/join-us-orbit-images/image-31.png"
+        <image class="join-orbit__orb" href="Assets/images/join-us-orbit-images/image-31.png"
                x="281" y="219" width="80" height="80"
                clip-path="url(#orb-clip2)" preserveAspectRatio="xMidYMid slice"/>
 
         <!-- Outer arc (r=500), θ=14° → (1205, 439)  right large r=40 -->
-        <image href="Assets/images/join-us-orbit-images/image-33.png"
+        <image class="join-orbit__orb" href="Assets/images/join-us-orbit-images/image-33.png"
                x="1165" y="399" width="80" height="80"
                clip-path="url(#orb-clip3)" preserveAspectRatio="xMidYMid slice"/>
 
         <!-- Inner arc (r=380), θ=150° → (391, 370)  left-lower small r=18 -->
-        <image href="Assets/images/join-us-orbit-images/AdobeStock_535425457-1.png"
+        <image class="join-orbit__orb" href="Assets/images/join-us-orbit-images/AdobeStock_535425457-1.png"
                x="373" y="352" width="36" height="36"
                clip-path="url(#orb-clip4)" preserveAspectRatio="xMidYMid slice"/>
 
@@ -2465,19 +2698,58 @@
     sections.forEach(s => activeObserver.observe(s));
 
 
-    /* ── STAT FADE-UP — fires once when the stats grid is actually in view ── */
+    /* ── STAT FADE-UP + SCRAMBLE — fires once when stats grid enters view ── */
     (function () {
       const animStats = document.querySelectorAll('.stat--animate');
-      const grid = document.querySelector('.numbers-flex');
+      const grid      = document.querySelector('.numbers-flex');
       if (!animStats.length || !grid) return;
+
+      /* Slow calm scramble: resolves characters left→right over ~1.8s */
+      function scramble(el, delay) {
+        const original = el.textContent.trim();
+        // Split into numeric prefix and any suffix (e.g. "500" + "+")
+        const m = original.match(/^(\d+)(\D*)$/);
+        if (!m) return;
+        const numStr = m[1];
+        const suffix = m[2] || '';
+        const digits = '0123456789';
+        const frameDur  = 90;   // ms per frame — slower = calmer
+        const totalFrames = 20; // ~1.8s total
+        let frame = 0;
+
+        setTimeout(() => {
+          const iv = setInterval(() => {
+            frame++;
+            const progress = frame / totalFrames;
+            // Characters resolve left→right
+            const resolved = Math.floor(progress * (numStr.length + 1));
+            let display = '';
+            for (let i = 0; i < numStr.length; i++) {
+              display += i < resolved
+                ? numStr[i]
+                : digits[Math.floor(Math.random() * digits.length)];
+            }
+            el.textContent = display + suffix;
+            if (frame >= totalFrames) {
+              clearInterval(iv);
+              el.textContent = original; // lock to real value
+            }
+          }, frameDur);
+        }, delay);
+      }
+
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            animStats.forEach(stat => stat.classList.add('is-visible'));
-            observer.disconnect();
-          }
+          if (!entry.isIntersecting) return;
+          animStats.forEach((stat, i) => {
+            stat.classList.add('is-visible');
+            const val = stat.querySelector('.stat__val');
+            if (val) scramble(val, i * 200); // stagger each number by 200ms
+          });
+          observer.disconnect();
         });
       }, { threshold: 0.5, rootMargin: '0px 0px -80px 0px' });
+
       observer.observe(grid);
     })();
 
@@ -2507,6 +2779,48 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
 
     revealEls.forEach(el => revealObserver.observe(el));
+
+    /* ── Join Orbit: fully scroll-scrubbed (glow + arcs + orbs) ── */
+    (function () {
+      const section = document.querySelector('.join-orbit');
+      if (!section) return;
+
+      const glow = section.querySelector('.join-orbit__glow');
+      const arcs = section.querySelectorAll('.join-orbit__arc');  // [0]=inner, [1]=outer
+      const orbs = section.querySelectorAll('.join-orbit__orb');
+
+      // Map a value from one range to another, clamped 0–1
+      function remap(val, inLo, inHi) {
+        return Math.max(0, Math.min(1, (val - inLo) / (inHi - inLo)));
+      }
+
+      function update() {
+        const rect   = section.getBoundingClientRect();
+        const vh     = window.innerHeight;
+
+        // progress: 0 = section centre at viewport bottom, 1 = section centre at viewport centre
+        const sectionMid = rect.top + rect.height * 0.5;
+        const progress   = Math.max(0, Math.min(1, (vh - sectionMid) / (vh * 0.5)));
+
+        // Glow scrubs across the full range
+        if (glow) glow.style.opacity = Math.pow(progress, 0.5);
+
+        // Inner arc fades in first (progress 0 → 0.45)
+        if (arcs[0]) arcs[0].style.opacity = remap(progress, 0, 0.45);
+
+        // Outer arc fades in second (progress 0.3 → 0.8)
+        if (arcs[1]) arcs[1].style.opacity = remap(progress, 0.3, 0.8);
+
+        // Orbs fade in last, staggered (progress 0.55, 0.65, 0.75, 0.85)
+        orbs.forEach((orb, i) => {
+          orb.style.opacity = remap(progress, 0.5 + i * 0.1, 0.75 + i * 0.1);
+        });
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+    })();
 
 
     /* ── CASE CARDS: keyboard interaction ── */
@@ -2664,6 +2978,22 @@
       if (component) {
         component.addEventListener('mouseenter', () => clearInterval(timer));
         component.addEventListener('mouseleave', () => startTimer());
+      }
+
+      // Reset to tab 0 every time the section scrolls into view
+      const aiSection = document.querySelector('#ai-engineering');
+      if (aiSection) {
+        const resetObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              activate(0);
+              startTimer();
+            } else {
+              clearInterval(timer);
+            }
+          });
+        }, { threshold: 0.2 });
+        resetObserver.observe(aiSection);
       }
 
       activate(0);
