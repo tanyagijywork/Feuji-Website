@@ -1284,6 +1284,27 @@
     .comm-card:nth-child(2) { margin-top: 80px; }
     .comm-card:nth-child(3) { margin-top: 160px; }
 
+    .comm-card__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .comm-card__icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: rgba(255,255,255,0.85);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     .comm-card {
       display: flex;
       flex-direction: column;
@@ -2359,6 +2380,9 @@
           <div class="comm-cards">
 
             <div class="comm-card" data-comm-idx="0">
+              <div class="comm-card__icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              </div>
               <h3 class="comm-card__title">Smart Village</h3>
               <p class="comm-card__body">
                 We partner with rural communities to bring digital infrastructure, connectivity,
@@ -2371,6 +2395,9 @@
             </div>
 
             <div class="comm-card" data-comm-idx="1">
+              <div class="comm-card__icon">
+                <svg viewBox="0 0 24 24"><path d="M22 9L12 4 2 9l10 5 10-5z"/><path d="M6 11.5v5c0 1.5 2.686 3 6 3s6-1.5 6-3v-5"/><line x1="22" y1="9" x2="22" y2="15"/></svg>
+              </div>
               <h3 class="comm-card__title">Education</h3>
               <p class="comm-card__body">
                 Through scholarships, mentorship programmes, and skills training, we invest in
@@ -2383,6 +2410,9 @@
             </div>
 
             <div class="comm-card" data-comm-idx="2">
+              <div class="comm-card__icon">
+                <svg viewBox="0 0 24 24"><path d="M2 22c0 0 4-8 10-10 6-2 10 2 10 2s-4 8-10 10C6 26 2 22 2 22z"/><path d="M12 22c0-6 4-12 4-12"/></svg>
+              </div>
               <h3 class="comm-card__title">Sustainability</h3>
               <p class="comm-card__body">
                 We embed sustainable practices into how we operate and how we build — reducing
