@@ -1504,84 +1504,74 @@
     }
 
     /* Image layer — always at the bottom, behind .page-content */
-    /* ── Parallax Footer ── */
-    .parallax-wrap {
-      position: relative;
-      height: 250vh;
-    }
-
-    .parallax-sticky {
+    .footer-reveal {
       position: sticky;
-      top: 0;
-      height: 100vh;
+      bottom: 0;
+      z-index: 0;
+      height: 56vh;
       overflow: hidden;
-      background: #0A0806;
+      background: var(--ink);
     }
 
-    .parallax-visuals {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    .parallax-layers {
+    /* The photograph */
+    .footer-reveal__img {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .parallax-layer-img {
-      position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center bottom;
-      will-change: transform;
+      object-position: center 60%;
+      display: block;
     }
 
-    .parallax-layer-text {
+    /* Dark gradient at bottom — ensures legal text is legible over the image */
+    .footer-reveal::before {
+      content: '';
       position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 3;
-      will-change: transform;
-      text-align: center;
-    }
-
-    .parallax-eyebrow {
-      font-family: var(--f-ui);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
-      margin-bottom: 16px;
-    }
-
-    .parallax-title {
-      font-family: var(--f-display);
-      font-size: clamp(64px, 10vw, 130px);
-      font-weight: 500;
-      line-height: 1;
-      color: #fff;
-      letter-spacing: -3px;
-    }
-
-    .parallax-fade {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 35%;
-      background: linear-gradient(to bottom, transparent, #0A0806);
-      z-index: 10;
+      bottom: 0; left: 0; right: 0;
+      height: 30%;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.55));
+      z-index: 1;
       pointer-events: none;
     }
+
+    /* Legal bar — pinned to bottom of image layer */
+    .footer-reveal__legal {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--pad-x) 40px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .footer-reveal__copyright {
+      font-family: var(--f-ui);
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .footer-reveal__policy {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-reveal__policy a {
+      font-family: var(--f-ui);
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.18s;
+      text-decoration: none;
+    }
+    .footer-reveal__policy a:hover { color: rgba(255,255,255,0.85); }
 
     /* Footer — light theme, merges with section above */
     .footer {
@@ -1886,10 +1876,6 @@
     }
 
   </style>
-  <!-- GSAP + ScrollTrigger + Lenis -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
 <body>
 
@@ -2661,27 +2647,22 @@
 
 
   <!-- ══════════════════════════════════════
-       PARALLAX FOOTER
+       FOOTER REVEAL — image only, sticky behind
   ══════════════════════════════════════ -->
-  <div class="parallax-wrap">
-    <section class="parallax-sticky">
-      <div class="parallax-visuals">
-        <div data-parallax-layers class="parallax-layers">
-          <img src="Assets/images/parallax-zoomy-footer/background-layer-3.png"
-               data-parallax-layer="1" class="parallax-layer-img" alt="" loading="eager" />
-          <img src="Assets/images/parallax-zoomy-footer/middle-layer-2.png"
-               data-parallax-layer="2" class="parallax-layer-img" alt="" loading="eager" />
-          <div data-parallax-layer="3" class="parallax-layer-text">
-            <p class="parallax-eyebrow">Applied AI Engineering</p>
-            <h2 class="parallax-title">Built for<br>what's next.</h2>
-          </div>
-          <img src="Assets/images/parallax-zoomy-footer/front-layer-1.png"
-               data-parallax-layer="4" class="parallax-layer-img" alt="" loading="eager" />
-        </div>
-        <div class="parallax-fade"></div>
+  <div class="footer-reveal">
+    <img class="footer-reveal__img"
+         src="Assets/images/Firefly_Gemini-Flash-mountain.png"
+         alt=""
+         aria-hidden="true" />
+
+    <div class="footer-reveal__legal">
+      <p class="footer-reveal__copyright">© 2025 Feuji. All rights reserved.</p>
+      <div class="footer-reveal__policy">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
       </div>
-    </section>
-  </div><!-- /parallax-wrap -->
+    </div>
+  </div><!-- /footer-reveal -->
 
 
   <!-- ══════════════════════════════════════
@@ -3077,46 +3058,6 @@
       update();
     })();
 
-  </script>
-
-  <!-- ── Parallax Footer Animation ── -->
-  <script>
-  (function () {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const triggerEl = document.querySelector('[data-parallax-layers]');
-    if (!triggerEl) return;
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: triggerEl,
-        start: '0% 0%',
-        end: '100% 0%',
-        scrub: 0
-      }
-    });
-
-    const layers = [
-      { layer: '1', yPercent: 70 },
-      { layer: '2', yPercent: 55 },
-      { layer: '3', yPercent: 40 },
-      { layer: '4', yPercent: 10 }
-    ];
-
-    layers.forEach((layerObj, idx) => {
-      tl.to(
-        triggerEl.querySelectorAll(`[data-parallax-layer="${layerObj.layer}"]`),
-        { yPercent: layerObj.yPercent, ease: 'none' },
-        idx === 0 ? undefined : '<'
-      );
-    });
-
-    // Lenis smooth scroll
-    const lenis = new Lenis();
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-    gsap.ticker.lagSmoothing(0);
-  })();
   </script>
 
 </body>
