@@ -2109,6 +2109,29 @@
     /* ── Join Orbit ── */
     .join .section__inner { grid-template-columns: 1fr !important; gap: 32px; }
 
+    /* Mobile: orbit SVG on top, text content stacked below */
+    .join-orbit { padding: var(--sec-py) 0; }
+
+    .join-orbit__stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* SVG stays full-width but capped so the arc dome reads clearly */
+    .join-orbit__svg { max-height: 220px; }
+
+    /* Pull content out of absolute overlay → normal flow below SVG */
+    .join-orbit__content {
+      position: static !important;
+      bottom: auto !important;
+      left: auto !important;
+      right: auto !important;
+      padding: 32px var(--pad-x) 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
     /* ── Who We Are (About) ── */
     .about .section__inner {
       grid-template-columns: 1fr !important;
