@@ -770,6 +770,9 @@
       display: none;
     }
 
+    /* Mobile dot indicators — hidden on desktop */
+    .ai-mobile-dots { display: none; }
+
     /* Tab cards row */
     .ai-tabs__cards {
       display: grid;
@@ -1989,10 +1992,69 @@
     .stat { padding-top: 32px; padding-left: 12px; }
     .stat__val { font-size: 56px; }
 
-    /* ── AI Engineering tabs ── */
-    .ai-tabs__cards { grid-template-columns: 1fr !important; gap: 16px; }
-    .ai-tab { padding: 20px; }
-    .ai-tabs__image { display: none; }
+    /* ── AI Engineering — mobile carousel ── */
+
+    /* Re-show the video panel, taller ratio for portrait screens */
+    .ai-tabs__image {
+      display: block !important;
+      aspect-ratio: 16 / 9;
+      margin-bottom: 0;
+      border-radius: 16px;
+    }
+
+    /* Single-column card area, no gap (only active card shows) */
+    .ai-tabs__cards {
+      grid-template-columns: 1fr !important;
+      gap: 0 !important;
+      position: relative;
+      min-height: 100px;
+      margin-top: 24px;
+    }
+
+    /* Hide all tabs; only show the active one */
+    .ai-tab { display: none !important; padding: 20px 0 0 !important; }
+    .ai-tab.is-active { display: block !important; }
+
+    /* Remove top progress bar — dots replace it */
+    .ai-tab::before, .ai-tab::after { display: none !important; }
+
+    /* Always show body text on mobile (no fade-in needed) */
+    .ai-tab.is-active .ai-tab__body {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    /* Title styling on mobile */
+    .ai-tab__title {
+      font-size: 22px !important;
+      line-height: 28px !important;
+      color: var(--ink) !important;
+      margin-bottom: 8px;
+    }
+
+    /* ── Dot-pill progress indicators ── */
+    .ai-mobile-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .ai-dot {
+      height: 8px;
+      width: 8px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.15);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  background 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .ai-dot.is-active {
+      width: 24px;
+      background: var(--ink);
+    }
 
     /* ── Case Studies ── */
     .case-grid {
@@ -2297,6 +2359,15 @@
           </div>
 
         </div>
+
+        <!-- Mobile-only dot indicators -->
+        <div class="ai-mobile-dots" role="tablist" aria-label="AI Engineering topics">
+          <button class="ai-dot is-active" data-tab="0" aria-label="Topic 1 of 4" aria-selected="true"></button>
+          <button class="ai-dot" data-tab="1" aria-label="Topic 2 of 4" aria-selected="false"></button>
+          <button class="ai-dot" data-tab="2" aria-label="Topic 3 of 4" aria-selected="false"></button>
+          <button class="ai-dot" data-tab="3" aria-label="Topic 4 of 4" aria-selected="false"></button>
+        </div>
+
       </div>
     </div>
   </section>
@@ -3169,6 +3240,7 @@
       const DURATION = 4000;
       const tabs   = document.querySelectorAll('.ai-tab');
       const images = document.querySelectorAll('.ai-tab-img');
+      const dots   = document.querySelectorAll('.ai-dot');
       let current = 0;
       let timer   = null;
 
@@ -3181,6 +3253,12 @@
         tabs[idx].classList.add('is-active');
         images[idx].classList.add('is-active');
         current = idx;
+
+        // Sync mobile dot indicators
+        dots.forEach((d, i) => {
+          d.classList.toggle('is-active', i === idx);
+          d.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+        });
       }
 
       function advance() { activate((current + 1) % tabs.length); }
@@ -3193,6 +3271,32 @@
       tabs.forEach((tab, i) => {
         tab.addEventListener('click', () => { activate(i); startTimer(); });
       });
+
+      // Dot buttons also trigger activation
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => { activate(i); startTimer(); });
+      });
+
+      // ── Touch swipe on the ai-tabs block (mobile) ──
+      const aiTabs = document.querySelector('.ai-tabs');
+      if (aiTabs) {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        aiTabs.addEventListener('touchstart', e => {
+          touchStartX = e.changedTouches[0].clientX;
+          touchStartY = e.changedTouches[0].clientY;
+        }, { passive: true });
+        aiTabs.addEventListener('touchend', e => {
+          const dx = e.changedTouches[0].clientX - touchStartX;
+          const dy = e.changedTouches[0].clientY - touchStartY;
+          // Only act if horizontal swipe is dominant (avoids scroll conflicts)
+          if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+            if (dx < 0) activate((current + 1) % tabs.length);   // swipe left → next
+            else        activate((current - 1 + tabs.length) % tabs.length); // swipe right → prev
+            startTimer();
+          }
+        }, { passive: true });
+      }
 
       // Pause auto-advance while user hovers the component
       const component = document.querySelector('.ai-tabs');
