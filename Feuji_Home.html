@@ -2109,6 +2109,9 @@
     /* ── Join Orbit ── */
     .join .section__inner { grid-template-columns: 1fr !important; gap: 32px; }
 
+    /* Keep community section flush (override mobile section-light padding) */
+    .comm-section { padding: 0 !important; }
+
     /* Mobile: orbit SVG on top, text content stacked below */
     .join-orbit { padding: var(--sec-py) 0; }
 
@@ -2116,6 +2119,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      background: var(--ink); /* ensure bg covers any SVG transparency */
     }
 
     /* SVG stays full-width but capped so the arc dome reads clearly */
