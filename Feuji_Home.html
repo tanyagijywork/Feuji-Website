@@ -1875,6 +1875,173 @@
       .t-h2 { font-size: 40px; line-height: 42px; letter-spacing: -2px; }
     }
 
+  /* ═══════════════════════════════════════════
+     MOBILE STYLES — max-width: 768px
+     Desktop styles are untouched above.
+  ═══════════════════════════════════════════ */
+
+  /* Hamburger — hidden on desktop */
+  .nav__hamburger { display: none; }
+  .mobile-nav     { display: none; }
+
+  @media (max-width: 768px) {
+
+    /* ── Tokens ── */
+    :root {
+      --pad-x:  20px;
+      --sec-py: 60px;
+    }
+
+    /* ── Nav ── */
+    .nav__links,
+    .nav__cta-wrap { display: none !important; }
+
+    .nav__hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      margin-left: auto;
+      z-index: 201;
+      position: relative;
+    }
+    .nav__hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform-origin: center;
+    }
+    .nav__hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav__hamburger.is-open span:nth-child(2) { opacity: 0; }
+    .nav__hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ── Mobile nav drawer ── */
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      position: fixed;
+      inset: 0;
+      background: #0A0A0A;
+      z-index: 200;
+      padding: 100px 32px 48px;
+      transform: translateY(-100%);
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+      pointer-events: none;
+    }
+    .mobile-nav.is-open {
+      transform: translateY(0);
+      pointer-events: all;
+    }
+    .mobile-nav__links { list-style: none; padding: 0; margin: 0 0 40px; width: 100%; }
+    .mobile-nav__link {
+      display: block;
+      font-family: var(--f-display);
+      font-size: 36px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: color 0.2s;
+    }
+    .mobile-nav__link:hover { color: #F3752C; }
+    .mobile-nav__cta { margin-top: auto; }
+
+    /* ── Hero ── */
+    .hero { min-height: 100svh; }
+    .hero__inner { padding: 100px var(--pad-x) 48px; }
+    .hero__headline {
+      font-size: 52px !important;
+      line-height: 54px !important;
+      letter-spacing: -2px !important;
+    }
+    .hero__sub { font-size: 15px; max-width: 100%; }
+    .hero__actions { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .hero__capsule { display: none; }
+    .hero__scroll  { display: none; }
+
+    /* ── Section padding ── */
+    .section-light,
+    .section-dark,
+    .section-surface { padding-top: var(--sec-py); padding-bottom: var(--sec-py); }
+    .section__inner  { padding: 0 var(--pad-x); }
+    .container       { padding: 0 var(--pad-x); }
+
+    /* ── Typography ── */
+    .t-h2 { font-size: 36px !important; line-height: 40px !important; letter-spacing: -1.5px !important; }
+
+    /* ── Numbers / Feuji at a Glance ── */
+    .numbers-flex {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 0 !important;
+    }
+    .stat { padding-top: 32px; padding-left: 12px; }
+    .stat__val { font-size: 56px; }
+
+    /* ── AI Engineering tabs ── */
+    .ai-tabs__cards { grid-template-columns: 1fr !important; gap: 16px; }
+    .ai-tab { padding: 20px; }
+    .ai-tabs__image { display: none; }
+
+    /* ── Case Studies ── */
+    .case-grid {
+      grid-template-columns: 1fr !important;
+      gap: 16px;
+    }
+    .case-card { padding: 36px 24px; }
+    .case-card__heading { font-size: 28px; line-height: 34px; }
+
+    /* ── Partners ── */
+    .partner-cards {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 10px;
+    }
+
+    /* ── Clients marquee ── */
+    .logo-marquee .logo-pill { padding: 0 16px; width: 140px; }
+    .logo-pill img { height: 32px; }
+
+    /* ── Community ── */
+    .comm-stage-inner { padding: var(--sec-py) var(--pad-x); }
+    .comm-cards { grid-template-columns: 1fr !important; gap: 0; }
+    .comm-scroll-wrapper { height: auto; }
+    .comm-sticky-stage { position: relative; height: auto; }
+    .comm-card { opacity: 1 !important; transform: none !important; margin-top: 0 !important; }
+    .comm-card__icon { margin-top: 0; margin-bottom: 16px; }
+    .comm-card__title { font-size: 28px; line-height: 32px; }
+    .comm-card__body  { font-size: 15px; line-height: 22px; }
+
+    /* ── Join Orbit ── */
+    .join .section__inner { grid-template-columns: 1fr !important; gap: 32px; }
+
+    /* ── Services ── */
+    .svc-list { gap: 0; }
+    .svc-item { grid-template-columns: 32px 1fr; gap: 0 16px; }
+    .svc-item__body    { display: none; }
+    .svc-item__preview { display: none; }
+    .section-header    { grid-template-columns: 1fr !important; gap: 16px; }
+
+    /* ── Footer ── */
+    .footer__inner { padding: 48px var(--pad-x) 32px; }
+    .footer__top   { flex-direction: column; gap: 40px; }
+    .footer__cols  { grid-template-columns: 1fr 1fr !important; gap: 32px; }
+
+    /* ── Footer reveal ── */
+    .footer-reveal { height: 45vh; }
+
+  }
+
   </style>
 </head>
 <body>
@@ -1907,8 +2074,26 @@
         <a href="#connect" class="btn btn--primary-orange t-btn">Let's connect <span class="btn-arrow">→</span></a>
       </div>
 
+      <!-- Mobile hamburger -->
+      <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
     </div>
   </nav>
+
+  <!-- Mobile nav drawer -->
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <ul class="mobile-nav__links" role="list">
+      <li><a href="#ai-engineering" class="mobile-nav__link">Applied AI</a></li>
+      <li><a href="#services"       class="mobile-nav__link">Services</a></li>
+      <li><a href="#services"       class="mobile-nav__link">Industries</a></li>
+      <li><a href="#community"      class="mobile-nav__link">Community</a></li>
+      <li><a href="#case-studies"   class="mobile-nav__link">Insights</a></li>
+      <li><a href="#about"          class="mobile-nav__link">Who we are</a></li>
+    </ul>
+    <a href="#connect" class="btn btn--primary-orange t-btn mobile-nav__cta">Let's connect <span class="btn-arrow">→</span></a>
+  </div>
 
 
   <!-- ══════════════════════════════════════
@@ -3058,6 +3243,31 @@
       update();
     })();
 
+  </script>
+
+  <!-- ── Mobile nav toggle ── -->
+  <script>
+  (function () {
+    const btn     = document.querySelector('.nav__hamburger');
+    const drawer  = document.getElementById('mobileNav');
+    const links   = drawer.querySelectorAll('.mobile-nav__link, .mobile-nav__cta');
+
+    function toggleMenu(open) {
+      btn.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', open);
+      drawer.classList.toggle('is-open', open);
+      drawer.setAttribute('aria-hidden', !open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+
+    btn.addEventListener('click', () => {
+      toggleMenu(!btn.classList.contains('is-open'));
+    });
+
+    links.forEach(link => {
+      link.addEventListener('click', () => toggleMenu(false));
+    });
+  })();
   </script>
 
 </body>
