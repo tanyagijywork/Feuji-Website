@@ -1622,6 +1622,28 @@
     }
     .footer__link:hover { color: var(--white); }
 
+    /* Accordion — desktop reset (always open, no chevron, no borders) */
+    .footer__acc-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: default;
+      pointer-events: none;
+      /* inherit title typography */
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .footer__acc-chevron { display: none; }
+    .footer__acc-panel { overflow: visible; max-height: none; }
+
 
     /* ─────────────────────────────────────────
        DIVIDERS
@@ -2153,9 +2175,63 @@
     .svc-item__preview { display: none; }
     .section-header    { grid-template-columns: 1fr !important; gap: 16px; }
 
-    /* ── Footer ── */
+    /* ── Footer accordion (mobile) ── */
     .footer__inner { padding: 48px var(--pad-x) 32px; }
-    .footer__top   { flex-direction: column; gap: 40px; }
+
+    .footer__top {
+      display: flex !important;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* Each accordion row */
+    .footer__acc {
+      border-bottom: 1px solid var(--border-dk);
+    }
+    .footer__acc:first-child {
+      border-top: 1px solid var(--border-dk);
+    }
+
+    /* Toggle button */
+    .footer__acc-btn {
+      display: flex !important;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 18px 0;
+      margin-bottom: 0;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    /* Chevron */
+    .footer__acc-chevron {
+      display: block;
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: rgba(255,255,255,0.45);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .footer__acc.is-open .footer__acc-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Collapsible panel */
+    .footer__acc-panel {
+      overflow: hidden !important;
+      max-height: 0 !important;
+      transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .footer__acc.is-open .footer__acc-panel {
+      max-height: 400px !important;
+    }
+
+    /* Links padding inside open panel */
+    .footer__acc-panel .footer__links {
+      padding-bottom: 20px;
+    }
+
     .footer__cols  { grid-template-columns: 1fr 1fr !important; gap: 32px; }
 
     /* ── Footer reveal ── */
@@ -2895,67 +2971,109 @@
 
       <div class="footer__top">
 
-        <div>
-          <p class="footer__col-title">Applied AI</p>
-          <ul class="footer__links" role="list">
-            <li><a href="#ai-engineering" class="footer__link">Feuji AI Labs</a></li>
-            <li><a href="#ai-engineering" class="footer__link">AI &amp; ML Solutions</a></li>
-            <li><a href="#ai-engineering" class="footer__link">AI Innovation Suite</a></li>
-            <li><a href="#ai-engineering" class="footer__link">AI Partnership Ecosystem</a></li>
-          </ul>
+        <div class="footer__acc">
+          <button class="footer__acc-btn" aria-expanded="false">
+            Applied AI
+            <svg class="footer__acc-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="footer__acc-panel">
+            <ul class="footer__links" role="list">
+              <li><a href="#ai-engineering" class="footer__link">Feuji AI Labs</a></li>
+              <li><a href="#ai-engineering" class="footer__link">AI &amp; ML Solutions</a></li>
+              <li><a href="#ai-engineering" class="footer__link">AI Innovation Suite</a></li>
+              <li><a href="#ai-engineering" class="footer__link">AI Partnership Ecosystem</a></li>
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <p class="footer__col-title">Services</p>
-          <ul class="footer__links" role="list">
-            <li><a href="#services" class="footer__link">Consulting</a></li>
-            <li><a href="#services" class="footer__link">Cloud Solutions</a></li>
-            <li><a href="#services" class="footer__link">Digital Engineering</a></li>
-            <li><a href="#services" class="footer__link">Data and Insights</a></li>
-            <li><a href="#services" class="footer__link">Cybersecurity</a></li>
-            <li><a href="#services" class="footer__link">Managed Services</a></li>
-          </ul>
+        <div class="footer__acc">
+          <button class="footer__acc-btn" aria-expanded="false">
+            Services
+            <svg class="footer__acc-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="footer__acc-panel">
+            <ul class="footer__links" role="list">
+              <li><a href="#services" class="footer__link">Consulting</a></li>
+              <li><a href="#services" class="footer__link">Cloud Solutions</a></li>
+              <li><a href="#services" class="footer__link">Digital Engineering</a></li>
+              <li><a href="#services" class="footer__link">Data and Insights</a></li>
+              <li><a href="#services" class="footer__link">Cybersecurity</a></li>
+              <li><a href="#services" class="footer__link">Managed Services</a></li>
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <p class="footer__col-title">Industries</p>
-          <ul class="footer__links" role="list">
-            <li><a href="#" class="footer__link">Healthcare</a></li>
-            <li><a href="#" class="footer__link">Insurance</a></li>
-            <li><a href="#" class="footer__link">Pharma</a></li>
-          </ul>
+        <div class="footer__acc">
+          <button class="footer__acc-btn" aria-expanded="false">
+            Industries
+            <svg class="footer__acc-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="footer__acc-panel">
+            <ul class="footer__links" role="list">
+              <li><a href="#" class="footer__link">Healthcare</a></li>
+              <li><a href="#" class="footer__link">Insurance</a></li>
+              <li><a href="#" class="footer__link">Pharma</a></li>
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <p class="footer__col-title">Community</p>
-          <ul class="footer__links" role="list">
-            <li><a href="#community" class="footer__link">Smart Village</a></li>
-            <li><a href="#community" class="footer__link">Education &amp; Training</a></li>
-            <li><a href="#community" class="footer__link">Sustainability</a></li>
-          </ul>
+        <div class="footer__acc">
+          <button class="footer__acc-btn" aria-expanded="false">
+            Community
+            <svg class="footer__acc-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="footer__acc-panel">
+            <ul class="footer__links" role="list">
+              <li><a href="#community" class="footer__link">Smart Village</a></li>
+              <li><a href="#community" class="footer__link">Education &amp; Training</a></li>
+              <li><a href="#community" class="footer__link">Sustainability</a></li>
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <p class="footer__col-title">Insights</p>
-          <ul class="footer__links" role="list">
-            <li><a href="#" class="footer__link">Our perspectives</a></li>
-            <li><a href="#" class="footer__link">Research and Whitepapers</a></li>
-            <li><a href="#case-studies" class="footer__link">Case Studies and blogs</a></li>
-            <li><a href="#" class="footer__link">Events and webinars</a></li>
-            <li><a href="#" class="footer__link">Feuji Expert Connect</a></li>
-          </ul>
+        <div class="footer__acc">
+          <button class="footer__acc-btn" aria-expanded="false">
+            Insights
+            <svg class="footer__acc-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="footer__acc-panel">
+            <ul class="footer__links" role="list">
+              <li><a href="#" class="footer__link">Our perspectives</a></li>
+              <li><a href="#" class="footer__link">Research and Whitepapers</a></li>
+              <li><a href="#case-studies" class="footer__link">Case Studies and blogs</a></li>
+              <li><a href="#" class="footer__link">Events and webinars</a></li>
+              <li><a href="#" class="footer__link">Feuji Expert Connect</a></li>
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <p class="footer__col-title">Who we are</p>
-          <ul class="footer__links" role="list">
-            <li><a href="#about"     class="footer__link">Our Story</a></li>
-            <li><a href="#"          class="footer__link">People</a></li>
-            <li><a href="#partners"  class="footer__link">Partners</a></li>
-            <li><a href="#"          class="footer__link">Leadership</a></li>
-            <li><a href="#careers"   class="footer__link">Careers</a></li>
-            <li><a href="#"          class="footer__link">Locations</a></li>
-          </ul>
+        <div class="footer__acc">
+          <button class="footer__acc-btn" aria-expanded="false">
+            Who we are
+            <svg class="footer__acc-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="footer__acc-panel">
+            <ul class="footer__links" role="list">
+              <li><a href="#about"     class="footer__link">Our Story</a></li>
+              <li><a href="#"          class="footer__link">People</a></li>
+              <li><a href="#partners"  class="footer__link">Partners</a></li>
+              <li><a href="#"          class="footer__link">Leadership</a></li>
+              <li><a href="#careers"   class="footer__link">Careers</a></li>
+              <li><a href="#"          class="footer__link">Locations</a></li>
+            </ul>
+          </div>
         </div>
 
       </div>
@@ -3418,6 +3536,15 @@
       window.addEventListener('scroll', update, { passive: true });
       update();
     })();
+
+    /* ── Footer accordion (mobile only) ── */
+    document.querySelectorAll('.footer__acc-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const acc = btn.closest('.footer__acc');
+        const isOpen = acc.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    });
 
   </script>
 
