@@ -1304,7 +1304,7 @@
     .comm-card {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 0;
       padding-top: 24px;
       border-top: none;
       opacity: 0;
@@ -1326,7 +1326,10 @@
       line-height: 40px;
       letter-spacing: -2px;
       color: var(--white);
+      margin-bottom: 16px;
+      transition: color 0.4s var(--ease);
     }
+    .comm-card.is-revealed:hover .comm-card__title { color: #22c55e; }
 
     .comm-card__body {
       font-family: var(--f-ui);
@@ -1336,6 +1339,7 @@
       letter-spacing: -1px;
       color: rgba(255,255,255,0.8);
       flex: 1;
+      margin-bottom: 24px;
     }
 
     .comm-card__link {
