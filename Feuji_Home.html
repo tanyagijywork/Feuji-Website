@@ -1161,36 +1161,41 @@
       flex-direction: column;
       gap: 16px;
       padding-top: 48px;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid #5ec4b0;
       transition: border-color 0.4s var(--ease);
       position: relative;
       overflow: hidden;
     }
-    .stat:hover { border-color: #003727; }
+    .stat:hover { border-color: #2a9d8f; }
     .stat:hover .stat__val { color: #15803d; }
 
-    /* ── Top glow on all stat cards ── */
+    /* ── Sunrise glow from top border — soft on default, intensifies on hover ── */
     .stat::before {
       content: '';
       position: absolute;
-      top: -30px;
+      top: -20px;
       left: 50%;
       transform: translateX(-50%);
       width: 500%;
-      height: 75%;
+      height: 70%;
       background: radial-gradient(ellipse at 50% 0%,
-        rgba(0, 55, 39, 0.22) 0%,
-        rgba(0, 55, 39, 0.08) 40%,
-        rgba(0, 55, 39, 0.02) 65%,
-        transparent 80%
+        rgba(94, 196, 176, 0.28) 0%,
+        rgba(94, 196, 176, 0.10) 35%,
+        rgba(94, 196, 176, 0.02) 60%,
+        transparent 75%
       );
-      opacity: 0;
-      transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity: 1;
+      transition: background 1.2s cubic-bezier(0.22, 1, 0.36, 1);
       pointer-events: none;
       z-index: 0;
     }
     .stat:hover::before {
-      opacity: 1;
+      background: radial-gradient(ellipse at 50% 0%,
+        rgba(94, 196, 176, 0.65) 0%,
+        rgba(94, 196, 176, 0.28) 35%,
+        rgba(94, 196, 176, 0.06) 60%,
+        transparent 75%
+      );
     }
 
     /* ── Stat fade-up animation ── */
