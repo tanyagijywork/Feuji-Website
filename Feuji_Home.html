@@ -770,8 +770,9 @@
       display: none;
     }
 
-    /* Mobile dot indicators — hidden on desktop */
+    /* Mobile-only elements — hidden on desktop */
     .ai-mobile-dots { display: none; }
+    .ai-mobile-progress { display: none; }
 
     /* Tab cards row */
     .ai-tabs__cards {
@@ -2003,6 +2004,26 @@
       border-radius: 16px;
     }
 
+    /* Progress bar between video and heading */
+    .ai-mobile-progress {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--border);
+      border-radius: 999px;
+      margin-top: 24px;
+      overflow: hidden;
+    }
+    .ai-mobile-progress__fill {
+      height: 100%;
+      width: 0;
+      background: #D8582B;
+      border-radius: 999px;
+    }
+    .ai-mobile-progress__fill.is-running {
+      animation: ai-progress 4s linear forwards;
+    }
+
     /* Single-column card area, no gap (only active card shows) */
     .ai-tabs__cards {
       grid-template-columns: 1fr !important;
@@ -2334,6 +2355,11 @@
             <span class="ai-tab-img__label">AI Partnership Ecosystem</span>
           </div>
 
+        </div>
+
+        <!-- ── Mobile progress bar (hidden on desktop) ── -->
+        <div class="ai-mobile-progress" aria-hidden="true">
+          <div class="ai-mobile-progress__fill"></div>
         </div>
 
         <!-- ── Tab cards ── -->
@@ -3239,9 +3265,10 @@
     ───────────────────────────────────────── */
     (function () {
       const DURATION = 4000;
-      const tabs   = document.querySelectorAll('.ai-tab');
-      const images = document.querySelectorAll('.ai-tab-img');
-      const dots   = document.querySelectorAll('.ai-dot');
+      const tabs        = document.querySelectorAll('.ai-tab');
+      const images      = document.querySelectorAll('.ai-tab-img');
+      const dots        = document.querySelectorAll('.ai-dot');
+      const mobileFill  = document.querySelector('.ai-mobile-progress__fill');
       let current = 0;
       let timer   = null;
 
@@ -3260,6 +3287,13 @@
           d.classList.toggle('is-active', i === idx);
           d.setAttribute('aria-selected', i === idx ? 'true' : 'false');
         });
+
+        // Reset & restart mobile progress bar
+        if (mobileFill) {
+          mobileFill.classList.remove('is-running');
+          void mobileFill.offsetWidth; // force reflow to restart animation
+          mobileFill.classList.add('is-running');
+        }
       }
 
       function advance() { activate((current + 1) % tabs.length); }
