@@ -1169,6 +1169,33 @@
     .stat:hover { border-color: #00B784; }
     .stat:hover .stat__val { color: #15803d; }
 
+    /* ── Cards 2 & 4: flip border to bottom, glow from bottom up ── */
+    .stat:nth-child(2),
+    .stat:nth-child(4) {
+      border-top: none;
+      border-bottom: 1px solid #00B784;
+      padding-top: 0;
+      padding-bottom: 48px;
+    }
+    .stat:nth-child(2)::before,
+    .stat:nth-child(4)::before {
+      top: auto;
+      bottom: -10px;
+      background: radial-gradient(ellipse 60% 60% at 50% 100%,
+        rgba(0, 183, 132, 0.50) 0%,
+        rgba(0, 183, 132, 0) 93%
+      );
+    }
+    .stat:nth-child(2)::after,
+    .stat:nth-child(4)::after {
+      top: auto;
+      bottom: -10px;
+      background: radial-gradient(ellipse 100% 100% at 50% 100%,
+        rgba(0, 183, 132, 0.50) 0%,
+        rgba(0, 183, 132, 0) 93%
+      );
+    }
+
     /* ── Default glow — smaller ellipse, always on ── */
     .stat::before {
       content: '';
