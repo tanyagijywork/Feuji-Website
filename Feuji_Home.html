@@ -1880,6 +1880,20 @@
       .join__content { order: 2; }
       .ai-tabs__cards { grid-template-columns: repeat(2, 1fr); }
       .numbers-flex { grid-template-columns: repeat(2, 1fr); }
+
+      /* Community — tighter stagger so card 3 fits inside the sticky stage */
+      .comm-cards { gap: 40px; }
+      .comm-card:nth-child(2) { margin-top: 40px; }
+      .comm-card:nth-child(3) { margin-top: 80px; }
+      .comm-card__title { font-size: 32px; line-height: 36px; }
+      .comm-card__body  { font-size: 16px; line-height: 22px; }
+    }
+
+    /* Short viewport guard — any screen width with limited height */
+    @media (max-height: 780px) and (min-width: 641px) {
+      .comm-card:nth-child(2) { margin-top: 32px; }
+      .comm-card:nth-child(3) { margin-top: 64px; }
+      .comm-cards { gap: 32px; }
     }
     @media (max-width: 640px) {
       .hero__headline {
