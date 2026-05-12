@@ -527,7 +527,8 @@
     /* Grid placements */
     .bcard--brand    { grid-column: 1; grid-row: 1; }
     .bcard--keywords { grid-column: 2; grid-row: 1; }
-    .bcard--mood     { grid-column: 3; grid-row: 1 / 4; }
+    .bcard--mood     { grid-column: 3; grid-row: 1 / 3; }
+    .bcard--faces    { grid-column: 3; grid-row: 3; }
     .bcard--flow     { grid-column: 1; grid-row: 2; }
     .bcard--values   { grid-column: 2; grid-row: 2; }
     .bcard--typo-anim { grid-column: 1 / 3; grid-row: 3; }
@@ -724,6 +725,34 @@
       width: 1px; align-self: stretch; background: rgba(0,0,0,0.1);
     }
 
+    /* ── Typefaces mini card ── */
+    .bcard--faces {
+      background: #F5F5F3;
+      padding: 28px 32px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .faces-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .faces-row {
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .face-item { display: flex; flex-direction: column; gap: 2px; }
+    .face-item__tag {
+      font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .face-item__sample--display {
+      font-family: var(--f-display); font-size: 36px; font-weight: 500;
+      line-height: 1; letter-spacing: -1.5px; color: var(--ink);
+    }
+    .face-item__sample--display em { font-style: italic; }
+    .face-item__sample--ui {
+      font-family: var(--f-ui); font-size: 22px; font-weight: 400;
+      line-height: 1.1; letter-spacing: -0.5px; color: var(--ink);
+    }
+
     /* ── Media collage card ── */
     .bcard--collage { grid-column: 1 / 4; grid-row: 5; }
     .collage-grid {
@@ -876,6 +905,21 @@
             <p class="tf-label">Secondary Typeface</p>
             <p class="tf-name">DM Sans</p>
             <p class="tf-sample--ui">Engineering<br>outcomes.</p>
+          </div>
+        </div>
+
+        <!-- TYPEFACES — col 3, row 3 -->
+        <div class="bcard bcard--faces">
+          <p class="faces-label">Typefaces</p>
+          <div class="faces-row">
+            <div class="face-item">
+              <p class="face-item__tag">Primary</p>
+              <p class="face-item__sample--display"><em>Applied</em> AI</p>
+            </div>
+            <div class="face-item">
+              <p class="face-item__tag">Secondary</p>
+              <p class="face-item__sample--ui">Engineering outcomes.</p>
+            </div>
           </div>
         </div>
 
