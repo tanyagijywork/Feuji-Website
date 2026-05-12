@@ -387,19 +387,25 @@
        COLOUR PALETTE
     ───────────────────────────────────────── */
     .colour-page { padding: 48px var(--pad-h) 80px; }
-    .colour-group { margin-bottom: 48px; }
+    .colour-group { margin-bottom: 52px; }
     .colour-group__title {
       font-size: 10px; font-weight: 700;
       letter-spacing: 1px; text-transform: uppercase;
       color: var(--muted); margin-bottom: 20px;
       padding-bottom: 12px; border-bottom: 1px solid var(--divider);
     }
-    .colour-swatches { display: flex; flex-wrap: wrap; gap: 16px; }
+    .colour-swatches { display: flex; flex-wrap: wrap; gap: 12px; }
+    /* Standard swatch (Black & White) */
     .swatch { display: flex; flex-direction: column; gap: 10px; width: 140px; }
     .swatch__block { width: 100%; height: 80px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.07); }
     .swatch__name  { font-size: 12px; font-weight: 600; color: var(--ink); line-height: 1.2; }
     .swatch__hex   { font-size: 11px; color: var(--muted); font-family: 'Courier New', monospace; margin-top: 2px; }
     .swatch__token { font-size: 10px; font-weight: 600; letter-spacing: 0.5px; color: #BDBDBD; text-transform: uppercase; margin-top: 1px; }
+    /* Scale swatch (smaller, for full 50–900 rows) */
+    .swatch--sm { width: 108px; }
+    .swatch--sm .swatch__block { height: 64px; border-radius: 8px; }
+    .swatch--sm .swatch__name { font-size: 11px; font-weight: 600; color: var(--ink); }
+    .swatch--sm .swatch__hex  { font-size: 10px; }
 
     /* ─────────────────────────────────────────
        UI ELEMENTS
@@ -974,38 +980,131 @@
   <div id="colours" class="tab-panel" role="tabpanel">
     <div class="colour-page">
 
+      <!-- BLACK & WHITE -->
+      <div class="colour-group">
+        <p class="colour-group__title">Black &amp; White</p>
+        <div class="colour-swatches">
+          <div class="swatch"><div class="swatch__block" style="background:#000000;"></div><div><p class="swatch__name">Black</p><p class="swatch__hex">#000000</p></div></div>
+          <div class="swatch"><div class="swatch__block" style="background:#FFFFFF;border-color:#E0E0E0;"></div><div><p class="swatch__name">White</p><p class="swatch__hex">#FFFFFF</p></div></div>
+        </div>
+      </div>
+
+      <!-- NEUTRALS -->
       <div class="colour-group">
         <p class="colour-group__title">Neutrals</p>
         <div class="colour-swatches">
-          <div class="swatch"><div class="swatch__block" style="background:#0A0A0A;"></div><div><p class="swatch__name">Ink</p><p class="swatch__hex">#0A0A0A</p><p class="swatch__token">--ink</p></div></div>
-          <div class="swatch"><div class="swatch__block" style="background:#1A1A1A;"></div><div><p class="swatch__name">Ink 90</p><p class="swatch__hex">#1A1A1A</p><p class="swatch__token">--ink-90</p></div></div>
-          <div class="swatch"><div class="swatch__block" style="background:#333333;"></div><div><p class="swatch__name">Ink 70</p><p class="swatch__hex">#333333</p><p class="swatch__token">--ink-70</p></div></div>
-          <div class="swatch"><div class="swatch__block" style="background:#555555;"></div><div><p class="swatch__name">Mid</p><p class="swatch__hex">#555555</p><p class="swatch__token">--mid</p></div></div>
-          <div class="swatch"><div class="swatch__block" style="background:#888888;"></div><div><p class="swatch__name">Muted</p><p class="swatch__hex">#888888</p><p class="swatch__token">--muted</p></div></div>
-          <div class="swatch"><div class="swatch__block" style="background:#242424;"></div><div><p class="swatch__name">Border Dark</p><p class="swatch__hex">#242424</p><p class="swatch__token">--border-dk</p></div></div>
-          <div class="swatch"><div class="swatch__block" style="background:#E0E0E0;"></div><div><p class="swatch__name">Border</p><p class="swatch__hex">#E0E0E0</p><p class="swatch__token">--border</p></div></div>
-          <div class="swatch"><div class="swatch__block" style="background:#F5F5F5;"></div><div><p class="swatch__name">Surface</p><p class="swatch__hex">#F5F5F5</p><p class="swatch__token">--surface</p></div></div>
-          <div class="swatch"><div class="swatch__block" style="background:#FFFFFF;border-color:#E0E0E0;"></div><div><p class="swatch__name">White</p><p class="swatch__hex">#FFFFFF</p><p class="swatch__token">--white</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#FAFAFA;border-color:#E8E8E8;"></div><div><p class="swatch__name">50</p><p class="swatch__hex">#FAFAFA</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#F5F5F5;border-color:#E8E8E8;"></div><div><p class="swatch__name">100</p><p class="swatch__hex">#F5F5F5</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#E8E8E8;"></div><div><p class="swatch__name">200</p><p class="swatch__hex">#E8E8E8</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#D0D0D0;"></div><div><p class="swatch__name">300</p><p class="swatch__hex">#D0D0D0</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#B0B0B0;"></div><div><p class="swatch__name">400</p><p class="swatch__hex">#B0B0B0</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#888888;"></div><div><p class="swatch__name">500</p><p class="swatch__hex">#888888</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#555555;"></div><div><p class="swatch__name">600</p><p class="swatch__hex">#555555</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#333333;"></div><div><p class="swatch__name">700</p><p class="swatch__hex">#333333</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#1A1A1A;"></div><div><p class="swatch__name">800</p><p class="swatch__hex">#1A1A1A</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#0A0A0A;"></div><div><p class="swatch__name">900</p><p class="swatch__hex">#0A0A0A</p></div></div>
         </div>
       </div>
 
+      <!-- ORANGE — BRAND PRIMARY -->
       <div class="colour-group">
-        <p class="colour-group__title">Brand — Orange</p>
+        <p class="colour-group__title">Orange — Brand Primary</p>
         <div class="colour-swatches">
-          <div class="swatch"><div class="swatch__block" style="background:#F3752C;"></div><div><p class="swatch__name">Orange 600</p><p class="swatch__hex">#F3752C</p><p class="swatch__token">--orange · Primary CTA</p></div></div>
-          <div class="swatch"><div class="swatch__block" style="background:#DA6A29;"></div><div><p class="swatch__name">Orange 700</p><p class="swatch__hex">#DA6A29</p><p class="swatch__token">--orange-dark · Hover</p></div></div>
-          <div class="swatch"><div class="swatch__block" style="background:#D8582B;"></div><div><p class="swatch__name">Orange Tab</p><p class="swatch__hex">#D8582B</p><p class="swatch__token">Tab progress bar</p></div></div>
-          <div class="swatch"><div class="swatch__block" style="background:#FEF3EC;"></div><div><p class="swatch__name">Orange Light</p><p class="swatch__hex">#FEF3EC</p><p class="swatch__token">--orange-light · Tint</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#FEF3EC;border-color:#E8E8E8;"></div><div><p class="swatch__name">50</p><p class="swatch__hex">#FEF3EC</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#FDDECE;border-color:#E8E8E8;"></div><div><p class="swatch__name">100</p><p class="swatch__hex">#FDDECE</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#FBC4A0;"></div><div><p class="swatch__name">200</p><p class="swatch__hex">#FBC4A0</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#F9A876;"></div><div><p class="swatch__name">300</p><p class="swatch__hex">#F9A876</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#F78C52;"></div><div><p class="swatch__name">400</p><p class="swatch__hex">#F78C52</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#F3752C;"></div><div><p class="swatch__name">500 ★</p><p class="swatch__hex">#F3752C</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#DA6A29;"></div><div><p class="swatch__name">600</p><p class="swatch__hex">#DA6A29</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#D8582B;"></div><div><p class="swatch__name">700</p><p class="swatch__hex">#D8582B</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#B04520;"></div><div><p class="swatch__name">800</p><p class="swatch__hex">#B04520</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#8A3318;"></div><div><p class="swatch__name">900</p><p class="swatch__hex">#8A3318</p></div></div>
         </div>
       </div>
 
+      <!-- GREEN — SECONDARY BRAND -->
       <div class="colour-group">
-        <p class="colour-group__title">Brand — Green</p>
+        <p class="colour-group__title">Green — Secondary Brand</p>
         <div class="colour-swatches">
-          <div class="swatch"><div class="swatch__block" style="background:#003727;"></div><div><p class="swatch__name">Green Deep</p><p class="swatch__hex">#003727</p><p class="swatch__token">Community bg</p></div></div>
-          <div class="swatch"><div class="swatch__block" style="background:#00B784;"></div><div><p class="swatch__name">Green Primary</p><p class="swatch__hex">#00B784</p><p class="swatch__token">Stat hover glow</p></div></div>
-          <div class="swatch"><div class="swatch__block" style="background:#15803d;"></div><div><p class="swatch__name">Green 700</p><p class="swatch__hex">#15803d</p><p class="swatch__token">Stat number hover</p></div></div>
-          <div class="swatch"><div class="swatch__block" style="background:#22c55e;"></div><div><p class="swatch__name">Green 500</p><p class="swatch__hex">#22c55e</p><p class="swatch__token">Community title hover</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#ECFDF8;border-color:#E8E8E8;"></div><div><p class="swatch__name">50</p><p class="swatch__hex">#ECFDF8</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#D1FAF0;border-color:#E8E8E8;"></div><div><p class="swatch__name">100</p><p class="swatch__hex">#D1FAF0</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#A7F3DC;"></div><div><p class="swatch__name">200</p><p class="swatch__hex">#A7F3DC</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#6EE7C0;"></div><div><p class="swatch__name">300</p><p class="swatch__hex">#6EE7C0</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#34D3A0;"></div><div><p class="swatch__name">400</p><p class="swatch__hex">#34D3A0</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#00B784;"></div><div><p class="swatch__name">500 ★</p><p class="swatch__hex">#00B784</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#22C55E;"></div><div><p class="swatch__name">600</p><p class="swatch__hex">#22C55E</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#15803D;"></div><div><p class="swatch__name">700</p><p class="swatch__hex">#15803D</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#166534;"></div><div><p class="swatch__name">800</p><p class="swatch__hex">#166534</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#003727;"></div><div><p class="swatch__name">900</p><p class="swatch__hex">#003727</p></div></div>
+        </div>
+      </div>
+
+      <!-- BLUE -->
+      <div class="colour-group">
+        <p class="colour-group__title">Blue</p>
+        <div class="colour-swatches">
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#EFF6FF;border-color:#E8E8E8;"></div><div><p class="swatch__name">50</p><p class="swatch__hex">#EFF6FF</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#DBEAFE;border-color:#E8E8E8;"></div><div><p class="swatch__name">100</p><p class="swatch__hex">#DBEAFE</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#BFDBFE;"></div><div><p class="swatch__name">200</p><p class="swatch__hex">#BFDBFE</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#93C5FD;"></div><div><p class="swatch__name">300</p><p class="swatch__hex">#93C5FD</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#60A5FA;"></div><div><p class="swatch__name">400</p><p class="swatch__hex">#60A5FA</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#3B82F6;"></div><div><p class="swatch__name">500</p><p class="swatch__hex">#3B82F6</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#2563EB;"></div><div><p class="swatch__name">600</p><p class="swatch__hex">#2563EB</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#1D4ED8;"></div><div><p class="swatch__name">700</p><p class="swatch__hex">#1D4ED8</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#1E40AF;"></div><div><p class="swatch__name">800</p><p class="swatch__hex">#1E40AF</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#1E3A8A;"></div><div><p class="swatch__name">900</p><p class="swatch__hex">#1E3A8A</p></div></div>
+        </div>
+      </div>
+
+      <!-- VIOLET -->
+      <div class="colour-group">
+        <p class="colour-group__title">Violet</p>
+        <div class="colour-swatches">
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#F5F3FF;border-color:#E8E8E8;"></div><div><p class="swatch__name">50</p><p class="swatch__hex">#F5F3FF</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#EDE9FE;border-color:#E8E8E8;"></div><div><p class="swatch__name">100</p><p class="swatch__hex">#EDE9FE</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#DDD6FE;"></div><div><p class="swatch__name">200</p><p class="swatch__hex">#DDD6FE</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#C4B5FD;"></div><div><p class="swatch__name">300</p><p class="swatch__hex">#C4B5FD</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#A78BFA;"></div><div><p class="swatch__name">400</p><p class="swatch__hex">#A78BFA</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#8B5CF6;"></div><div><p class="swatch__name">500</p><p class="swatch__hex">#8B5CF6</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#7C3AED;"></div><div><p class="swatch__name">600</p><p class="swatch__hex">#7C3AED</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#6D28D9;"></div><div><p class="swatch__name">700</p><p class="swatch__hex">#6D28D9</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#5B21B6;"></div><div><p class="swatch__name">800</p><p class="swatch__hex">#5B21B6</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#4C1D95;"></div><div><p class="swatch__name">900</p><p class="swatch__hex">#4C1D95</p></div></div>
+        </div>
+      </div>
+
+      <!-- SKY BLUE -->
+      <div class="colour-group">
+        <p class="colour-group__title">Sky Blue</p>
+        <div class="colour-swatches">
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#F0F9FF;border-color:#E8E8E8;"></div><div><p class="swatch__name">50</p><p class="swatch__hex">#F0F9FF</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#E0F2FE;border-color:#E8E8E8;"></div><div><p class="swatch__name">100</p><p class="swatch__hex">#E0F2FE</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#BAE6FD;"></div><div><p class="swatch__name">200</p><p class="swatch__hex">#BAE6FD</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#7DD3FC;"></div><div><p class="swatch__name">300</p><p class="swatch__hex">#7DD3FC</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#38BDF8;"></div><div><p class="swatch__name">400</p><p class="swatch__hex">#38BDF8</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#0EA5E9;"></div><div><p class="swatch__name">500</p><p class="swatch__hex">#0EA5E9</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#0284C7;"></div><div><p class="swatch__name">600</p><p class="swatch__hex">#0284C7</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#0369A1;"></div><div><p class="swatch__name">700</p><p class="swatch__hex">#0369A1</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#075985;"></div><div><p class="swatch__name">800</p><p class="swatch__hex">#075985</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#0C4A6E;"></div><div><p class="swatch__name">900</p><p class="swatch__hex">#0C4A6E</p></div></div>
+        </div>
+      </div>
+
+      <!-- RED -->
+      <div class="colour-group">
+        <p class="colour-group__title">Red</p>
+        <div class="colour-swatches">
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#FEF2F2;border-color:#E8E8E8;"></div><div><p class="swatch__name">50</p><p class="swatch__hex">#FEF2F2</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#FEE2E2;border-color:#E8E8E8;"></div><div><p class="swatch__name">100</p><p class="swatch__hex">#FEE2E2</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#FECACA;"></div><div><p class="swatch__name">200</p><p class="swatch__hex">#FECACA</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#FCA5A5;"></div><div><p class="swatch__name">300</p><p class="swatch__hex">#FCA5A5</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#F87171;"></div><div><p class="swatch__name">400</p><p class="swatch__hex">#F87171</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#EF4444;"></div><div><p class="swatch__name">500</p><p class="swatch__hex">#EF4444</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#DC2626;"></div><div><p class="swatch__name">600</p><p class="swatch__hex">#DC2626</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#B91C1C;"></div><div><p class="swatch__name">700</p><p class="swatch__hex">#B91C1C</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#991B1B;"></div><div><p class="swatch__name">800</p><p class="swatch__hex">#991B1B</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#7F1D1D;"></div><div><p class="swatch__name">900</p><p class="swatch__hex">#7F1D1D</p></div></div>
         </div>
       </div>
 
