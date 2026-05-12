@@ -20,14 +20,16 @@
       --muted:     #A2A2A2;
       --mid:       #656565;
       --orange:    #F3752C;
-      --pad-h:     64px;
+      --col-meta:  220px;
+      --pad-h:     80px;
+      --divider:   #E8E8E8;
     }
 
     /* ── RESET ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: var(--white);
-      color: var(--ink);
+      background: #fff;
+      color: #141414;
       font-family: var(--f-ui);
       -webkit-font-smoothing: antialiased;
     }
@@ -37,13 +39,12 @@
     ───────────────────────────────────────── */
     .pg-header {
       padding: 52px var(--pad-h) 40px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--divider);
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
       gap: 24px;
     }
-    .pg-header__left {}
     .pg-header__eyebrow {
       font-size: 11px; font-weight: 700;
       letter-spacing: 1px; text-transform: uppercase;
@@ -56,11 +57,10 @@
     }
     .pg-header__title em { font-style: italic; }
     .pg-header__fonts {
-      display: flex; gap: 24px; flex-shrink: 0;
-      padding-bottom: 4px;
+      display: flex; gap: 16px; flex-shrink: 0; padding-bottom: 4px;
     }
     .ff-pill {
-      font-size: 13px; font-weight: 400; color: var(--mid);
+      font-size: 13px; color: var(--mid);
       padding: 6px 14px; border: 1px solid var(--border);
       border-radius: 999px; background: var(--surface);
       white-space: nowrap;
@@ -72,12 +72,11 @@
     ───────────────────────────────────────── */
     .tab-nav {
       display: flex;
-      gap: 0;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--divider);
       padding: 0 var(--pad-h);
       position: sticky;
       top: 0;
-      background: var(--white);
+      background: #fff;
       z-index: 10;
     }
     .tab-btn {
@@ -89,13 +88,11 @@
       cursor: pointer;
       position: relative;
       transition: color 0.2s;
-      white-space: nowrap;
     }
     .tab-btn::after {
       content: '';
       position: absolute;
-      bottom: -1px; left: 0; right: 0;
-      height: 2px;
+      bottom: -1px; left: 0; right: 0; height: 2px;
       background: var(--ink);
       transform: scaleX(0);
       transition: transform 0.2s cubic-bezier(0.22,1,0.36,1);
@@ -111,93 +108,213 @@
     .tab-panel.is-active { display: block; }
 
     /* ─────────────────────────────────────────
+       SPECIMEN STYLES  (visual layout)
+    ───────────────────────────────────────── */
+
+    /* Font families bar */
+    .ff-bar { display: flex; border-bottom: 1px solid var(--divider); }
+    .ff-block { flex: 1; padding: 40px var(--pad-h); }
+    .ff-block + .ff-block { border-left: 1px solid var(--divider); }
+    .ff-block__label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1.2px; text-transform: uppercase;
+      color: #A2A2A2; margin-bottom: 4px;
+    }
+    .ff-block__name {
+      font-size: 14px; font-weight: 700;
+      color: #141414; margin-bottom: 20px;
+    }
+    .ff-block__sample { font-size: 44px; line-height: 1; letter-spacing: -2px; color: #000; }
+    .ff-block__sample--display { font-family: var(--f-display); font-weight: 500; }
+    .ff-block__sample--display em { font-style: italic; font-weight: 400; }
+    .ff-block__sample--ui { font-family: var(--f-ui); font-weight: 400; letter-spacing: -1px; }
+    .ff-chips {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 20px; padding-top: 20px;
+      border-top: 1px solid var(--divider);
+    }
+    .chip {
+      font-size: 12px; color: #474747;
+      padding: 4px 12px; border: 1px solid var(--divider);
+      border-radius: 100px; background: #FAFAFA;
+    }
+
+    /* Category header */
+    .cat-header {
+      display: grid;
+      grid-template-columns: var(--col-meta) 1fr;
+    }
+    .cat-header__left {
+      padding: 28px 40px 22px var(--pad-h);
+      border-right: 1px solid var(--divider);
+      border-bottom: 1px solid var(--divider);
+    }
+    .cat-header__right {
+      padding: 28px var(--pad-h) 22px;
+      border-bottom: 1px solid var(--divider);
+      display: flex; align-items: center;
+    }
+    .cat-name {
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.6px; color: #000;
+    }
+    .cat-desc { font-size: 13px; color: #656565; }
+
+    /* Type row */
+    .type-row {
+      display: grid;
+      grid-template-columns: var(--col-meta) 1fr;
+      border-bottom: 1px solid var(--divider);
+    }
+    .type-row--dark { background: #0A0A0A; }
+    .type-row--dark .type-meta { border-right-color: #222; }
+    .type-row--tinted { background: #FAFAFA; }
+
+    .type-meta {
+      padding: 32px 32px 32px var(--pad-h);
+      border-right: 1px solid var(--divider);
+    }
+    .type-meta__token {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.8px; text-transform: uppercase;
+      color: #A2A2A2; margin-bottom: 6px;
+    }
+    .type-meta__label {
+      font-size: 14px; font-weight: 700;
+      color: #141414; margin-bottom: 14px;
+    }
+    .type-row--dark .type-meta__label { color: #fff; }
+    .type-meta__spec {
+      font-size: 12px; line-height: 1.9; color: #656565;
+    }
+    .type-meta__spec b { font-weight: 600; color: #292929; }
+    .type-row--dark .type-meta__spec b { color: #A2A2A2; }
+
+    .type-body {
+      padding: 32px var(--pad-h);
+      display: flex; flex-direction: column; gap: 20px;
+    }
+
+    /* Type styles */
+    .s-disp-l { font-family: var(--f-display); font-size: 120px; font-weight: 400; line-height: 1; letter-spacing: -6px; color: #000; }
+    .s-disp-l em { font-style: italic; }
+    .s-disp-m { font-family: var(--f-display); font-size: 72px; font-weight: 500; line-height: 1; letter-spacing: -3px; color: #000; }
+    .s-disp-m em { font-style: italic; }
+    .s-quote  { font-family: var(--f-display); font-size: 48px; font-weight: 500; line-height: 1; letter-spacing: -2px; color: #000; }
+    .s-quote em { font-style: italic; }
+    .s-h1 { font-family: var(--f-display); font-size: 72px; font-weight: 500; line-height: 1; letter-spacing: -3px; color: #000; }
+    .s-h1 em { font-style: italic; }
+    .s-h2 { font-family: var(--f-display); font-size: 64px; font-weight: 500; line-height: 1; letter-spacing: -3px; color: #000; }
+    .s-h2 em { font-style: italic; }
+    .s-h3 { font-family: var(--f-display); font-size: 40px; font-weight: 500; line-height: 1; letter-spacing: -2px; color: #000; }
+    .s-h3 em { font-style: italic; }
+    .s-h4 { font-family: var(--f-ui); font-size: 32px; font-weight: 500; line-height: 1.1; letter-spacing: -1px; color: #141414; }
+    .s-h5 { font-family: var(--f-ui); font-size: 24px; font-weight: 500; line-height: 1.2; letter-spacing: -1px; color: #141414; }
+    .s-body-xl { font-family: var(--f-ui); font-size: 20px; font-weight: 400; line-height: 1.4; letter-spacing: -1px; color: #474747; }
+    .s-body-xl b { font-weight: 700; color: #141414; }
+    .s-body-l  { font-family: var(--f-ui); font-size: 18px; font-weight: 400; line-height: 1.4; letter-spacing: -1px; color: #474747; }
+    .s-body-l b { font-weight: 700; color: #141414; }
+    .s-body-m  { font-family: var(--f-ui); font-size: 16px; font-weight: 400; line-height: 1.5; color: #656565; }
+    .s-body-s  { font-family: var(--f-ui); font-size: 14px; font-weight: 400; line-height: 1.5; color: #656565; }
+    .s-label-m { font-family: var(--f-ui); font-size: 14px; font-weight: 600; line-height: 1.1; letter-spacing: 1px; text-transform: uppercase; color: #656565; }
+    .s-label-s { font-family: var(--f-ui); font-size: 12px; font-weight: 600; line-height: 1.1; letter-spacing: 1px; text-transform: uppercase; color: #656565; }
+    .s-stats-l { font-family: var(--f-display); font-size: 80px; font-weight: 500; line-height: 1; letter-spacing: -3px; color: #000; }
+    .s-stats-m { font-family: var(--f-display); font-size: 48px; font-weight: 500; line-height: 1; letter-spacing: -2px; color: #000; }
+    .s-stats-s { font-family: var(--f-ui); font-size: 24px; font-weight: 500; line-height: 1.2; letter-spacing: -1px; color: #000; }
+    .stat-item { display: flex; flex-direction: column; gap: 10px; }
+    .stat-item__sub { font-size: 16px; font-weight: 400; line-height: 1.4; letter-spacing: -1px; color: #656565; }
+    .stats-row { display: flex; gap: 48px; align-items: flex-end; }
+
+    /* Display canvas */
+    .disp-canvas {
+      background: #0A0A0A; border-radius: 12px;
+      padding: 48px; overflow: hidden;
+    }
+    .disp-canvas .s-disp-l { color: #fff; }
+
+    /* Buttons inside specimens */
+    .spec-btn {
+      display: inline-flex; align-items: center;
+      gap: 8px; padding: 14px 20px;
+      border-radius: 999px;
+      font-family: var(--f-ui); font-size: 16px; font-weight: 400;
+      line-height: 1.1; cursor: default;
+    }
+    .spec-btn--dark  { background: #0A0A0A; color: #fff; }
+    .spec-btn--white { background: #fff; color: #0A0A0A; border: 1px solid #E8E8E8; }
+    .spec-btn--outline { background: transparent; color: #0A0A0A; border: 1px solid #0A0A0A; }
+    .spec-btn--ghost   { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.4); }
+    .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+    .link-item {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--f-ui); font-size: 16px; color: #0A0A0A;
+    }
+    .link-item--inv { color: rgba(255,255,255,0.85); }
+    .link-arrow { width: 16px; height: 1px; background: currentColor; display: inline-block; position: relative; top: 1px; }
+    .nav-item { font-family: var(--f-ui); font-size: 18px; font-weight: 400; letter-spacing: -1px; color: #fff; }
+
+    .flex-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
+    .flex-col  { display: flex; flex-direction: column; gap: 12px; }
+
+    /* ── Table divider label ── */
+    .table-label {
+      padding: 28px var(--pad-h) 0;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted);
+      border-top: 2px solid var(--divider);
+      margin-top: 0;
+    }
+
+    /* ─────────────────────────────────────────
        TYPOGRAPHY TABLE
     ───────────────────────────────────────── */
     .type-table {
       width: 100%;
       border-collapse: collapse;
+      margin-top: 20px;
     }
     .type-table thead th {
       font-size: 10px; font-weight: 700;
       letter-spacing: 1px; text-transform: uppercase;
       color: var(--muted);
       text-align: left;
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--border);
+      padding: 13px 20px;
+      border-bottom: 1px solid var(--divider);
       background: var(--surface);
       white-space: nowrap;
     }
     .type-table thead th:first-child { padding-left: var(--pad-h); }
     .type-table thead th:last-child  { padding-right: var(--pad-h); }
 
-    .type-table tbody tr {
-      border-bottom: 1px solid var(--border);
-    }
+    .type-table tbody tr { border-bottom: 1px solid var(--divider); }
     .type-table tbody tr:hover { background: #FAFAFA; }
     .type-table tbody tr.row--dark { background: #0A0A0A; }
     .type-table tbody tr.row--dark:hover { background: #111; }
-    .type-table tbody tr.row--group-start td {
-      border-top: 2px solid var(--border);
-      padding-top: 20px;
-    }
 
     .type-table td {
-      padding: 16px 20px;
+      padding: 14px 20px;
       vertical-align: middle;
       font-size: 13px;
     }
     .type-table td:first-child { padding-left: var(--pad-h); }
     .type-table td:last-child  { padding-right: var(--pad-h); }
 
-    /* Token column */
-    .td-token {
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 0.5px;
-      color: var(--muted);
-      white-space: nowrap;
-    }
+    .td-token { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; color: var(--muted); white-space: nowrap; }
     .row--dark .td-token { color: #555; }
-
-    /* Style name column */
-    .td-name {
-      font-size: 13px; font-weight: 600;
-      color: var(--ink);
-      white-space: nowrap;
-    }
+    .td-name  { font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap; }
     .row--dark .td-name { color: #fff; }
-
-    /* Typeface column */
-    .td-face {
-      color: var(--mid);
-      white-space: nowrap;
-    }
+    .td-face  { color: var(--mid); white-space: nowrap; font-size: 13px; }
     .row--dark .td-face { color: #666; }
-    .td-face .face-cormorant { font-family: var(--f-display); font-style: italic; }
-
-    /* Size columns */
-    .td-size {
-      color: var(--ink);
-      white-space: nowrap;
-      font-variant-numeric: tabular-nums;
-    }
+    .face-cormorant { font-family: var(--f-display); font-style: italic; }
+    .td-size  { color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
     .row--dark .td-size { color: rgba(255,255,255,0.75); }
-    .td-size .sz-main {
-      font-weight: 600;
-      font-size: 14px;
-    }
-    .td-size .sz-sub {
-      font-size: 11px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-    .row--dark .td-size .sz-sub { color: #555; }
-    .td-size .sz-same {
-      font-size: 11px;
-      color: var(--border);
-    }
-    .row--dark .td-size .sz-same { color: #333; }
+    .sz-main { font-weight: 600; font-size: 14px; display: block; }
+    .sz-sub  { font-size: 11px; color: var(--muted); margin-top: 2px; display: block; }
+    .row--dark .sz-sub { color: #555; }
+    .sz-same { font-size: 11px; color: #D0D0D0; display: block; }
+    .row--dark .sz-same { color: #333; }
 
-    /* Group label row */
     .type-table .group-row td {
       padding: 10px 20px 6px;
       font-size: 10px; font-weight: 700;
@@ -211,132 +328,63 @@
     /* ─────────────────────────────────────────
        COLOUR PALETTE
     ───────────────────────────────────────── */
-    .colour-page {
-      padding: 48px var(--pad-h) 80px;
-    }
+    .colour-page { padding: 48px var(--pad-h) 80px; }
     .colour-group { margin-bottom: 48px; }
     .colour-group__title {
       font-size: 10px; font-weight: 700;
       letter-spacing: 1px; text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
+      color: var(--muted); margin-bottom: 20px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--divider);
     }
-    .colour-swatches {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .swatch {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 140px;
-    }
-    .swatch__block {
-      width: 100%;
-      height: 80px;
-      border-radius: 10px;
-      border: 1px solid rgba(0,0,0,0.07);
-    }
-    .swatch__name {
-      font-size: 12px; font-weight: 600;
-      color: var(--ink);
-      line-height: 1.2;
-    }
-    .swatch__hex {
-      font-size: 11px; font-weight: 400;
-      color: var(--muted);
-      font-family: 'Courier New', monospace;
-      margin-top: 2px;
-    }
-    .swatch__token {
-      font-size: 10px; font-weight: 600;
-      letter-spacing: 0.5px;
-      color: #BDBDBD;
-      text-transform: uppercase;
-      margin-top: 1px;
-    }
+    .colour-swatches { display: flex; flex-wrap: wrap; gap: 16px; }
+    .swatch { display: flex; flex-direction: column; gap: 10px; width: 140px; }
+    .swatch__block { width: 100%; height: 80px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.07); }
+    .swatch__name  { font-size: 12px; font-weight: 600; color: var(--ink); line-height: 1.2; }
+    .swatch__hex   { font-size: 11px; color: var(--muted); font-family: 'Courier New', monospace; margin-top: 2px; }
+    .swatch__token { font-size: 10px; font-weight: 600; letter-spacing: 0.5px; color: #BDBDBD; text-transform: uppercase; margin-top: 1px; }
 
     /* ─────────────────────────────────────────
-       UI ELEMENTS — BUTTONS
+       UI ELEMENTS
     ───────────────────────────────────────── */
-    .ui-page {
-      padding: 48px var(--pad-h) 80px;
-    }
+    .ui-page { padding: 48px var(--pad-h) 80px; }
     .ui-group { margin-bottom: 56px; }
     .ui-group__title {
       font-size: 10px; font-weight: 700;
       letter-spacing: 1px; text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
+      color: var(--muted); margin-bottom: 20px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--divider);
     }
-    .ui-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: flex-start;
-    }
+    .ui-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; }
     .ui-canvas {
       display: flex; flex-wrap: wrap; gap: 12px;
-      align-items: center;
-      padding: 32px 36px;
-      border-radius: 14px;
+      align-items: center; padding: 32px 36px; border-radius: 14px;
     }
-    .ui-canvas--dark { background: #0A0A0A; }
+    .ui-canvas--dark  { background: #0A0A0A; }
     .ui-canvas--green { background: #003727; }
 
-    /* Buttons */
     .btn {
       display: inline-flex; align-items: center;
       gap: 8px; padding: 14px 24px;
       border-radius: 999px; cursor: default;
-      font-family: var(--f-ui);
-      font-size: 15px; font-weight: 400;
-      line-height: 1.1; letter-spacing: 0;
-      border: 1px solid transparent;
-      transition: none;
+      font-family: var(--f-ui); font-size: 15px; font-weight: 400;
+      line-height: 1.1; border: 1px solid transparent;
     }
-    .btn--orange   { background: #F3752C; color: #fff; border-color: #F3752C; }
-    .btn--dark     { background: #0A0A0A; color: #fff; border-color: #0A0A0A; }
-    .btn--white    { background: #fff; color: #0A0A0A; border-color: #E8E8E8; }
-    .btn--outline  { background: transparent; color: #0A0A0A; border-color: #0A0A0A; }
-    .btn--ghost    { background: transparent; color: #fff; border-color: rgba(255,255,255,0.35); }
-    .btn--ghost-green { background: transparent; color: #fff; border-color: rgba(255,255,255,0.35); }
+    .btn--orange  { background: #F3752C; color: #fff; border-color: #F3752C; }
+    .btn--dark    { background: #0A0A0A; color: #fff; border-color: #0A0A0A; }
+    .btn--white   { background: #fff; color: #0A0A0A; border-color: #E8E8E8; }
+    .btn--outline { background: transparent; color: #0A0A0A; border-color: #0A0A0A; }
+    .btn--ghost   { background: transparent; color: #fff; border-color: rgba(255,255,255,0.35); }
 
-    .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
-    .arrow { font-size: 15px; }
-
-    /* Link button */
     .link-btn {
       display: inline-flex; align-items: center; gap: 10px;
-      font-family: var(--f-ui);
-      font-size: 15px; font-weight: 400;
-      line-height: 1.1; letter-spacing: 0;
-      color: var(--ink); cursor: default;
+      font-family: var(--f-ui); font-size: 15px; color: var(--ink); cursor: default;
     }
     .link-btn--inv { color: rgba(255,255,255,0.85); }
-    .link-btn__arrow {
-      width: 18px; height: 1px;
-      background: currentColor;
-      display: inline-block;
-      position: relative; top: 1px;
-    }
+    .link-btn__arrow { width: 18px; height: 1px; background: currentColor; display: inline-block; position: relative; top: 1px; }
 
-    /* Button spec label */
-    .btn-wrap {
-      display: flex; flex-direction: column; gap: 8px;
-      align-items: flex-start;
-    }
-    .btn-label {
-      font-size: 10px; font-weight: 700;
-      letter-spacing: 0.8px; text-transform: uppercase;
-      color: var(--muted);
-    }
-    .btn-label--inv { color: rgba(255,255,255,0.3); }
+    .btn-wrap { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+    .btn-label { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); }
+    .btn-label--inv   { color: rgba(255,255,255,0.3); }
     .btn-label--green { color: rgba(255,255,255,0.3); }
 
   </style>
@@ -345,12 +393,12 @@
 
   <!-- ── PAGE HEADER ── -->
   <header class="pg-header">
-    <div class="pg-header__left">
+    <div>
       <p class="pg-header__eyebrow">Feuji Website · Design System</p>
       <h1 class="pg-header__title">UI <em>Kit</em></h1>
     </div>
     <div class="pg-header__fonts">
-      <span class="ff-pill"><span class="face-cormorant" style="font-family:'Cormorant Garamond';font-style:italic;font-size:15px;">Aa</span> &nbsp;<b>Cormorant Garamond</b> — Display</span>
+      <span class="ff-pill"><span style="font-family:'Cormorant Garamond';font-style:italic;font-size:15px;margin-right:4px;">Aa</span> <b>Cormorant Garamond</b> — Display</span>
       <span class="ff-pill"><b>Aa</b> &nbsp;<b>DM Sans</b> — UI / Body</span>
     </div>
   </header>
@@ -362,10 +410,356 @@
     <button class="tab-btn" role="tab" data-panel="ui-elements" aria-selected="false">UI Elements</button>
   </nav>
 
+
   <!-- ══════════════════════════════════════
        TAB 1 — TYPOGRAPHY
   ══════════════════════════════════════ -->
   <div id="typography" class="tab-panel is-active" role="tabpanel">
+
+    <!-- Font families -->
+    <div class="ff-bar">
+      <div class="ff-block">
+        <p class="ff-block__label">Display · Serif</p>
+        <p class="ff-block__name">Cormorant Garamond</p>
+        <p class="ff-block__sample ff-block__sample--display">The Feuji way is to <em>find the Flow.</em></p>
+        <div class="ff-chips">
+          <span class="chip" style="font-family:'Cormorant Garamond';font-weight:400;">Regular</span>
+          <span class="chip" style="font-family:'Cormorant Garamond';font-weight:400;font-style:italic;">Italic</span>
+          <span class="chip" style="font-family:'Cormorant Garamond';font-weight:500;">Medium</span>
+          <span class="chip" style="font-family:'Cormorant Garamond';font-weight:500;font-style:italic;">Medium Italic</span>
+          <span class="chip" style="font-family:'Cormorant Garamond';font-weight:600;">SemiBold</span>
+          <span class="chip" style="font-family:'Cormorant Garamond';font-weight:600;font-style:italic;">SemiBold Italic</span>
+        </div>
+      </div>
+      <div class="ff-block">
+        <p class="ff-block__label">UI · Sans-serif</p>
+        <p class="ff-block__name">DM Sans</p>
+        <p class="ff-block__sample ff-block__sample--ui">Engineering built to last.</p>
+        <div class="ff-chips">
+          <span class="chip" style="font-family:'DM Sans';font-weight:400;">Regular</span>
+          <span class="chip" style="font-family:'DM Sans';font-weight:500;">Medium</span>
+          <span class="chip" style="font-family:'DM Sans';font-weight:600;">SemiBold</span>
+          <span class="chip" style="font-family:'DM Sans';font-weight:700;">Bold</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DISPLAY ── -->
+    <div class="cat-header">
+      <div class="cat-header__left"><p class="cat-name">Display</p></div>
+      <div class="cat-header__right"><p class="cat-desc">Cormorant Garamond · Editorial, hero, and large-format moments. Pairs roman with italic for expressive contrast.</p></div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Display / L</p>
+        <p class="type-meta__label">Display Large</p>
+        <p class="type-meta__spec"><b>Cormorant Garamond</b> Regular 400<br>120px · Line-height 1<br>Tracking −6px</p>
+      </div>
+      <div class="type-body">
+        <div class="disp-canvas"><p class="s-disp-l">work<br>in <em>Flow</em></p></div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Display / M</p>
+        <p class="type-meta__label">Display Medium</p>
+        <p class="type-meta__spec"><b>Cormorant Garamond</b> Medium 500<br>72px · Line-height 1<br>Tracking −3px</p>
+      </div>
+      <div class="type-body">
+        <p class="s-disp-m">The Feuji way is to <em>find the Flow.</em></p>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Display / Quote</p>
+        <p class="type-meta__label">Quote</p>
+        <p class="type-meta__spec"><b>Cormorant Garamond</b> Medium 500<br>48px · Line-height 1<br>Tracking −2px</p>
+      </div>
+      <div class="type-body">
+        <p class="s-quote">"Growth with <em>purpose</em> is the only growth that compounds."</p>
+      </div>
+    </div>
+
+    <!-- ── HEADING ── -->
+    <div class="cat-header">
+      <div class="cat-header__left"><p class="cat-name">Heading</p></div>
+      <div class="cat-header__right"><p class="cat-desc">H1–H3 in Cormorant Garamond for editorial weight. H4–H5 in DM Sans for structured UI hierarchy.</p></div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Heading / 1</p>
+        <p class="type-meta__label">Heading 1</p>
+        <p class="type-meta__spec"><b>Cormorant Garamond</b> Medium 500<br>72px · Line-height 1<br>Tracking −3px</p>
+      </div>
+      <div class="type-body"><p class="s-h1">Built with purpose. <em>Driven</em> by craft.</p></div>
+    </div>
+
+    <div class="type-row type-row--dark">
+      <div class="type-meta">
+        <p class="type-meta__token">Heading / 2</p>
+        <p class="type-meta__label">Heading 2</p>
+        <p class="type-meta__spec"><b>Cormorant Garamond</b> Medium 500<br>64px · Line-height 1<br>Tracking −3px</p>
+      </div>
+      <div class="type-body">
+        <p class="s-h2" style="color:#fff">The engineering <em style="color:#fff">foundation.</em></p>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Heading / 3</p>
+        <p class="type-meta__label">Heading 3</p>
+        <p class="type-meta__spec"><b>Cormorant Garamond</b> Medium 500<br>40px · Line-height 1<br>Tracking −2px</p>
+      </div>
+      <div class="type-body"><p class="s-h3">Engineering built to <em>last.</em></p></div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Heading / 4</p>
+        <p class="type-meta__label">Heading 4</p>
+        <p class="type-meta__spec"><b>DM Sans</b> Medium 500<br>32px · Line-height 1.1<br>Tracking −1px</p>
+      </div>
+      <div class="type-body"><p class="s-h4">With AI. With Tech. With People.</p></div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Heading / 5</p>
+        <p class="type-meta__label">Heading 5</p>
+        <p class="type-meta__spec"><b>DM Sans</b> Medium 500<br>24px · Line-height 1.2<br>Tracking −1px</p>
+      </div>
+      <div class="type-body"><p class="s-h5">Reduction in prior authorization processing time</p></div>
+    </div>
+
+    <!-- ── BODY ── -->
+    <div class="cat-header">
+      <div class="cat-header__left"><p class="cat-name">Body</p></div>
+      <div class="cat-header__right"><p class="cat-desc">DM Sans · Running copy at all scales. Supports Regular and Bold weights for emphasis within paragraphs.</p></div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Body / XL</p>
+        <p class="type-meta__label">Body XL</p>
+        <p class="type-meta__spec"><b>DM Sans</b> Regular 400<br>20px · Line-height 1.4<br>Tracking −1px</p>
+      </div>
+      <div class="type-body"><p class="s-body-xl">Founded in Dallas, Texas, Feuji is a <b>global Applied AI Engineering company</b> with operations in India and Costa Rica.</p></div>
+    </div>
+
+    <div class="type-row type-row--tinted">
+      <div class="type-meta">
+        <p class="type-meta__token">Body / L</p>
+        <p class="type-meta__label">Body Large</p>
+        <p class="type-meta__spec"><b>DM Sans</b> Regular 400<br>18px · Line-height 1.4<br>Tracking −1px</p>
+      </div>
+      <div class="type-body"><p class="s-body-l">Flow — like the mountain Fuji stands for — is not the absence of effort. It is effort at its most purposeful: disciplined, clear, continuous. At Feuji, <b>Flow™ is not a methodology.</b> It is how we think, how we build, and who we are.</p></div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Body / M</p>
+        <p class="type-meta__label">Body Medium</p>
+        <p class="type-meta__spec"><b>DM Sans</b> Regular 400<br>16px · Line-height 1.5<br>Tracking 0</p>
+      </div>
+      <div class="type-body"><p class="s-body-m">Cloud should give you leverage, not complexity. From advisory and migration to multi-cloud governance and security, we help you move to the cloud confidently — and run it efficiently once you're there.</p></div>
+    </div>
+
+    <div class="type-row type-row--tinted">
+      <div class="type-meta">
+        <p class="type-meta__token">Body / S</p>
+        <p class="type-meta__label">Body Small</p>
+        <p class="type-meta__spec"><b>DM Sans</b> Regular 400<br>14px · Line-height 1.5<br>Tracking 0</p>
+      </div>
+      <div class="type-body"><p class="s-body-s">For a leading health network, through AI-powered workflow automation and intelligent document processing.</p></div>
+    </div>
+
+    <!-- ── LABEL ── -->
+    <div class="cat-header">
+      <div class="cat-header__left"><p class="cat-name">Label</p></div>
+      <div class="cat-header__right"><p class="cat-desc">DM Sans · Uppercase tracking labels for categories, eyebrows, and UI identifiers.</p></div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Label / M</p>
+        <p class="type-meta__label">Label Medium</p>
+        <p class="type-meta__spec"><b>DM Sans</b> SemiBold 600 · Uppercase<br>14px · Line-height 1.1<br>Tracking +1px</p>
+      </div>
+      <div class="type-body">
+        <div class="flex-row">
+          <p class="s-label-m">Engineering</p>
+          <p class="s-label-m">Intelligence</p>
+          <p class="s-label-m">Purpose</p>
+          <p class="s-label-m">Flow™ Philosophy</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Label / S</p>
+        <p class="type-meta__label">Label Small</p>
+        <p class="type-meta__spec"><b>DM Sans</b> SemiBold 600 · Uppercase<br>12px · Line-height 1.1<br>Tracking +1px</p>
+      </div>
+      <div class="type-body">
+        <div class="flex-row">
+          <p class="s-label-s">Healthcare</p>
+          <p class="s-label-s">Smart Villages</p>
+          <p class="s-label-s">Education &amp; Training</p>
+          <p class="s-label-s">Costa Rica</p>
+          <p class="s-label-s">Trusted By</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STATS ── -->
+    <div class="cat-header">
+      <div class="cat-header__left"><p class="cat-name">Stats</p></div>
+      <div class="cat-header__right"><p class="cat-desc">Cormorant Garamond · Numerals and metrics. Same typeface as Display but used purely for data callouts.</p></div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Stats / L</p>
+        <p class="type-meta__label">Stats Large</p>
+        <p class="type-meta__spec"><b>Cormorant Garamond</b> Medium 500<br>80px · Line-height 1<br>Tracking −3px</p>
+      </div>
+      <div class="type-body">
+        <div class="stats-row">
+          <div class="stat-item"><p class="s-stats-l">500+</p><p class="stat-item__sub">Employees</p></div>
+          <div class="stat-item"><p class="s-stats-l">3</p><p class="stat-item__sub">Countries</p></div>
+          <div class="stat-item"><p class="s-stats-l">50+</p><p class="stat-item__sub">Clients</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-row type-row--tinted">
+      <div class="type-meta">
+        <p class="type-meta__token">Stats / M</p>
+        <p class="type-meta__label">Stats Medium</p>
+        <p class="type-meta__spec"><b>Cormorant Garamond</b> Medium 500<br>48px · Line-height 1<br>Tracking −2px</p>
+      </div>
+      <div class="type-body">
+        <div class="stats-row">
+          <div class="stat-item"><p class="s-stats-m">30%</p><p class="stat-item__sub">Reduction in processing time</p></div>
+          <div class="stat-item"><p class="s-stats-m">20+</p><p class="stat-item__sub">Villages digitally enabled</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Stats / S</p>
+        <p class="type-meta__label">Stats Small</p>
+        <p class="type-meta__spec"><b>DM Sans</b> Medium 500<br>24px · Line-height 1.2<br>Tracking −1px</p>
+      </div>
+      <div class="type-body">
+        <div class="stats-row">
+          <div class="stat-item"><p class="s-stats-s">01</p><p class="stat-item__sub">Cloud Engineering</p></div>
+          <div class="stat-item"><p class="s-stats-s">02</p><p class="stat-item__sub">Digital Products</p></div>
+          <div class="stat-item"><p class="s-stats-s">03</p><p class="stat-item__sub">Data &amp; AI</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BUTTON / LINKS ── -->
+    <div class="cat-header">
+      <div class="cat-header__left"><p class="cat-name">Button / Links</p></div>
+      <div class="cat-header__right"><p class="cat-desc">DM Sans Regular · Primary = fill, Secondary = outline, Tertiary = link. Inverse variants for dark backgrounds.</p></div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Button / Primary</p>
+        <p class="type-meta__label">Fill Button</p>
+        <p class="type-meta__spec"><b>DM Sans</b> Regular 400<br>16px · Line-height 1.1<br>Tracking 0</p>
+      </div>
+      <div class="type-body">
+        <div class="flex-row">
+          <div class="spec-btn spec-btn--dark"><span class="dot"></span>Explore Services<span class="dot"></span></div>
+          <div class="spec-btn spec-btn--dark"><span class="dot"></span>Talk to Us<span class="dot"></span></div>
+          <div class="spec-btn spec-btn--dark"><span class="dot"></span>Learn More<span class="dot"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-row type-row--dark">
+      <div class="type-meta">
+        <p class="type-meta__token">Button / Primary Inv.</p>
+        <p class="type-meta__label">Fill Button · Dark</p>
+        <p class="type-meta__spec"><b>DM Sans</b> Regular 400<br>16px · Line-height 1.1<br>Tracking 0</p>
+      </div>
+      <div class="type-body">
+        <div class="flex-row">
+          <div class="spec-btn spec-btn--white"><span class="dot"></span>Explore Services<span class="dot"></span></div>
+          <div class="spec-btn spec-btn--white"><span class="dot"></span>Talk to Us<span class="dot"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Button / Secondary</p>
+        <p class="type-meta__label">Outline Button</p>
+        <p class="type-meta__spec"><b>DM Sans</b> Regular 400<br>16px · Line-height 1.1<br>Tracking 0</p>
+      </div>
+      <div class="type-body">
+        <div class="flex-row">
+          <div class="spec-btn spec-btn--outline"><span class="dot"></span>Our Full Story<span class="dot"></span></div>
+          <div class="spec-btn spec-btn--outline"><span class="dot"></span>Contact Us<span class="dot"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-row type-row--dark">
+      <div class="type-meta">
+        <p class="type-meta__token">Button / Secondary Inv.</p>
+        <p class="type-meta__label">Outline Button · Dark</p>
+        <p class="type-meta__spec"><b>DM Sans</b> Regular 400<br>16px · Line-height 1.1<br>Tracking 0</p>
+      </div>
+      <div class="type-body">
+        <div class="flex-row">
+          <div class="spec-btn spec-btn--ghost"><span class="dot"></span>About Feuji<span class="dot"></span></div>
+          <div class="spec-btn spec-btn--ghost"><span class="dot"></span>Explore Our Work<span class="dot"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <p class="type-meta__token">Button / Tertiary</p>
+        <p class="type-meta__label">Link Button</p>
+        <p class="type-meta__spec"><b>DM Sans</b> Regular 400<br>16px · Line-height 1.1<br>Tracking 0</p>
+      </div>
+      <div class="type-body">
+        <div class="flex-col">
+          <div class="link-item"><span class="dot"></span>Read More<span class="link-arrow"></span></div>
+          <div class="link-item"><span class="dot"></span>View Case Study<span class="link-arrow"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-row type-row--dark">
+      <div class="type-meta">
+        <p class="type-meta__token">Button / Tertiary Inv.</p>
+        <p class="type-meta__label">Link Button · Dark</p>
+        <p class="type-meta__spec"><b>DM Sans</b> Regular 400<br>16px · Line-height 1.1<br>Tracking 0</p>
+      </div>
+      <div class="type-body">
+        <div class="flex-col">
+          <div class="link-item link-item--inv"><span class="dot"></span>Read More<span class="link-arrow"></span></div>
+          <div class="link-item link-item--inv"><span class="dot"></span>Explore Services<span class="link-arrow"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ RESPONSIVE SCALE TABLE ══ -->
+    <p class="table-label" style="padding-top:40px;padding-bottom:20px;">Responsive Scale</p>
     <table class="type-table">
       <thead>
         <tr>
@@ -379,227 +773,172 @@
         </tr>
       </thead>
       <tbody>
-
-        <!-- DISPLAY GROUP -->
         <tr class="group-row"><td colspan="7">Display</td></tr>
-
         <tr class="row--dark">
-          <td class="td-token">Display / L</td>
-          <td class="td-name">Display Large</td>
+          <td class="td-token">Display / L</td><td class="td-name">Display Large</td>
           <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
           <td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">120px</span><div class="sz-sub">lh 1 · ls −6px</div></td>
-          <td class="td-size"><span class="sz-main">80px</span><div class="sz-sub">lh 1 · ls −4px</div></td>
-          <td class="td-size"><span class="sz-main">52px</span><div class="sz-sub">lh 54px · ls −2px</div></td>
+          <td class="td-size"><span class="sz-main">120px</span><span class="sz-sub">lh 1 · ls −6px</span></td>
+          <td class="td-size"><span class="sz-main">80px</span><span class="sz-sub">lh 1 · ls −4px</span></td>
+          <td class="td-size"><span class="sz-main">52px</span><span class="sz-sub">lh 54px · ls −2px</span></td>
         </tr>
-
         <tr>
-          <td class="td-token">Display / M</td>
-          <td class="td-name">Display Medium</td>
+          <td class="td-token">Display / M</td><td class="td-name">Display Medium</td>
           <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
           <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">72px</span><div class="sz-sub">lh 1 · ls −3px</div></td>
+          <td class="td-size"><span class="sz-main">72px</span><span class="sz-sub">lh 1 · ls −3px</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
-
         <tr class="row--dark">
-          <td class="td-token">Display / Quote</td>
-          <td class="td-name">Quote</td>
+          <td class="td-token">Display / Quote</td><td class="td-name">Quote</td>
           <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
           <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">48px</span><div class="sz-sub">lh 1 · ls −2px</div></td>
+          <td class="td-size"><span class="sz-main">48px</span><span class="sz-sub">lh 1 · ls −2px</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
 
-        <!-- HEADING GROUP -->
         <tr class="group-row"><td colspan="7">Heading</td></tr>
-
         <tr>
-          <td class="td-token">Heading / 1</td>
-          <td class="td-name">H1</td>
+          <td class="td-token">Heading / 1</td><td class="td-name">H1</td>
           <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
           <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">72px</span><div class="sz-sub">lh 1 · ls −3px</div></td>
+          <td class="td-size"><span class="sz-main">72px</span><span class="sz-sub">lh 1 · ls −3px</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
-
         <tr class="row--dark">
-          <td class="td-token">Heading / 2</td>
-          <td class="td-name">H2</td>
+          <td class="td-token">Heading / 2</td><td class="td-name">H2</td>
           <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
           <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">64px</span><div class="sz-sub">lh 1 · ls −3px</div></td>
-          <td class="td-size"><span class="sz-main">40px</span><div class="sz-sub">lh 42px · ls −2px</div></td>
-          <td class="td-size"><span class="sz-main">36px</span><div class="sz-sub">lh 40px · ls −1.5px</div></td>
+          <td class="td-size"><span class="sz-main">64px</span><span class="sz-sub">lh 1 · ls −3px</span></td>
+          <td class="td-size"><span class="sz-main">40px</span><span class="sz-sub">lh 42px · ls −2px</span></td>
+          <td class="td-size"><span class="sz-main">36px</span><span class="sz-sub">lh 40px · ls −1.5px</span></td>
         </tr>
-
         <tr>
-          <td class="td-token">Heading / 3</td>
-          <td class="td-name">H3</td>
+          <td class="td-token">Heading / 3</td><td class="td-name">H3</td>
           <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
           <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">40px</span><div class="sz-sub">lh 1 · ls −2px</div></td>
+          <td class="td-size"><span class="sz-main">40px</span><span class="sz-sub">lh 1 · ls −2px</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
-
         <tr class="row--dark">
-          <td class="td-token">Heading / 4</td>
-          <td class="td-name">H4</td>
+          <td class="td-token">Heading / 4</td><td class="td-name">H4</td>
           <td class="td-face">DM Sans</td>
           <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">32px</span><div class="sz-sub">lh 1.1 · ls −1px</div></td>
+          <td class="td-size"><span class="sz-main">32px</span><span class="sz-sub">lh 1.1 · ls −1px</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
-
         <tr>
-          <td class="td-token">Heading / 5</td>
-          <td class="td-name">H5</td>
+          <td class="td-token">Heading / 5</td><td class="td-name">H5</td>
           <td class="td-face">DM Sans</td>
           <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">24px</span><div class="sz-sub">lh 1.2 · ls −1px</div></td>
+          <td class="td-size"><span class="sz-main">24px</span><span class="sz-sub">lh 1.2 · ls −1px</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
 
-        <!-- BODY GROUP -->
         <tr class="group-row"><td colspan="7">Body</td></tr>
-
         <tr class="row--dark">
-          <td class="td-token">Body / XL</td>
-          <td class="td-name">Body XL</td>
-          <td class="td-face">DM Sans</td>
-          <td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">20px</span><div class="sz-sub">lh 1.4 · ls −1px</div></td>
+          <td class="td-token">Body / XL</td><td class="td-name">Body XL</td>
+          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">400</span></td>
+          <td class="td-size"><span class="sz-main">20px</span><span class="sz-sub">lh 1.4 · ls −1px</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
-
         <tr>
-          <td class="td-token">Body / L</td>
-          <td class="td-name">Body Large</td>
-          <td class="td-face">DM Sans</td>
-          <td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">18px</span><div class="sz-sub">lh 1.4 · ls −1px</div></td>
+          <td class="td-token">Body / L</td><td class="td-name">Body Large</td>
+          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">400</span></td>
+          <td class="td-size"><span class="sz-main">18px</span><span class="sz-sub">lh 1.4 · ls −1px</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
-
         <tr class="row--dark">
-          <td class="td-token">Body / M</td>
-          <td class="td-name">Body Medium</td>
-          <td class="td-face">DM Sans</td>
-          <td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">16px</span><div class="sz-sub">lh 1.5 · ls 0</div></td>
+          <td class="td-token">Body / M</td><td class="td-name">Body Medium</td>
+          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">400</span></td>
+          <td class="td-size"><span class="sz-main">16px</span><span class="sz-sub">lh 1.5 · ls 0</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
-
         <tr>
-          <td class="td-token">Body / S</td>
-          <td class="td-name">Body Small</td>
-          <td class="td-face">DM Sans</td>
-          <td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">14px</span><div class="sz-sub">lh 1.5 · ls 0</div></td>
+          <td class="td-token">Body / S</td><td class="td-name">Body Small</td>
+          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">400</span></td>
+          <td class="td-size"><span class="sz-main">14px</span><span class="sz-sub">lh 1.5 · ls 0</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
 
-        <!-- LABEL GROUP -->
         <tr class="group-row"><td colspan="7">Label</td></tr>
-
         <tr class="row--dark">
-          <td class="td-token">Label / M</td>
-          <td class="td-name">Label Medium</td>
-          <td class="td-face">DM Sans</td>
-          <td class="td-size"><span class="sz-main">600 · UPP</span></td>
-          <td class="td-size"><span class="sz-main">14px</span><div class="sz-sub">lh 1.1 · ls +1px</div></td>
+          <td class="td-token">Label / M</td><td class="td-name">Label Medium</td>
+          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">600 · UPP</span></td>
+          <td class="td-size"><span class="sz-main">14px</span><span class="sz-sub">lh 1.1 · ls +1px</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
-
         <tr>
-          <td class="td-token">Label / S</td>
-          <td class="td-name">Label Small</td>
-          <td class="td-face">DM Sans</td>
-          <td class="td-size"><span class="sz-main">600 · UPP</span></td>
-          <td class="td-size"><span class="sz-main">12px</span><div class="sz-sub">lh 1.1 · ls +1px</div></td>
+          <td class="td-token">Label / S</td><td class="td-name">Label Small</td>
+          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">600 · UPP</span></td>
+          <td class="td-size"><span class="sz-main">12px</span><span class="sz-sub">lh 1.1 · ls +1px</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
 
-        <!-- STATS GROUP -->
         <tr class="group-row"><td colspan="7">Stats</td></tr>
-
         <tr class="row--dark">
-          <td class="td-token">Stats / L</td>
-          <td class="td-name">Stats Large</td>
+          <td class="td-token">Stats / L</td><td class="td-name">Stats Large</td>
           <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
           <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">80px</span><div class="sz-sub">lh 1 · ls −3px</div></td>
+          <td class="td-size"><span class="sz-main">80px</span><span class="sz-sub">lh 1 · ls −3px</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-main">56px</span><div class="sz-sub">lh 1 · ls −2px</div></td>
+          <td class="td-size"><span class="sz-main">56px</span><span class="sz-sub">lh 1 · ls −2px</span></td>
         </tr>
-
         <tr>
-          <td class="td-token">Stats / M</td>
-          <td class="td-name">Stats Medium</td>
+          <td class="td-token">Stats / M</td><td class="td-name">Stats Medium</td>
           <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
           <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">48px</span><div class="sz-sub">lh 1 · ls −2px</div></td>
+          <td class="td-size"><span class="sz-main">48px</span><span class="sz-sub">lh 1 · ls −2px</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
-
         <tr class="row--dark">
-          <td class="td-token">Stats / S</td>
-          <td class="td-name">Stats Small</td>
+          <td class="td-token">Stats / S</td><td class="td-name">Stats Small</td>
           <td class="td-face">DM Sans</td>
           <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">24px</span><div class="sz-sub">lh 1.2 · ls −1px</div></td>
+          <td class="td-size"><span class="sz-main">24px</span><span class="sz-sub">lh 1.2 · ls −1px</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
 
-        <!-- BUTTON GROUP -->
         <tr class="group-row"><td colspan="7">Button / Link</td></tr>
-
         <tr>
-          <td class="td-token">Button</td>
-          <td class="td-name">All Buttons</td>
-          <td class="td-face">DM Sans</td>
-          <td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">15px</span><div class="sz-sub">lh 1.1 · ls 0</div></td>
+          <td class="td-token">Button</td><td class="td-name">All Buttons</td>
+          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">400</span></td>
+          <td class="td-size"><span class="sz-main">15px</span><span class="sz-sub">lh 1.1 · ls 0</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
-
         <tr class="row--dark">
-          <td class="td-token">Nav Link</td>
-          <td class="td-name">Navigation</td>
-          <td class="td-face">DM Sans</td>
-          <td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">16px</span><div class="sz-sub">lh 1.1 · ls −1px</div></td>
+          <td class="td-token">Nav Link</td><td class="td-name">Navigation</td>
+          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">400</span></td>
+          <td class="td-size"><span class="sz-main">16px</span><span class="sz-sub">lh 1.1 · ls −1px</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-main">—</span></td>
         </tr>
-
         <tr>
-          <td class="td-token">Footer Link</td>
-          <td class="td-name">Footer</td>
-          <td class="td-face">DM Sans</td>
-          <td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">14px</span><div class="sz-sub">lh 1.5 · ls 0</div></td>
+          <td class="td-token">Footer Link</td><td class="td-name">Footer</td>
+          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">400</span></td>
+          <td class="td-size"><span class="sz-main">14px</span><span class="sz-sub">lh 1.5 · ls 0</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
           <td class="td-size"><span class="sz-same">Same</span></td>
         </tr>
-
       </tbody>
     </table>
+    <div style="height:60px;"></div>
+
   </div><!-- /typography -->
 
 
@@ -609,160 +948,38 @@
   <div id="colours" class="tab-panel" role="tabpanel">
     <div class="colour-page">
 
-      <!-- Neutrals -->
       <div class="colour-group">
         <p class="colour-group__title">Neutrals</p>
         <div class="colour-swatches">
-          <div class="swatch">
-            <div class="swatch__block" style="background:#0A0A0A;"></div>
-            <div>
-              <p class="swatch__name">Ink</p>
-              <p class="swatch__hex">#0A0A0A</p>
-              <p class="swatch__token">--ink</p>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch__block" style="background:#1A1A1A;"></div>
-            <div>
-              <p class="swatch__name">Ink 90</p>
-              <p class="swatch__hex">#1A1A1A</p>
-              <p class="swatch__token">--ink-90</p>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch__block" style="background:#333333;"></div>
-            <div>
-              <p class="swatch__name">Ink 70</p>
-              <p class="swatch__hex">#333333</p>
-              <p class="swatch__token">--ink-70</p>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch__block" style="background:#555555;"></div>
-            <div>
-              <p class="swatch__name">Mid</p>
-              <p class="swatch__hex">#555555</p>
-              <p class="swatch__token">--mid</p>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch__block" style="background:#888888;"></div>
-            <div>
-              <p class="swatch__name">Muted</p>
-              <p class="swatch__hex">#888888</p>
-              <p class="swatch__token">--muted</p>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch__block" style="background:#242424;"></div>
-            <div>
-              <p class="swatch__name">Border Dark</p>
-              <p class="swatch__hex">#242424</p>
-              <p class="swatch__token">--border-dk</p>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch__block" style="background:#E0E0E0;"></div>
-            <div>
-              <p class="swatch__name">Border</p>
-              <p class="swatch__hex">#E0E0E0</p>
-              <p class="swatch__token">--border</p>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch__block" style="background:#F5F5F5;"></div>
-            <div>
-              <p class="swatch__name">Surface</p>
-              <p class="swatch__hex">#F5F5F5</p>
-              <p class="swatch__token">--surface</p>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch__block" style="background:#FFFFFF; border-color: #E0E0E0;"></div>
-            <div>
-              <p class="swatch__name">White</p>
-              <p class="swatch__hex">#FFFFFF</p>
-              <p class="swatch__token">--white</p>
-            </div>
-          </div>
+          <div class="swatch"><div class="swatch__block" style="background:#0A0A0A;"></div><div><p class="swatch__name">Ink</p><p class="swatch__hex">#0A0A0A</p><p class="swatch__token">--ink</p></div></div>
+          <div class="swatch"><div class="swatch__block" style="background:#1A1A1A;"></div><div><p class="swatch__name">Ink 90</p><p class="swatch__hex">#1A1A1A</p><p class="swatch__token">--ink-90</p></div></div>
+          <div class="swatch"><div class="swatch__block" style="background:#333333;"></div><div><p class="swatch__name">Ink 70</p><p class="swatch__hex">#333333</p><p class="swatch__token">--ink-70</p></div></div>
+          <div class="swatch"><div class="swatch__block" style="background:#555555;"></div><div><p class="swatch__name">Mid</p><p class="swatch__hex">#555555</p><p class="swatch__token">--mid</p></div></div>
+          <div class="swatch"><div class="swatch__block" style="background:#888888;"></div><div><p class="swatch__name">Muted</p><p class="swatch__hex">#888888</p><p class="swatch__token">--muted</p></div></div>
+          <div class="swatch"><div class="swatch__block" style="background:#242424;"></div><div><p class="swatch__name">Border Dark</p><p class="swatch__hex">#242424</p><p class="swatch__token">--border-dk</p></div></div>
+          <div class="swatch"><div class="swatch__block" style="background:#E0E0E0;"></div><div><p class="swatch__name">Border</p><p class="swatch__hex">#E0E0E0</p><p class="swatch__token">--border</p></div></div>
+          <div class="swatch"><div class="swatch__block" style="background:#F5F5F5;"></div><div><p class="swatch__name">Surface</p><p class="swatch__hex">#F5F5F5</p><p class="swatch__token">--surface</p></div></div>
+          <div class="swatch"><div class="swatch__block" style="background:#FFFFFF;border-color:#E0E0E0;"></div><div><p class="swatch__name">White</p><p class="swatch__hex">#FFFFFF</p><p class="swatch__token">--white</p></div></div>
         </div>
       </div>
 
-      <!-- Brand Orange -->
       <div class="colour-group">
         <p class="colour-group__title">Brand — Orange</p>
         <div class="colour-swatches">
-          <div class="swatch">
-            <div class="swatch__block" style="background:#F3752C;"></div>
-            <div>
-              <p class="swatch__name">Orange 600</p>
-              <p class="swatch__hex">#F3752C</p>
-              <p class="swatch__token">--orange · Primary CTA</p>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch__block" style="background:#DA6A29;"></div>
-            <div>
-              <p class="swatch__name">Orange 700</p>
-              <p class="swatch__hex">#DA6A29</p>
-              <p class="swatch__token">--orange-dark · Hover</p>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch__block" style="background:#D8582B;"></div>
-            <div>
-              <p class="swatch__name">Orange Tab</p>
-              <p class="swatch__hex">#D8582B</p>
-              <p class="swatch__token">Tab progress bar</p>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch__block" style="background:#FEF3EC;"></div>
-            <div>
-              <p class="swatch__name">Orange Light</p>
-              <p class="swatch__hex">#FEF3EC</p>
-              <p class="swatch__token">--orange-light · Tint</p>
-            </div>
-          </div>
+          <div class="swatch"><div class="swatch__block" style="background:#F3752C;"></div><div><p class="swatch__name">Orange 600</p><p class="swatch__hex">#F3752C</p><p class="swatch__token">--orange · Primary CTA</p></div></div>
+          <div class="swatch"><div class="swatch__block" style="background:#DA6A29;"></div><div><p class="swatch__name">Orange 700</p><p class="swatch__hex">#DA6A29</p><p class="swatch__token">--orange-dark · Hover</p></div></div>
+          <div class="swatch"><div class="swatch__block" style="background:#D8582B;"></div><div><p class="swatch__name">Orange Tab</p><p class="swatch__hex">#D8582B</p><p class="swatch__token">Tab progress bar</p></div></div>
+          <div class="swatch"><div class="swatch__block" style="background:#FEF3EC;"></div><div><p class="swatch__name">Orange Light</p><p class="swatch__hex">#FEF3EC</p><p class="swatch__token">--orange-light · Tint</p></div></div>
         </div>
       </div>
 
-      <!-- Brand Green -->
       <div class="colour-group">
         <p class="colour-group__title">Brand — Green</p>
         <div class="colour-swatches">
-          <div class="swatch">
-            <div class="swatch__block" style="background:#003727;"></div>
-            <div>
-              <p class="swatch__name">Green Deep</p>
-              <p class="swatch__hex">#003727</p>
-              <p class="swatch__token">Community bg</p>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch__block" style="background:#00B784;"></div>
-            <div>
-              <p class="swatch__name">Green Primary</p>
-              <p class="swatch__hex">#00B784</p>
-              <p class="swatch__token">Stat hover glow</p>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch__block" style="background:#15803d;"></div>
-            <div>
-              <p class="swatch__name">Green 700</p>
-              <p class="swatch__hex">#15803d</p>
-              <p class="swatch__token">Stat number hover</p>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch__block" style="background:#22c55e;"></div>
-            <div>
-              <p class="swatch__name">Green 500</p>
-              <p class="swatch__hex">#22c55e</p>
-              <p class="swatch__token">Community title hover</p>
-            </div>
-          </div>
+          <div class="swatch"><div class="swatch__block" style="background:#003727;"></div><div><p class="swatch__name">Green Deep</p><p class="swatch__hex">#003727</p><p class="swatch__token">Community bg</p></div></div>
+          <div class="swatch"><div class="swatch__block" style="background:#00B784;"></div><div><p class="swatch__name">Green Primary</p><p class="swatch__hex">#00B784</p><p class="swatch__token">Stat hover glow</p></div></div>
+          <div class="swatch"><div class="swatch__block" style="background:#15803d;"></div><div><p class="swatch__name">Green 700</p><p class="swatch__hex">#15803d</p><p class="swatch__token">Stat number hover</p></div></div>
+          <div class="swatch"><div class="swatch__block" style="background:#22c55e;"></div><div><p class="swatch__name">Green 500</p><p class="swatch__hex">#22c55e</p><p class="swatch__token">Community title hover</p></div></div>
         </div>
       </div>
 
@@ -776,64 +993,31 @@
   <div id="ui-elements" class="tab-panel" role="tabpanel">
     <div class="ui-page">
 
-      <!-- Primary Buttons — Light bg -->
       <div class="ui-group">
         <p class="ui-group__title">Primary Buttons — Light Background</p>
         <div class="ui-row">
-          <div class="btn-wrap">
-            <span class="btn-label">Orange (Primary CTA)</span>
-            <div class="btn btn--orange"><span class="dot"></span> Let's connect <span class="arrow">→</span></div>
-          </div>
-          <div class="btn-wrap">
-            <span class="btn-label">Dark (Primary)</span>
-            <div class="btn btn--dark"><span class="dot"></span> Explore Services <span class="dot"></span></div>
-          </div>
-          <div class="btn-wrap">
-            <span class="btn-label">Outline (Secondary)</span>
-            <div class="btn btn--outline"><span class="dot"></span> Our Full Story <span class="dot"></span></div>
-          </div>
-          <div class="btn-wrap">
-            <span class="btn-label">Tertiary / Link</span>
-            <div class="link-btn"><span class="dot"></span> Read More <span class="link-btn__arrow"></span></div>
-          </div>
+          <div class="btn-wrap"><span class="btn-label">Orange (Primary CTA)</span><div class="btn btn--orange"><span class="dot"></span> Let's connect <span style="font-size:15px;">→</span></div></div>
+          <div class="btn-wrap"><span class="btn-label">Dark (Primary)</span><div class="btn btn--dark"><span class="dot"></span> Explore Services <span class="dot"></span></div></div>
+          <div class="btn-wrap"><span class="btn-label">Outline (Secondary)</span><div class="btn btn--outline"><span class="dot"></span> Our Full Story <span class="dot"></span></div></div>
+          <div class="btn-wrap"><span class="btn-label">Tertiary / Link</span><div class="link-btn"><span class="dot"></span> Read More <span class="link-btn__arrow"></span></div></div>
         </div>
       </div>
 
-      <!-- Inverse Buttons — Dark bg -->
       <div class="ui-group">
         <p class="ui-group__title">Inverse Buttons — Dark Background</p>
         <div class="ui-canvas ui-canvas--dark">
-          <div class="btn-wrap">
-            <span class="btn-label btn-label--inv">Orange (Primary CTA)</span>
-            <div class="btn btn--orange"><span class="dot"></span> Let's connect <span class="arrow">→</span></div>
-          </div>
-          <div class="btn-wrap">
-            <span class="btn-label btn-label--inv">White (Primary Inv.)</span>
-            <div class="btn btn--white"><span class="dot"></span> Explore Services <span class="dot"></span></div>
-          </div>
-          <div class="btn-wrap">
-            <span class="btn-label btn-label--inv">Ghost (Secondary Inv.)</span>
-            <div class="btn btn--ghost"><span class="dot"></span> About Feuji <span class="dot"></span></div>
-          </div>
-          <div class="btn-wrap">
-            <span class="btn-label btn-label--inv">Tertiary / Link</span>
-            <div class="link-btn link-btn--inv"><span class="dot"></span> Learn More <span class="link-btn__arrow"></span></div>
-          </div>
+          <div class="btn-wrap"><span class="btn-label btn-label--inv">Orange (Primary CTA)</span><div class="btn btn--orange"><span class="dot"></span> Let's connect <span style="font-size:15px;">→</span></div></div>
+          <div class="btn-wrap"><span class="btn-label btn-label--inv">White (Primary Inv.)</span><div class="btn btn--white"><span class="dot"></span> Explore Services <span class="dot"></span></div></div>
+          <div class="btn-wrap"><span class="btn-label btn-label--inv">Ghost (Secondary Inv.)</span><div class="btn btn--ghost"><span class="dot"></span> About Feuji <span class="dot"></span></div></div>
+          <div class="btn-wrap"><span class="btn-label btn-label--inv">Tertiary / Link</span><div class="link-btn link-btn--inv"><span class="dot"></span> Learn More <span class="link-btn__arrow"></span></div></div>
         </div>
       </div>
 
-      <!-- Community / Green bg -->
       <div class="ui-group">
         <p class="ui-group__title">Buttons — Green Background (Community)</p>
         <div class="ui-canvas ui-canvas--green">
-          <div class="btn-wrap">
-            <span class="btn-label btn-label--green">Ghost (Secondary Inv.)</span>
-            <div class="btn btn--ghost-green"><span class="dot"></span> Learn more <span class="arrow">→</span></div>
-          </div>
-          <div class="btn-wrap">
-            <span class="btn-label btn-label--green">Tertiary / Link</span>
-            <div class="link-btn link-btn--inv"><span class="dot"></span> Learn More <span class="link-btn__arrow"></span></div>
-          </div>
+          <div class="btn-wrap"><span class="btn-label btn-label--green">Ghost (Secondary Inv.)</span><div class="btn btn--ghost"><span class="dot"></span> Learn more <span style="font-size:15px;">→</span></div></div>
+          <div class="btn-wrap"><span class="btn-label btn-label--green">Tertiary / Link</span><div class="link-btn link-btn--inv"><span class="dot"></span> Learn More <span class="link-btn__arrow"></span></div></div>
         </div>
       </div>
 
@@ -844,12 +1028,10 @@
   <script>
     const tabs   = document.querySelectorAll('.tab-btn');
     const panels = document.querySelectorAll('.tab-panel');
-
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
         tabs.forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected','false'); });
         panels.forEach(p => p.classList.remove('is-active'));
-
         tab.classList.add('is-active');
         tab.setAttribute('aria-selected','true');
         document.getElementById(tab.dataset.panel).classList.add('is-active');
