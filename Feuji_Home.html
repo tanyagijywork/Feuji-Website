@@ -1889,11 +1889,11 @@
       .comm-card__body  { font-size: 16px; line-height: 22px; }
     }
 
-    /* Short viewport guard — any screen width with limited height */
-    @media (max-height: 780px) and (min-width: 641px) {
-      .comm-card:nth-child(2) { margin-top: 32px; }
-      .comm-card:nth-child(3) { margin-top: 64px; }
-      .comm-cards { gap: 32px; }
+    /* Short viewport — zero stagger so all three cards are fully visible */
+    @media (max-height: 700px) and (min-width: 641px) {
+      .comm-card:nth-child(1),
+      .comm-card:nth-child(2),
+      .comm-card:nth-child(3) { margin-top: 0; }
     }
     @media (max-width: 640px) {
       .hero__headline {
