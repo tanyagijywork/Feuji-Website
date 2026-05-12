@@ -326,6 +326,60 @@
     .type-table .group-row td:first-child { padding-left: var(--pad-h); }
 
     /* ─────────────────────────────────────────
+       RESPONSIVE SCALE TABLE v2
+    ───────────────────────────────────────── */
+    .resp-scale-wrap { margin-top: 8px; overflow-x: auto; }
+    .resp-scale { width: 100%; border-collapse: collapse; font-family: var(--f-ui); }
+    /* Colgroup tints — cells inherit these when no td background is set */
+    .col-desk { background: #BAE0CA; }
+    .col-tab  { background: #C4C0EC; }
+    .col-mob  { background: #F6CBAA; }
+    /* Breakpoint group header row */
+    .resp-scale .bp-head {
+      font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      padding: 10px 20px; text-align: center; color: rgba(0,0,0,0.75);
+      border-bottom: 1px solid rgba(0,0,0,0.14);
+    }
+    .resp-scale .bp-head--desk { background: #89C9A6; }
+    .resp-scale .bp-head--tab  { background: #968FD4; color: rgba(255,255,255,0.9); }
+    .resp-scale .bp-head--mob  { background: #E8A97E; }
+    .resp-scale .bp-head-token { background: #fff; border-bottom: 1px solid rgba(0,0,0,0.14); }
+    /* Sub-column header row (SIZE / LINE HEIGHT / TRACKING) */
+    .resp-scale .sub-head {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase;
+      padding: 8px 20px; text-align: right; white-space: nowrap;
+      border-bottom: 2px solid rgba(0,0,0,0.18);
+    }
+    .resp-scale .sub-head--desk { background: #A0D2B8; color: rgba(0,0,0,0.6); }
+    .resp-scale .sub-head--tab  { background: #AFAAE2; color: rgba(255,255,255,0.85); }
+    .resp-scale .sub-head--mob  { background: #EDB98E; color: rgba(0,0,0,0.65); }
+    .resp-scale .sub-head-token {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase;
+      padding: 8px var(--pad-h); text-align: left; color: var(--muted);
+      background: #fff; border-bottom: 2px solid rgba(0,0,0,0.18);
+    }
+    /* Category section rows */
+    .resp-scale .cat-row td {
+      background: #0A0A0A !important;
+      color: rgba(255,255,255,0.45);
+      font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 9px var(--pad-h); border: none;
+    }
+    /* Token column */
+    .resp-scale td.td-tok {
+      background: #fff; padding: 14px var(--pad-h);
+      font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap;
+      border-right: 1px solid #E0E0E0; border-bottom: 1px solid #EBEBEB;
+    }
+    /* Number value cells — no background set so colgroup shows through */
+    .resp-scale td.td-n {
+      padding: 13px 20px; font-size: 13px; font-variant-numeric: tabular-nums;
+      color: rgba(0,0,0,0.8); text-align: right;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .resp-scale td.td-n.zero { color: rgba(0,0,0,0.3); }
+
+    /* ─────────────────────────────────────────
        COLOUR PALETTE
     ───────────────────────────────────────── */
     .colour-page { padding: 48px var(--pad-h) 80px; }
@@ -760,183 +814,178 @@
 
     <!-- ══ RESPONSIVE SCALE TABLE ══ -->
     <p class="table-label" style="padding-top:40px;padding-bottom:20px;">Responsive Scale</p>
-    <table class="type-table">
+    <div class="resp-scale-wrap">
+    <table class="resp-scale">
+      <colgroup>
+        <col class="col-token"><!-- TOKEN -->
+        <col class="col-desk"><col class="col-desk"><col class="col-desk"><!-- Desktop -->
+        <col class="col-tab"><col class="col-tab"><col class="col-tab"><!-- Tablet -->
+        <col class="col-mob"><col class="col-mob"><col class="col-mob"><!-- Mobile -->
+      </colgroup>
       <thead>
+        <!-- Row 1: breakpoint group labels -->
         <tr>
-          <th>Token</th>
-          <th>Style</th>
-          <th>Typeface</th>
-          <th>Weight</th>
-          <th>Desktop</th>
-          <th>Tablet ≤ 1024px</th>
-          <th>Mobile ≤ 768px</th>
+          <th class="bp-head-token" rowspan="2"></th>
+          <th class="bp-head bp-head--desk" colspan="3">Desktop · 1440px</th>
+          <th class="bp-head bp-head--tab"  colspan="3">Tablet · 768px</th>
+          <th class="bp-head bp-head--mob"  colspan="3">Mobile · 375px</th>
+        </tr>
+        <!-- Row 2: sub-column labels -->
+        <tr>
+          <th class="sub-head sub-head--desk">Size</th>
+          <th class="sub-head sub-head--desk">Line Height</th>
+          <th class="sub-head sub-head--desk">Tracking</th>
+          <th class="sub-head sub-head--tab">Size</th>
+          <th class="sub-head sub-head--tab">Line Height</th>
+          <th class="sub-head sub-head--tab">Tracking</th>
+          <th class="sub-head sub-head--mob">Size</th>
+          <th class="sub-head sub-head--mob">Line Height</th>
+          <th class="sub-head sub-head--mob">Tracking</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="group-row"><td colspan="7">Display</td></tr>
-        <tr class="row--dark">
-          <td class="td-token">Display / L</td><td class="td-name">Display Large</td>
-          <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
-          <td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">120px</span><span class="sz-sub">lh 1 · ls −6px</span></td>
-          <td class="td-size"><span class="sz-main">80px</span><span class="sz-sub">lh 1 · ls −4px</span></td>
-          <td class="td-size"><span class="sz-main">52px</span><span class="sz-sub">lh 54px · ls −2px</span></td>
+
+        <!-- ── DISPLAY ── -->
+        <tr class="cat-row"><td colspan="10">Display</td></tr>
+        <tr>
+          <td class="td-tok">Display / L</td>
+          <td class="td-n">120</td><td class="td-n">120px</td><td class="td-n">−6px</td>
+          <td class="td-n">80</td><td class="td-n">80px</td><td class="td-n">−4px</td>
+          <td class="td-n">56</td><td class="td-n">56px</td><td class="td-n">−2px</td>
         </tr>
         <tr>
-          <td class="td-token">Display / M</td><td class="td-name">Display Medium</td>
-          <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
-          <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">72px</span><span class="sz-sub">lh 1 · ls −3px</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
+          <td class="td-tok">Display / M</td>
+          <td class="td-n">72</td><td class="td-n">72px</td><td class="td-n">−3px</td>
+          <td class="td-n">56</td><td class="td-n">56px</td><td class="td-n">−2px</td>
+          <td class="td-n">40</td><td class="td-n">40px</td><td class="td-n">−2px</td>
         </tr>
-        <tr class="row--dark">
-          <td class="td-token">Display / Quote</td><td class="td-name">Quote</td>
-          <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
-          <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">48px</span><span class="sz-sub">lh 1 · ls −2px</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
+        <tr>
+          <td class="td-tok">Display / Quote</td>
+          <td class="td-n">48</td><td class="td-n">48px</td><td class="td-n">−2px</td>
+          <td class="td-n">40</td><td class="td-n">44px</td><td class="td-n">−2px</td>
+          <td class="td-n">32</td><td class="td-n">38px</td><td class="td-n">−1px</td>
         </tr>
 
-        <tr class="group-row"><td colspan="7">Heading</td></tr>
+        <!-- ── HEADING ── -->
+        <tr class="cat-row"><td colspan="10">Heading</td></tr>
         <tr>
-          <td class="td-token">Heading / 1</td><td class="td-name">H1</td>
-          <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
-          <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">72px</span><span class="sz-sub">lh 1 · ls −3px</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-        </tr>
-        <tr class="row--dark">
-          <td class="td-token">Heading / 2</td><td class="td-name">H2</td>
-          <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
-          <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">64px</span><span class="sz-sub">lh 1 · ls −3px</span></td>
-          <td class="td-size"><span class="sz-main">40px</span><span class="sz-sub">lh 42px · ls −2px</span></td>
-          <td class="td-size"><span class="sz-main">36px</span><span class="sz-sub">lh 40px · ls −1.5px</span></td>
+          <td class="td-tok">Heading / 1</td>
+          <td class="td-n">72</td><td class="td-n">72px</td><td class="td-n">−3px</td>
+          <td class="td-n">56</td><td class="td-n">56px</td><td class="td-n">−2px</td>
+          <td class="td-n">40</td><td class="td-n">40px</td><td class="td-n">−2px</td>
         </tr>
         <tr>
-          <td class="td-token">Heading / 3</td><td class="td-name">H3</td>
-          <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
-          <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">40px</span><span class="sz-sub">lh 1 · ls −2px</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-        </tr>
-        <tr class="row--dark">
-          <td class="td-token">Heading / 4</td><td class="td-name">H4</td>
-          <td class="td-face">DM Sans</td>
-          <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">32px</span><span class="sz-sub">lh 1.1 · ls −1px</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
+          <td class="td-tok">Heading / 2</td>
+          <td class="td-n">64</td><td class="td-n">64px</td><td class="td-n">−3px</td>
+          <td class="td-n">48</td><td class="td-n">48px</td><td class="td-n">−2px</td>
+          <td class="td-n">36</td><td class="td-n">36px</td><td class="td-n">−1px</td>
         </tr>
         <tr>
-          <td class="td-token">Heading / 5</td><td class="td-name">H5</td>
-          <td class="td-face">DM Sans</td>
-          <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">24px</span><span class="sz-sub">lh 1.2 · ls −1px</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
+          <td class="td-tok">Heading / 3</td>
+          <td class="td-n">40</td><td class="td-n">40px</td><td class="td-n">−2px</td>
+          <td class="td-n">32</td><td class="td-n">32px</td><td class="td-n">−1px</td>
+          <td class="td-n">28</td><td class="td-n">28px</td><td class="td-n">−1px</td>
+        </tr>
+        <tr>
+          <td class="td-tok">Heading / 4</td>
+          <td class="td-n">32</td><td class="td-n">35px</td><td class="td-n">−1px</td>
+          <td class="td-n">28</td><td class="td-n">31px</td><td class="td-n">−1px</td>
+          <td class="td-n">24</td><td class="td-n">26px</td><td class="td-n">−1px</td>
+        </tr>
+        <tr>
+          <td class="td-tok">Heading / 5</td>
+          <td class="td-n">24</td><td class="td-n">29px</td><td class="td-n">−1px</td>
+          <td class="td-n">20</td><td class="td-n">24px</td><td class="td-n">−1px</td>
+          <td class="td-n">18</td><td class="td-n">22px</td><td class="td-n">−1px</td>
         </tr>
 
-        <tr class="group-row"><td colspan="7">Body</td></tr>
-        <tr class="row--dark">
-          <td class="td-token">Body / XL</td><td class="td-name">Body XL</td>
-          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">20px</span><span class="sz-sub">lh 1.4 · ls −1px</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
+        <!-- ── BODY ── -->
+        <tr class="cat-row"><td colspan="10">Body</td></tr>
+        <tr>
+          <td class="td-tok">Body / XL</td>
+          <td class="td-n">20</td><td class="td-n">28px</td><td class="td-n">−1px</td>
+          <td class="td-n">18</td><td class="td-n">25px</td><td class="td-n">−1px</td>
+          <td class="td-n">16</td><td class="td-n">24px</td><td class="td-n zero">0</td>
         </tr>
         <tr>
-          <td class="td-token">Body / L</td><td class="td-name">Body Large</td>
-          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">18px</span><span class="sz-sub">lh 1.4 · ls −1px</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-        </tr>
-        <tr class="row--dark">
-          <td class="td-token">Body / M</td><td class="td-name">Body Medium</td>
-          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">16px</span><span class="sz-sub">lh 1.5 · ls 0</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
+          <td class="td-tok">Body / L</td>
+          <td class="td-n">18</td><td class="td-n">25px</td><td class="td-n">−1px</td>
+          <td class="td-n">16</td><td class="td-n">24px</td><td class="td-n zero">0</td>
+          <td class="td-n">16</td><td class="td-n">24px</td><td class="td-n zero">0</td>
         </tr>
         <tr>
-          <td class="td-token">Body / S</td><td class="td-name">Body Small</td>
-          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">14px</span><span class="sz-sub">lh 1.5 · ls 0</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
+          <td class="td-tok">Body / M</td>
+          <td class="td-n">16</td><td class="td-n">24px</td><td class="td-n zero">0</td>
+          <td class="td-n">16</td><td class="td-n">24px</td><td class="td-n zero">0</td>
+          <td class="td-n">16</td><td class="td-n">24px</td><td class="td-n zero">0</td>
+        </tr>
+        <tr>
+          <td class="td-tok">Body / S</td>
+          <td class="td-n">14</td><td class="td-n">21px</td><td class="td-n zero">0</td>
+          <td class="td-n">14</td><td class="td-n">21px</td><td class="td-n zero">0</td>
+          <td class="td-n">13</td><td class="td-n">20px</td><td class="td-n zero">0</td>
         </tr>
 
-        <tr class="group-row"><td colspan="7">Label</td></tr>
-        <tr class="row--dark">
-          <td class="td-token">Label / M</td><td class="td-name">Label Medium</td>
-          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">600 · UPP</span></td>
-          <td class="td-size"><span class="sz-main">14px</span><span class="sz-sub">lh 1.1 · ls +1px</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
+        <!-- ── LABEL ── -->
+        <tr class="cat-row"><td colspan="10">Label</td></tr>
+        <tr>
+          <td class="td-tok">Label / M</td>
+          <td class="td-n">14</td><td class="td-n">15px</td><td class="td-n">+1px</td>
+          <td class="td-n">13</td><td class="td-n">14px</td><td class="td-n">+1px</td>
+          <td class="td-n">12</td><td class="td-n">13px</td><td class="td-n">+1px</td>
         </tr>
         <tr>
-          <td class="td-token">Label / S</td><td class="td-name">Label Small</td>
-          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">600 · UPP</span></td>
-          <td class="td-size"><span class="sz-main">12px</span><span class="sz-sub">lh 1.1 · ls +1px</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
+          <td class="td-tok">Label / S</td>
+          <td class="td-n">12</td><td class="td-n">13px</td><td class="td-n">+1px</td>
+          <td class="td-n">12</td><td class="td-n">13px</td><td class="td-n">+1px</td>
+          <td class="td-n">11</td><td class="td-n">12px</td><td class="td-n">+1px</td>
         </tr>
 
-        <tr class="group-row"><td colspan="7">Stats</td></tr>
-        <tr class="row--dark">
-          <td class="td-token">Stats / L</td><td class="td-name">Stats Large</td>
-          <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
-          <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">80px</span><span class="sz-sub">lh 1 · ls −3px</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-main">56px</span><span class="sz-sub">lh 1 · ls −2px</span></td>
+        <!-- ── STATS ── -->
+        <tr class="cat-row"><td colspan="10">Stats</td></tr>
+        <tr>
+          <td class="td-tok">Stats / L</td>
+          <td class="td-n">80</td><td class="td-n">80px</td><td class="td-n">−3px</td>
+          <td class="td-n">56</td><td class="td-n">56px</td><td class="td-n">−2px</td>
+          <td class="td-n">40</td><td class="td-n">40px</td><td class="td-n">−2px</td>
         </tr>
         <tr>
-          <td class="td-token">Stats / M</td><td class="td-name">Stats Medium</td>
-          <td class="td-face"><span class="face-cormorant">Cormorant Garamond</span></td>
-          <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">48px</span><span class="sz-sub">lh 1 · ls −2px</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
+          <td class="td-tok">Stats / M</td>
+          <td class="td-n">48</td><td class="td-n">48px</td><td class="td-n">−2px</td>
+          <td class="td-n">40</td><td class="td-n">40px</td><td class="td-n">−2px</td>
+          <td class="td-n">32</td><td class="td-n">32px</td><td class="td-n">−1px</td>
         </tr>
-        <tr class="row--dark">
-          <td class="td-token">Stats / S</td><td class="td-name">Stats Small</td>
-          <td class="td-face">DM Sans</td>
-          <td class="td-size"><span class="sz-main">500</span></td>
-          <td class="td-size"><span class="sz-main">24px</span><span class="sz-sub">lh 1.2 · ls −1px</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
+        <tr>
+          <td class="td-tok">Stats / S</td>
+          <td class="td-n">24</td><td class="td-n">29px</td><td class="td-n">−1px</td>
+          <td class="td-n">20</td><td class="td-n">24px</td><td class="td-n">−1px</td>
+          <td class="td-n">18</td><td class="td-n">22px</td><td class="td-n">−1px</td>
         </tr>
 
-        <tr class="group-row"><td colspan="7">Button / Link</td></tr>
+        <!-- ── BUTTON / LINK ── -->
+        <tr class="cat-row"><td colspan="10">Button / Link</td></tr>
         <tr>
-          <td class="td-token">Button</td><td class="td-name">All Buttons</td>
-          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">15px</span><span class="sz-sub">lh 1.1 · ls 0</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-        </tr>
-        <tr class="row--dark">
-          <td class="td-token">Nav Link</td><td class="td-name">Navigation</td>
-          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">16px</span><span class="sz-sub">lh 1.1 · ls −1px</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-main">—</span></td>
+          <td class="td-tok">Button / Primary</td>
+          <td class="td-n">16</td><td class="td-n">18px</td><td class="td-n zero">0</td>
+          <td class="td-n">16</td><td class="td-n">18px</td><td class="td-n zero">0</td>
+          <td class="td-n">16</td><td class="td-n">18px</td><td class="td-n zero">0</td>
         </tr>
         <tr>
-          <td class="td-token">Footer Link</td><td class="td-name">Footer</td>
-          <td class="td-face">DM Sans</td><td class="td-size"><span class="sz-main">400</span></td>
-          <td class="td-size"><span class="sz-main">14px</span><span class="sz-sub">lh 1.5 · ls 0</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
-          <td class="td-size"><span class="sz-same">Same</span></td>
+          <td class="td-tok">Nav Link</td>
+          <td class="td-n">16</td><td class="td-n">18px</td><td class="td-n">−1px</td>
+          <td class="td-n">16</td><td class="td-n">18px</td><td class="td-n">−1px</td>
+          <td class="td-n">16</td><td class="td-n">18px</td><td class="td-n">−1px</td>
         </tr>
+        <tr>
+          <td class="td-tok">Footer Link</td>
+          <td class="td-n">14</td><td class="td-n">21px</td><td class="td-n zero">0</td>
+          <td class="td-n">14</td><td class="td-n">21px</td><td class="td-n zero">0</td>
+          <td class="td-n">14</td><td class="td-n">21px</td><td class="td-n zero">0</td>
+        </tr>
+
       </tbody>
     </table>
+    </div><!-- /resp-scale-wrap -->
     <div style="height:60px;"></div>
 
   </div><!-- /typography -->
