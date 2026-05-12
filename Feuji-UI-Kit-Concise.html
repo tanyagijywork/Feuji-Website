@@ -39,23 +39,26 @@
     ───────────────────────────────────────── */
     .pg-header {
       height: 400px;
-      padding: 52px var(--pad-h) 40px;
-      border-bottom: 1px solid var(--divider);
+      padding: 52px var(--pad-h) 0;
+      background: var(--orange);
+      border-bottom: none;
       display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 24px;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
       box-sizing: border-box;
+      overflow: hidden;
     }
     .pg-header__eyebrow {
       font-size: 11px; font-weight: 700;
       letter-spacing: 1px; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 10px;
+      color: rgba(255,255,255,0.7); margin-bottom: 16px;
     }
     .pg-header__title {
       font-family: var(--f-display);
-      font-size: 44px; font-weight: 500;
-      line-height: 1; letter-spacing: -2px;
+      font-size: 160px; font-weight: 500;
+      line-height: 0.88; letter-spacing: -6px;
+      color: #fff;
     }
     .pg-header__title em { font-style: italic; }
     .pg-header__fonts {
