@@ -519,7 +519,7 @@
     .bento {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 280px 200px 260px 180px;
+      grid-template-rows: 280px 200px 260px 180px 260px;
       gap: 14px;
     }
     .bcard { border-radius: 20px; overflow: hidden; position: relative; }
@@ -716,6 +716,37 @@
       width: 1px; align-self: stretch; background: rgba(0,0,0,0.1);
     }
 
+    /* ── Media collage card ── */
+    .bcard--collage { grid-column: 1 / 4; grid-row: 5; }
+    .collage-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 160px 100px;
+      gap: 3px;
+      background: #111;
+      height: 100%;
+      width: 100%;
+    }
+    .collage-cell { overflow: hidden; position: relative; background: #1a1a1a; }
+    .collage-cell img,
+    .collage-cell video {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
+    }
+    /* hero video spans 2 rows on left */
+    .collage-cell--hero { grid-column: 1; grid-row: 1 / 3; }
+    /* last cell of row 2 spans 2 cols */
+    .collage-cell--wide  { grid-column: 4 / 6; grid-row: 2; }
+    .collage-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
+      padding: 18px 22px 16px;
+      font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      pointer-events: none;
+    }
+
   </style>
 </head>
 <body>
@@ -832,6 +863,62 @@
             <p class="tf-label">Secondary Typeface</p>
             <p class="tf-name">DM Sans</p>
             <p class="tf-sample--ui">Engineering<br>outcomes.</p>
+          </div>
+        </div>
+
+        <!-- MEDIA COLLAGE — full width, row 5 -->
+        <div class="bcard bcard--collage">
+          <div class="collage-grid">
+
+            <!-- Hero banner video — spans 2 rows, left side -->
+            <div class="collage-cell collage-cell--hero">
+              <video autoplay muted loop playsinline>
+                <source src="Assets/images/banner-video.mp4" type="video/mp4">
+              </video>
+            </div>
+
+            <!-- Row 1, col 2: About / team video -->
+            <div class="collage-cell">
+              <video autoplay muted loop playsinline>
+                <source src="Assets/images/hf_20260303_071415_7a7d4099-8c41-47e9-b050-3c4aae423622.mp4" type="video/mp4">
+              </video>
+            </div>
+
+            <!-- Row 1, col 3: Services — Consulting -->
+            <div class="collage-cell">
+              <img src="Assets/images/home-services-v002/Consulting.png" alt="Consulting" />
+            </div>
+
+            <!-- Row 1, col 4: AI engineering video -->
+            <div class="collage-cell">
+              <video autoplay muted loop playsinline>
+                <source src="Assets/images/ai-engineering/gettyimages-2188313395-640_adpp.mp4" type="video/mp4">
+              </video>
+            </div>
+
+            <!-- Row 1, col 5: Services — Cybersecurity -->
+            <div class="collage-cell">
+              <img src="Assets/images/home-services-v002/Cybersecurity.png" alt="Cybersecurity" />
+            </div>
+
+            <!-- Row 2, col 2: Services — Digital Engineering -->
+            <div class="collage-cell">
+              <img src="Assets/images/home-services-v002/Digital-Engineering.png" alt="Digital Engineering" />
+            </div>
+
+            <!-- Row 2, col 3: AI engineering video 2 -->
+            <div class="collage-cell">
+              <video autoplay muted loop playsinline>
+                <source src="Assets/images/ai-engineering/gettyimages-2151855243-640_adpp.mp4" type="video/mp4">
+              </video>
+            </div>
+
+            <!-- Row 2, cols 4–5: Connect / atmospheric image -->
+            <div class="collage-cell collage-cell--wide">
+              <img src="Assets/images/3-AdobeStock_1715180662.png" alt="Connect" />
+              <div class="collage-overlay">Visual Assets · Homepage</div>
+            </div>
+
           </div>
         </div>
 
