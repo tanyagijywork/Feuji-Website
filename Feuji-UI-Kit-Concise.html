@@ -576,8 +576,9 @@
     /* ── Mood card ── */
     .bcard--mood {
       background: linear-gradient(160deg, #FEF0E4 0%, #EBF6F1 45%, #F0EDE8 75%, #FEF3EC 100%);
-      display: flex; flex-direction: column; justify-content: flex-end;
+      display: flex; flex-direction: column; justify-content: flex-start;
       padding: 36px;
+      gap: 0;
     }
     .bcard--mood::before {
       content: '';
@@ -613,6 +614,13 @@
       line-height: 1.05; letter-spacing: -1.5px; color: var(--ink);
     }
     .mood-words em { font-style: italic; color: var(--orange); }
+    .mood-icons {
+      display: flex; gap: 16px; margin-top: 24px;
+    }
+    .mood-icon {
+      width: 40px; height: 40px; opacity: 0.55;
+    }
+    .mood-icon img { width: 100%; height: 100%; object-fit: contain; }
 
     /* ── Flow quote card ── */
     .bcard--flow {
@@ -814,6 +822,11 @@
           <div class="mood-orb mood-orb--3"></div>
           <p class="mood-label">Visual Language</p>
           <p class="mood-words">Calm.<br><em>Intelligent.</em><br>Grounded.</p>
+          <div class="mood-icons">
+            <div class="mood-icon"><img src="Assets/icons/icon-smart-village.svg" alt="Smart Village" /></div>
+            <div class="mood-icon"><img src="Assets/icons/icon-education.svg" alt="Education" /></div>
+            <div class="mood-icon"><img src="Assets/icons/icon-sustainability.svg" alt="Sustainability" /></div>
+          </div>
         </div>
 
         <!-- WORK IN FLOW -->
@@ -913,8 +926,13 @@
               </video>
             </div>
 
-            <!-- Row 2, cols 4–5: Connect / atmospheric image -->
-            <div class="collage-cell collage-cell--wide">
+            <!-- Row 2, col 4: Mt Fuji illustrated -->
+            <div class="collage-cell">
+              <img src="Assets/images/Firefly_Gemini-Flash-mountain.png" alt="Mt Fuji" />
+            </div>
+
+            <!-- Row 2, col 5: Connect / atmospheric image -->
+            <div class="collage-cell">
               <img src="Assets/images/3-AdobeStock_1715180662.png" alt="Connect" />
               <div class="collage-overlay">Visual Assets · Homepage</div>
             </div>
