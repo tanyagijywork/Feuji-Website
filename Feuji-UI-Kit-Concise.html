@@ -410,31 +410,34 @@
       margin-bottom: 28px; max-width: 780px;
     }
 
-    /* Three-column panel */
+    /* Four-column panel */
     .btn-split {
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
       border-radius: 16px; overflow: hidden;
     }
-    .btn-panel { padding: 44px 48px; }
-    .btn-panel--light { background: #F0F0F0; }
-    .btn-panel--dark  { background: #0A0A0A; }
-    .btn-panel--green { background: #003727; }
+    .btn-panel { padding: 40px 36px; }
+    .btn-panel--light  { background: #F0F0F0; }
+    .btn-panel--dark   { background: #0A0A0A; }
+    .btn-panel--green  { background: #003727; }
+    .btn-panel--orange { background: #F3752C; }
     .btn-panel__label {
       font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
-      color: rgba(0,0,0,0.35); margin-bottom: 36px;
+      color: rgba(0,0,0,0.4); margin-bottom: 36px;
     }
-    .btn-panel--dark .btn-panel__label,
-    .btn-panel--green .btn-panel__label { color: rgba(255,255,255,0.3); }
+    .btn-panel--dark .btn-panel__label   { color: rgba(255,255,255,0.45); }
+    .btn-panel--green .btn-panel__label  { color: rgba(255,255,255,0.55); }
+    .btn-panel--orange .btn-panel__label { color: rgba(255,255,255,0.7); }
 
     /* Tier rows */
     .btn-tier { margin-bottom: 32px; }
     .btn-tier:last-child { margin-bottom: 0; }
     .btn-tier__row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 10px; }
     .btn-tier__desc {
-      font-size: 11px; color: rgba(0,0,0,0.38); letter-spacing: 0;
+      font-size: 11px; color: rgba(0,0,0,0.45); letter-spacing: 0;
     }
-    .btn-panel--dark .btn-tier__desc,
-    .btn-panel__green .btn-tier__desc { color: rgba(255,255,255,0.28); }
+    .btn-panel--dark .btn-tier__desc   { color: rgba(255,255,255,0.5); }
+    .btn-panel--green .btn-tier__desc  { color: rgba(255,255,255,0.6); }
+    .btn-panel--orange .btn-tier__desc { color: rgba(255,255,255,0.75); }
 
     /* ── BUTTON BASE ── */
     .btn {
@@ -1081,9 +1084,9 @@
 
           <div class="btn-tier">
             <div class="btn-tier__row">
-              <button class="btn btn--primary-orange">Let's connect <span class="btn-arrow">→</span></button>
+              <button class="btn btn--primary-inv">Let's connect <span class="btn-arrow">→</span></button>
             </div>
-            <p class="btn-tier__desc">Primary · Orange fill · white text</p>
+            <p class="btn-tier__desc">Primary · White fill · dark text</p>
           </div>
 
           <div class="btn-tier">
@@ -1097,7 +1100,33 @@
             <div class="btn-tier__row">
               <button class="btn--tertiary-inv">Learn more <span class="btn-arrow">→</span></button>
             </div>
-            <p class="btn-tier__desc">Tertiary · Dim text + arrow · slides right on hover</p>
+            <p class="btn-tier__desc">Tertiary · White text + arrow · slides right on hover</p>
+          </div>
+        </div>
+
+        <!-- ORANGE BACKGROUND -->
+        <div class="btn-panel btn-panel--orange">
+          <p class="btn-panel__label">Orange Background</p>
+
+          <div class="btn-tier">
+            <div class="btn-tier__row">
+              <button class="btn btn--primary-inv">Let's connect <span class="btn-arrow">→</span></button>
+            </div>
+            <p class="btn-tier__desc">Primary · White fill · dark text</p>
+          </div>
+
+          <div class="btn-tier">
+            <div class="btn-tier__row">
+              <button class="btn btn--secondary-inv">View services <span class="btn-arrow">→</span></button>
+            </div>
+            <p class="btn-tier__desc">Secondary · White outline · ghost fill on hover</p>
+          </div>
+
+          <div class="btn-tier">
+            <div class="btn-tier__row">
+              <button class="btn--tertiary-inv">Learn more <span class="btn-arrow">→</span></button>
+            </div>
+            <p class="btn-tier__desc">Tertiary · White text + arrow · slides right on hover</p>
           </div>
         </div>
 
