@@ -400,45 +400,95 @@
        UI ELEMENTS
     ───────────────────────────────────────── */
     .ui-page { padding: 48px var(--pad-h) 80px; }
-    .ui-group { margin-bottom: 56px; }
-    .ui-group__title {
-      font-size: 10px; font-weight: 700;
-      letter-spacing: 1px; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 20px;
+    .ui-section-title {
+      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
       padding-bottom: 12px; border-bottom: 1px solid var(--divider);
     }
-    .ui-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; }
-    .ui-canvas {
-      display: flex; flex-wrap: wrap; gap: 12px;
-      align-items: center; padding: 32px 36px; border-radius: 14px;
+    .ui-section-desc {
+      font-size: 14px; color: var(--mid); line-height: 1.5;
+      margin-bottom: 28px; max-width: 780px;
     }
-    .ui-canvas--dark  { background: #0A0A0A; }
-    .ui-canvas--green { background: #003727; }
 
+    /* Split panel */
+    .btn-split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-radius: 16px; overflow: hidden;
+    }
+    .btn-panel { padding: 44px 48px; }
+    .btn-panel--light { background: #F0F0F0; }
+    .btn-panel--dark  { background: #0A0A0A; }
+    .btn-panel__label {
+      font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+      color: rgba(0,0,0,0.35); margin-bottom: 36px;
+    }
+    .btn-panel--dark .btn-panel__label { color: rgba(255,255,255,0.3); }
+
+    .btn-panel__green {
+      background: #003727; border-radius: 16px;
+      padding: 44px 48px; margin-top: 16px;
+    }
+    .btn-panel__green .btn-panel__label { color: rgba(255,255,255,0.3); }
+
+    /* Tier rows */
+    .btn-tier { margin-bottom: 32px; }
+    .btn-tier:last-child { margin-bottom: 0; }
+    .btn-tier__row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 10px; }
+    .btn-tier__desc {
+      font-size: 11px; color: rgba(0,0,0,0.38); letter-spacing: 0;
+    }
+    .btn-panel--dark .btn-tier__desc,
+    .btn-panel__green .btn-tier__desc { color: rgba(255,255,255,0.28); }
+
+    /* ── BUTTON BASE ── */
     .btn {
-      display: inline-flex; align-items: center;
-      gap: 8px; padding: 14px 24px;
-      border-radius: 999px; cursor: default;
-      font-family: var(--f-ui); font-size: 15px; font-weight: 400;
-      line-height: 1.1; border: 1px solid transparent;
-    }
-    .btn--orange  { background: #F3752C; color: #fff; border-color: #F3752C; }
-    .btn--dark    { background: #0A0A0A; color: #fff; border-color: #0A0A0A; }
-    .btn--white   { background: #fff; color: #0A0A0A; border-color: #E8E8E8; }
-    .btn--outline { background: transparent; color: #0A0A0A; border-color: #0A0A0A; }
-    .btn--ghost   { background: transparent; color: #fff; border-color: rgba(255,255,255,0.35); }
-
-    .link-btn {
       display: inline-flex; align-items: center; gap: 10px;
-      font-family: var(--f-ui); font-size: 15px; color: var(--ink); cursor: default;
+      padding: 14px 28px; border: 1px solid transparent; border-radius: 999px;
+      font-family: var(--f-ui); font-size: 16px; font-weight: 400;
+      line-height: 18px; letter-spacing: 0; cursor: pointer; text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.18s ease;
     }
-    .link-btn--inv { color: rgba(255,255,255,0.85); }
-    .link-btn__arrow { width: 18px; height: 1px; background: currentColor; display: inline-block; position: relative; top: 1px; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-arrow { display: inline-flex; align-items: center; flex-shrink: 0;
+      transition: transform 0.2s ease; }
+    .btn:hover .btn-arrow { transform: translateX(4px); }
 
-    .btn-wrap { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
-    .btn-label { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); }
-    .btn-label--inv   { color: rgba(255,255,255,0.3); }
-    .btn-label--green { color: rgba(255,255,255,0.3); }
+    /* Primary — orange fill */
+    .btn--primary-orange { background: #F3752C; color: #fff; border-color: #F3752C; }
+    .btn--primary-orange:hover { background: #DA6A29; border-color: #DA6A29; }
+
+    /* Primary — white fill (dark/green bg) */
+    .btn--primary-inv { background: #fff; color: #0A0A0A; border-color: #fff; }
+    .btn--primary-inv:hover { background: #E8E8E8; border-color: #E8E8E8; }
+
+    /* Secondary — black outline */
+    .btn--secondary { background: transparent; color: #0A0A0A; border-color: #0A0A0A; }
+    .btn--secondary:hover { background: #0A0A0A; color: #fff; }
+
+    /* Secondary inv — white outline */
+    .btn--secondary-inv { background: transparent; color: #fff; border-color: rgba(255,255,255,0.4); }
+    .btn--secondary-inv:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.7); }
+
+    /* Tertiary — text + arrow, light bg */
+    .btn--tertiary {
+      padding: 0; background: none; border: none; color: #0A0A0A;
+      font-family: var(--f-ui); font-size: 16px; font-weight: 400; line-height: 18px;
+      display: inline-flex; align-items: center; gap: 8px;
+      cursor: pointer; transition: transform 0s;
+    }
+    .btn--tertiary:hover { transform: none; }
+    .btn--tertiary:hover .btn-arrow { transform: translateX(4px); }
+
+    /* Tertiary inv — text + arrow, dark/green bg */
+    .btn--tertiary-inv {
+      padding: 0; background: none; border: none; color: rgba(255,255,255,0.7);
+      font-family: var(--f-ui); font-size: 16px; font-weight: 400; line-height: 18px;
+      display: inline-flex; align-items: center; gap: 8px;
+      cursor: pointer; transition: color 0.22s ease;
+    }
+    .btn--tertiary-inv:hover { color: #fff; transform: none; }
+    .btn--tertiary-inv .btn-arrow { transition: transform 0.2s ease; }
+    .btn--tertiary-inv:hover .btn-arrow { transform: translateX(4px); }
 
   </style>
 </head>
@@ -971,12 +1021,96 @@
   <div id="ui-elements" class="tab-panel" role="tabpanel">
     <div class="ui-page">
 
-      <div class="ui-group">
-        <p class="ui-group__title">Buttons</p>
-        <div class="ui-row">
-          <div class="btn btn--dark">Explore Services <span class="btn-arrow">→</span></div>
-          <div class="btn btn--orange">Let's connect <span class="btn-arrow">→</span></div>
-          <div class="btn btn--outline">Our Full Story <span class="btn-arrow">→</span></div>
+      <p class="ui-section-title">Button System</p>
+      <p class="ui-section-desc">Three tiers × three backgrounds. Capsule shape — border-radius: 999px. DM Sans 400 · 16/18 · tracking 0. Arrow on right, slides 4px on hover. Orange Primary replaces White Primary in all contexts where brand colour is intentional.</p>
+
+      <!-- Light + Dark split -->
+      <div class="btn-split">
+
+        <!-- LIGHT BACKGROUND -->
+        <div class="btn-panel btn-panel--light">
+          <p class="btn-panel__label">Light Background</p>
+
+          <div class="btn-tier">
+            <div class="btn-tier__row">
+              <button class="btn btn--primary-orange">Let's connect <span class="btn-arrow">→</span></button>
+            </div>
+            <p class="btn-tier__desc">Primary · Orange fill · white text</p>
+          </div>
+
+          <div class="btn-tier">
+            <div class="btn-tier__row">
+              <button class="btn btn--secondary">Let's connect <span class="btn-arrow">→</span></button>
+              <button class="btn btn--secondary">View services <span class="btn-arrow">→</span></button>
+            </div>
+            <p class="btn-tier__desc">Secondary · Black outline · fills on hover</p>
+          </div>
+
+          <div class="btn-tier">
+            <div class="btn-tier__row">
+              <button class="btn--tertiary">Learn more <span class="btn-arrow">→</span></button>
+              <button class="btn--tertiary">Explore opportunities <span class="btn-arrow">→</span></button>
+            </div>
+            <p class="btn-tier__desc">Tertiary · Text + arrow · arrow slides right on hover</p>
+          </div>
+        </div>
+
+        <!-- DARK BACKGROUND -->
+        <div class="btn-panel btn-panel--dark">
+          <p class="btn-panel__label">Dark Background</p>
+
+          <div class="btn-tier">
+            <div class="btn-tier__row">
+              <button class="btn btn--primary-orange">Let's connect <span class="btn-arrow">→</span></button>
+              <button class="btn btn--primary-inv">Explore our work <span class="btn-arrow">→</span></button>
+            </div>
+            <p class="btn-tier__desc">Primary · Orange fill · or White fill variant</p>
+          </div>
+
+          <div class="btn-tier">
+            <div class="btn-tier__row">
+              <button class="btn btn--secondary-inv">Let's connect <span class="btn-arrow">→</span></button>
+              <button class="btn btn--secondary-inv">View services <span class="btn-arrow">→</span></button>
+            </div>
+            <p class="btn-tier__desc">Secondary · White outline · ghost fill on hover</p>
+          </div>
+
+          <div class="btn-tier">
+            <div class="btn-tier__row">
+              <button class="btn--tertiary-inv">Learn more <span class="btn-arrow">→</span></button>
+              <button class="btn--tertiary-inv">Explore opportunities <span class="btn-arrow">→</span></button>
+            </div>
+            <p class="btn-tier__desc">Tertiary · Dim text + arrow · arrow slides right on hover</p>
+          </div>
+        </div>
+
+      </div><!-- /btn-split -->
+
+      <!-- GREEN BACKGROUND -->
+      <div class="btn-panel__green">
+        <p class="btn-panel__label">Green Background (Community)</p>
+
+        <div class="btn-tier">
+          <div class="btn-tier__row">
+            <button class="btn btn--primary-orange">Let's connect <span class="btn-arrow">→</span></button>
+            <button class="btn btn--primary-inv">Explore our work <span class="btn-arrow">→</span></button>
+          </div>
+          <p class="btn-tier__desc">Primary · Orange fill · or White fill variant</p>
+        </div>
+
+        <div class="btn-tier">
+          <div class="btn-tier__row">
+            <button class="btn btn--secondary-inv">Explore opportunities <span class="btn-arrow">→</span></button>
+          </div>
+          <p class="btn-tier__desc">Secondary · White outline · ghost fill on hover</p>
+        </div>
+
+        <div class="btn-tier">
+          <div class="btn-tier__row">
+            <button class="btn--tertiary-inv">Learn more <span class="btn-arrow">→</span></button>
+            <button class="btn--tertiary-inv">Discover now <span class="btn-arrow">→</span></button>
+          </div>
+          <p class="btn-tier__desc">Tertiary · Dim text + arrow · arrow slides right on hover</p>
         </div>
       </div>
 
