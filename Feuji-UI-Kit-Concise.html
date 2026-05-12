@@ -530,7 +530,7 @@
     .bcard--mood     { grid-column: 3; grid-row: 1 / 4; }
     .bcard--flow     { grid-column: 1; grid-row: 2; }
     .bcard--values   { grid-column: 2; grid-row: 2; }
-    .bcard--terminal { grid-column: 1 / 3; grid-row: 3; }
+    .bcard--typo-anim { grid-column: 1 / 3; grid-row: 3; }
     .bcard--colours  { grid-column: 1; grid-row: 4; }
     .bcard--typeface { grid-column: 2 / 4; grid-row: 4; }
 
@@ -648,48 +648,33 @@
     }
     .val-stmt em { font-style: italic; color: var(--orange); }
 
-    /* ── Terminal card ── */
-    .bcard--terminal {
+    /* ── Typography animation card ── */
+    .bcard--typo-anim {
       background: #0A0A0A;
-      padding: 40px 52px;
-      display: flex; flex-direction: column; justify-content: center;
+      padding: 52px 56px;
+      display: flex; flex-direction: column; justify-content: space-between;
     }
-    .term-header {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 24px;
+    .bcard--typo-anim .anim-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
     }
-    .term-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .term-dot--r { background: #FF5F57; }
-    .term-dot--y { background: #FEBC2E; }
-    .term-dot--g { background: #28C840; }
-    .term-label {
-      font-size: 11px; color: rgba(255,255,255,0.3); margin-left: 8px; letter-spacing: 0.3px;
+    .bcard--typo-anim .anim-heading {
+      font-family: var(--f-display); font-size: 72px; font-weight: 500;
+      line-height: 0.95; letter-spacing: -3.5px; color: #fff;
     }
-    .term-body {
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 14px; line-height: 1.9; color: rgba(255,255,255,0.85);
-    }
-    .term-prompt { color: rgba(243,117,44,0.9); }
-    .term-output { color: rgba(0,183,132,0.85); display: block; }
-    .term-cursor {
-      display: inline-block; width: 9px; height: 1.1em;
-      background: rgba(243,117,44,0.8); vertical-align: text-bottom;
-      animation: blink 1s step-end infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-    .term-tag {
-      font-size: 9px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase;
-      color: rgba(255,255,255,0.22); margin-top: 20px;
+    .bcard--typo-anim .anim-heading em { font-style: italic; color: var(--orange); }
+    .bcard--typo-anim .anim-meta {
+      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: rgba(255,255,255,0.22);
     }
 
-    /* Typewriter lines */
-    .tw-line {
-      overflow: hidden; white-space: nowrap; width: 0;
+    /* tw-char — matches exact homepage technique */
+    .tw-char {
+      opacity: 0;
+      transition: opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline;
     }
-    .tw-line--1 { animation: tw 2s steps(50, end) 0.4s forwards; }
-    .tw-line--2 { animation: tw-show 0.01s 3s forwards, tw 2s steps(50, end) 3s forwards; opacity: 0; }
-    .tw-line--3 { animation: tw-show 0.01s 5.5s forwards, tw 2.5s steps(60, end) 5.5s forwards; opacity: 0; }
-    @keyframes tw      { from { width: 0; } to { width: 100%; } }
-    @keyframes tw-show { from { opacity: 0; } to { opacity: 1; } }
+    .tw-char.is-visible { opacity: 1; }
 
     /* ── Colour stripes card ── */
     .bcard--colours {
@@ -812,20 +797,11 @@
           <p class="val-stmt">Not cold enterprise.<br><em>Warm</em> Intelligence.<br>Human-centred.</p>
         </div>
 
-        <!-- TERMINAL / AGENTIC FOUNDRY — spans cols 1–2 -->
-        <div class="bcard bcard--terminal">
-          <div class="term-header">
-            <span class="term-dot term-dot--r"></span>
-            <span class="term-dot term-dot--y"></span>
-            <span class="term-dot term-dot--g"></span>
-            <span class="term-label">agentic-foundry — bash</span>
-          </div>
-          <div class="term-body">
-            <div class="tw-line tw-line--1"><span class="term-prompt">$ </span>feuji deploy --model production-ai --env live</div>
-            <span class="term-output tw-line tw-line--2">✓ AI pipeline deployed · 847ms · 99.9% uptime</span>
-            <div class="tw-line tw-line--3"><span class="term-prompt">$ </span>Building production-grade AI systems that solve real business problems<span class="term-cursor"></span></div>
-          </div>
-          <p class="term-tag">Agentic Foundry · Engineering AI for outcomes</p>
+        <!-- TYPOGRAPHY ANIMATION — H2 typewriter · spans cols 1–2 -->
+        <div class="bcard bcard--typo-anim">
+          <p class="anim-label">Typography · H2 · Typewriter Animation</p>
+          <h2 id="bento-h2" class="anim-heading">Engineering AI<br><em>for outcomes.</em></h2>
+          <p class="anim-meta">Cormorant Garamond · 72px · Weight 500 · Tracking −3.5px</p>
         </div>
 
         <!-- COLOUR STRIPES -->
@@ -1612,6 +1588,62 @@
 
 
   <script>
+    /* ── H2 Typewriter — same technique as homepage ── */
+    (function () {
+      function buildTWChars(el) {
+        const chars = [];
+        function walk(parent) {
+          Array.from(parent.childNodes).forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) {
+              const text = /^\n/.test(node.textContent)
+                ? node.textContent.replace(/^\s+/, '').replace(/[\n\r\t]+$/, '')
+                : node.textContent.replace(/[\n\r\t]+$/, '');
+              if (!text.trim()) { parent.removeChild(node); return; }
+              const frag = document.createDocumentFragment();
+              for (const ch of text) {
+                const s = document.createElement('span');
+                s.className = 'tw-char';
+                s.textContent = ch;
+                frag.appendChild(s);
+                chars.push(s);
+              }
+              parent.replaceChild(frag, node);
+            } else if (node.nodeType === Node.ELEMENT_NODE && node.nodeName !== 'BR') {
+              walk(node);
+            }
+          });
+        }
+        walk(el);
+        return chars;
+      }
+
+      function playTypewriter(chars, speed, onDone) {
+        chars.forEach(s => s.classList.remove('is-visible'));
+        let i = 0;
+        const t = setInterval(() => {
+          if (i < chars.length) { chars[i].classList.add('is-visible'); i++; }
+          else { clearInterval(t); if (onDone) onDone(); }
+        }, speed);
+        return t;
+      }
+
+      window.addEventListener('DOMContentLoaded', () => {
+        const el = document.getElementById('bento-h2');
+        if (!el) return;
+        const chars = buildTWChars(el);
+        function loop() {
+          playTypewriter(chars, 38, () => {
+            // pause 2 s then fade all out, restart
+            setTimeout(() => {
+              chars.forEach(s => s.classList.remove('is-visible'));
+              setTimeout(() => loop(), 600);
+            }, 2000);
+          });
+        }
+        loop();
+      });
+    })();
+
     const tabs   = document.querySelectorAll('.tab-btn');
     const panels = document.querySelectorAll('.tab-panel');
     tabs.forEach(tab => {
