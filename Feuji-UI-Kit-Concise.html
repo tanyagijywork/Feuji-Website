@@ -410,25 +410,21 @@
       margin-bottom: 28px; max-width: 780px;
     }
 
-    /* Split panel */
+    /* Three-column panel */
     .btn-split {
-      display: grid; grid-template-columns: 1fr 1fr;
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
       border-radius: 16px; overflow: hidden;
     }
     .btn-panel { padding: 44px 48px; }
     .btn-panel--light { background: #F0F0F0; }
     .btn-panel--dark  { background: #0A0A0A; }
+    .btn-panel--green { background: #003727; }
     .btn-panel__label {
       font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
       color: rgba(0,0,0,0.35); margin-bottom: 36px;
     }
-    .btn-panel--dark .btn-panel__label { color: rgba(255,255,255,0.3); }
-
-    .btn-panel__green {
-      background: #003727; border-radius: 16px;
-      padding: 44px 48px; margin-top: 16px;
-    }
-    .btn-panel__green .btn-panel__label { color: rgba(255,255,255,0.3); }
+    .btn-panel--dark .btn-panel__label,
+    .btn-panel--green .btn-panel__label { color: rgba(255,255,255,0.3); }
 
     /* Tier rows */
     .btn-tier { margin-bottom: 32px; }
@@ -1024,7 +1020,7 @@
       <p class="ui-section-title">Button System</p>
       <p class="ui-section-desc">Three tiers × three backgrounds. Capsule shape — border-radius: 999px. DM Sans 400 · 16/18 · tracking 0. Arrow on right, slides 4px on hover. Orange Primary replaces White Primary in all contexts where brand colour is intentional.</p>
 
-      <!-- Light + Dark split -->
+      <!-- Three-column panel -->
       <div class="btn-split">
 
         <!-- LIGHT BACKGROUND -->
@@ -1040,7 +1036,6 @@
 
           <div class="btn-tier">
             <div class="btn-tier__row">
-              <button class="btn btn--secondary">Let's connect <span class="btn-arrow">→</span></button>
               <button class="btn btn--secondary">View services <span class="btn-arrow">→</span></button>
             </div>
             <p class="btn-tier__desc">Secondary · Black outline · fills on hover</p>
@@ -1049,9 +1044,8 @@
           <div class="btn-tier">
             <div class="btn-tier__row">
               <button class="btn--tertiary">Learn more <span class="btn-arrow">→</span></button>
-              <button class="btn--tertiary">Explore opportunities <span class="btn-arrow">→</span></button>
             </div>
-            <p class="btn-tier__desc">Tertiary · Text + arrow · arrow slides right on hover</p>
+            <p class="btn-tier__desc">Tertiary · Text + arrow · slides right on hover</p>
           </div>
         </div>
 
@@ -1062,14 +1056,12 @@
           <div class="btn-tier">
             <div class="btn-tier__row">
               <button class="btn btn--primary-orange">Let's connect <span class="btn-arrow">→</span></button>
-              <button class="btn btn--primary-inv">Explore our work <span class="btn-arrow">→</span></button>
             </div>
-            <p class="btn-tier__desc">Primary · Orange fill · or White fill variant</p>
+            <p class="btn-tier__desc">Primary · Orange fill · white text</p>
           </div>
 
           <div class="btn-tier">
             <div class="btn-tier__row">
-              <button class="btn btn--secondary-inv">Let's connect <span class="btn-arrow">→</span></button>
               <button class="btn btn--secondary-inv">View services <span class="btn-arrow">→</span></button>
             </div>
             <p class="btn-tier__desc">Secondary · White outline · ghost fill on hover</p>
@@ -1078,41 +1070,38 @@
           <div class="btn-tier">
             <div class="btn-tier__row">
               <button class="btn--tertiary-inv">Learn more <span class="btn-arrow">→</span></button>
-              <button class="btn--tertiary-inv">Explore opportunities <span class="btn-arrow">→</span></button>
             </div>
-            <p class="btn-tier__desc">Tertiary · Dim text + arrow · arrow slides right on hover</p>
+            <p class="btn-tier__desc">Tertiary · Dim text + arrow · slides right on hover</p>
+          </div>
+        </div>
+
+        <!-- GREEN BACKGROUND -->
+        <div class="btn-panel btn-panel--green">
+          <p class="btn-panel__label">Green Background</p>
+
+          <div class="btn-tier">
+            <div class="btn-tier__row">
+              <button class="btn btn--primary-orange">Let's connect <span class="btn-arrow">→</span></button>
+            </div>
+            <p class="btn-tier__desc">Primary · Orange fill · white text</p>
+          </div>
+
+          <div class="btn-tier">
+            <div class="btn-tier__row">
+              <button class="btn btn--secondary-inv">View services <span class="btn-arrow">→</span></button>
+            </div>
+            <p class="btn-tier__desc">Secondary · White outline · ghost fill on hover</p>
+          </div>
+
+          <div class="btn-tier">
+            <div class="btn-tier__row">
+              <button class="btn--tertiary-inv">Learn more <span class="btn-arrow">→</span></button>
+            </div>
+            <p class="btn-tier__desc">Tertiary · Dim text + arrow · slides right on hover</p>
           </div>
         </div>
 
       </div><!-- /btn-split -->
-
-      <!-- GREEN BACKGROUND -->
-      <div class="btn-panel__green">
-        <p class="btn-panel__label">Green Background (Community)</p>
-
-        <div class="btn-tier">
-          <div class="btn-tier__row">
-            <button class="btn btn--primary-orange">Let's connect <span class="btn-arrow">→</span></button>
-            <button class="btn btn--primary-inv">Explore our work <span class="btn-arrow">→</span></button>
-          </div>
-          <p class="btn-tier__desc">Primary · Orange fill · or White fill variant</p>
-        </div>
-
-        <div class="btn-tier">
-          <div class="btn-tier__row">
-            <button class="btn btn--secondary-inv">Explore opportunities <span class="btn-arrow">→</span></button>
-          </div>
-          <p class="btn-tier__desc">Secondary · White outline · ghost fill on hover</p>
-        </div>
-
-        <div class="btn-tier">
-          <div class="btn-tier__row">
-            <button class="btn--tertiary-inv">Learn more <span class="btn-arrow">→</span></button>
-            <button class="btn--tertiary-inv">Discover now <span class="btn-arrow">→</span></button>
-          </div>
-          <p class="btn-tier__desc">Tertiary · Dim text + arrow · arrow slides right on hover</p>
-        </div>
-      </div>
 
     </div>
   </div><!-- /ui-elements -->
