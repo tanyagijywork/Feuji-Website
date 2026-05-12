@@ -1895,6 +1895,14 @@
       .comm-card:nth-child(2),
       .comm-card:nth-child(3) { margin-top: 0; }
     }
+
+    /* Very short viewport — disable sticky, scroll community like a normal section */
+    @media (max-height: 650px) and (min-width: 641px) {
+      .comm-scroll-wrapper { height: auto; }
+      .comm-sticky-stage   { position: relative; height: auto; }
+      .comm-stage-inner    { padding-top: var(--sec-py); padding-bottom: var(--sec-py); }
+      .comm-card           { opacity: 1; transform: none; }
+    }
     @media (max-width: 640px) {
       .hero__headline {
         font-size: 56px;
