@@ -368,50 +368,25 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Subtle dot grid texture */
-    .page-banner::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
-      background-size: 28px 28px;
-      pointer-events: none;
-    }
-
-    /* Faint orange ambient glow bottom-left */
-    .page-banner::after {
-      content: '';
-      position: absolute;
-      bottom: -20%;
-      left: -10%;
-      width: 60%;
-      height: 70%;
-      background: radial-gradient(ellipse at center,
-        rgba(243, 117, 44, 0.12) 0%,
-        transparent 70%
-      );
-      pointer-events: none;
     }
 
     .page-banner__inner {
-      position: relative;
-      z-index: 2;
       max-width: var(--max-w);
       margin: 0 auto;
       width: 100%;
       padding: calc(var(--nav-h) + 48px) var(--pad-x) 80px;
     }
 
-    /* Breadcrumbs */
+    /* Breadcrumbs — pill track */
     .breadcrumb {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 0;
       margin-bottom: 40px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      padding: 5px 6px 5px 14px;
     }
 
     .breadcrumb__item {
@@ -421,24 +396,31 @@
       line-height: 16px;
       letter-spacing: 0;
       color: var(--neutral-500);
+      padding: 0 2px;
       transition: color 0.2s var(--ease);
     }
 
     .breadcrumb__item:hover {
-      color: var(--neutral-300);
+      color: var(--neutral-200);
     }
 
     .breadcrumb__sep {
       color: var(--neutral-700);
-      font-size: 12px;
+      font-size: 11px;
       line-height: 16px;
+      padding: 0 6px;
       pointer-events: none;
       user-select: none;
     }
 
     .breadcrumb__item--current {
-      color: var(--neutral-300);
+      background: var(--white);
+      color: var(--ink);
+      font-weight: 500;
+      border-radius: 999px;
+      padding: 4px 12px;
       pointer-events: none;
+      margin-left: 4px;
     }
 
     /* Banner heading + sub */
