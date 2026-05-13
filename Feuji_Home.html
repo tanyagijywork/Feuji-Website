@@ -19,16 +19,18 @@
       /* neutral palette */
       --neutral-50:  #F9F9F9;
       --neutral-100: #EAEAEA;
+      --neutral-200: #DFDFDF;
       --neutral-300: #C1C1C1;
       --neutral-400: #A2A2A2;
       --neutral-500: #848484;
+      --neutral-700: #474747;
       --neutral-800: #292929;
       --ink:       #0A0A0A;
       --ink-90:    #1A1A1A;
       --ink-70:    #333333;
       --mid:       #656565;
       --muted:     #848484;
-      --border:    #E0E0E0;
+      --border:    var(--neutral-200);
       --border-dk: var(--neutral-800);
       --surface:   #F5F5F5;
       --white:     #FFFFFF;
@@ -890,7 +892,7 @@
       height: 160px;
       margin-top: -40px;
       margin-bottom: -40px;
-      background: #F0EDE8;
+      background: var(--neutral-50);
       border: none;
       border-radius: 8px;
       overflow: hidden;
@@ -1460,14 +1462,14 @@
     }
 
     .join-orbit__body {
-      color: rgba(255,255,255,0.6);
+      color: var(--neutral-300);
       margin-bottom: 0;
       max-width: 500px;
     }
 
     .join-orbit__btn {
       color: var(--white);
-      border-color: rgba(255,255,255,0.3);
+      border-color: var(--neutral-700);
     }
 
     /* ── Orbit glow: scroll-scrubbed ── */
@@ -1777,8 +1779,8 @@
     .img-placeholder {
       position: relative;
       overflow: hidden;
-      background: #F7F5F2;
-      border: 1px solid #EBEBEB;
+      background: var(--neutral-50);
+      border: 1px solid var(--neutral-100);
     }
 
     /* Fine dot grid */
