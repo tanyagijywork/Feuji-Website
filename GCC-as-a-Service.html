@@ -541,7 +541,67 @@
         font-size: 17px;
         line-height: 25px;
       }
+
+      /* Intro mobile */
+      .intro__inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .t-h2 {
+        font-size: 40px !important;
+        line-height: 42px !important;
+        letter-spacing: -2px !important;
+      }
     }
+
+    /* ─────────────────────────────────────────
+       REVEAL ANIMATION
+    ───────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+
+    /* ─────────────────────────────────────────
+       INTRO SECTION
+    ───────────────────────────────────────── */
+    .intro {
+      background: var(--white);
+      padding: var(--sec-py) 0;
+    }
+
+    .intro__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .intro__heading {
+      position: sticky;
+      top: calc(var(--nav-h) + 40px);
+    }
+
+    .intro__heading em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .intro__body {
+      color: var(--mid);
+    }
+    .intro__body p + p { margin-top: 24px; }
 
   </style>
 </head>
@@ -614,6 +674,29 @@
       <p class="page-banner__sub">
         Scaling global capability with strategic control, cost efficiency, and faster time-to-value.
       </p>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       INTRO
+  ══════════════════════════════════════ -->
+  <section id="intro" class="intro" aria-labelledby="intro-heading">
+    <div class="intro__inner">
+
+      <div class="intro__heading">
+        <h2 id="intro-heading" class="t-h2 reveal">Simplify the path to <em>AI-native</em> global operations</h2>
+      </div>
+
+      <div class="intro__body t-body-l reveal reveal-d1">
+        <p>
+          Global capability centers have evolved beyond cost arbitrage into strategic hubs for engineering, innovation, and operational scale. But building and managing a GCC still involves long setup cycles, talent challenges, governance complexity, and rising operational overhead.
+        </p>
+        <p>
+          We simplify this through an AI-native Build-Operate-Transfer (BOT) model that combines embedded engineering, intelligent automation, and outcome-driven governance to help you launch and scale GCCs faster, with greater operational resilience, predictable costs, and long-term strategic control.
+        </p>
+      </div>
 
     </div>
   </section>
@@ -699,6 +782,24 @@
 
     // Start 500ms after load — lets fonts and nav settle first
     setTimeout(() => setupHeroTypewriter(document.querySelector('.page-banner__heading')), 500);
+
+    // Scroll-driven typewriter for all h2 headings
+    document.querySelectorAll('.t-h2').forEach(el => setupScrollTypewriter(el));
+  })();
+  </script>
+
+  <!-- ── Scroll reveal ── -->
+  <script>
+  (function () {
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+    revealEls.forEach(el => revealObserver.observe(el));
   })();
   </script>
 
