@@ -637,14 +637,13 @@
     .bcard { border-radius: 20px; overflow: hidden; position: relative; }
 
     /* Grid placements */
-    .bcard--brand    { grid-column: 1; grid-row: 1 / 3; }
-    .bcard--keywords { grid-column: 2; grid-row: 1; }
-    .bcard--mood     { grid-column: 3; grid-row: 1; }
-    .bcard--icons    { grid-column: 3; grid-row: 2; }
-    .bcard--faces    { grid-column: 3; grid-row: 3; }
-    .bcard--values   { grid-column: 2; grid-row: 2; }
+    .bcard--keywords  { grid-column: 1 / 3; grid-row: 1; }
+    .bcard--mood      { grid-column: 3; grid-row: 1; }
+    .bcard--values    { grid-column: 1 / 3; grid-row: 2; }
+    .bcard--icons     { grid-column: 3; grid-row: 2; }
     .bcard--typo-anim { grid-column: 1 / 3; grid-row: 3; }
-    .bcard--colours  { grid-column: 1 / 4; grid-row: 4; }
+    .bcard--faces     { grid-column: 3; grid-row: 3; }
+    .bcard--colours   { grid-column: 1 / 4; grid-row: 4; }
 
     /* ── Brand card ── */
     .bcard--brand {
@@ -916,15 +915,6 @@
     <div class="stylescape-page">
 
       <div class="bento">
-
-        <!-- BRAND IDENTITY -->
-        <div class="bcard bcard--brand">
-          <p class="bcard__eyebrow">Feuji · Design System</p>
-          <div>
-            <p class="bcard__wordmark"><em>Flow</em></p>
-            <p class="bcard__system-name">Feuji Website · UI Kit 2025</p>
-          </div>
-        </div>
 
         <!-- KEYWORDS -->
         <div class="bcard bcard--keywords">
