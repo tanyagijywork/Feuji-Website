@@ -374,7 +374,7 @@
     ───────────────────────────────────────── */
     .page-banner {
       min-height: 70vh;
-      background: var(--ink);
+      background: var(--neutral-100);
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -393,8 +393,8 @@
       align-items: center;
       gap: 0;
       margin-bottom: 40px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.04);
+      border: 1px solid var(--neutral-200);
       border-radius: 999px;
       padding: 5px 6px 5px 14px;
     }
@@ -405,17 +405,17 @@
       font-weight: 400;
       line-height: 16px;
       letter-spacing: 0;
-      color: var(--neutral-500);
+      color: var(--neutral-700);
       padding: 0 2px;
       transition: color 0.2s var(--ease);
     }
 
     .breadcrumb__item:hover {
-      color: var(--neutral-200);
+      color: var(--ink);
     }
 
     .breadcrumb__sep {
-      color: var(--neutral-700);
+      color: var(--neutral-400);
       font-size: 11px;
       line-height: 16px;
       padding: 0 6px;
@@ -424,8 +424,8 @@
     }
 
     .breadcrumb__item--current {
-      background: var(--white);
-      color: var(--ink);
+      background: var(--ink);
+      color: var(--white);
       font-weight: 500;
       border-radius: 999px;
       padding: 4px 12px;
@@ -440,7 +440,7 @@
       font-weight: 500;
       line-height: 80px;
       letter-spacing: -4px;
-      color: var(--white);
+      color: var(--ink);
       max-width: 760px;
       margin-bottom: 28px;
     }
@@ -451,7 +451,7 @@
       font-weight: 400;
       line-height: 28px;
       letter-spacing: -0.5px;
-      color: var(--neutral-300);
+      color: var(--mid);
       max-width: 560px;
     }
 
@@ -489,7 +489,7 @@
         display: block;
         width: 22px;
         height: 1.5px;
-        background: var(--white);
+        background: var(--ink);
         border-radius: 2px;
         transition: transform 0.3s ease, opacity 0.3s ease;
         transform-origin: center;
@@ -610,7 +610,7 @@
   <!-- ══════════════════════════════════════
        NAVIGATION
   ══════════════════════════════════════ -->
-  <nav class="nav nav--dark" id="mainNav" aria-label="Primary navigation">
+  <nav class="nav nav--light" id="mainNav" aria-label="Primary navigation">
     <div class="nav__inner">
 
       <a href="Feuji_Home.html" class="nav__logo">
@@ -714,8 +714,8 @@
       const bannerBottom = banner.getBoundingClientRect().bottom;
 
       if (bannerBottom > nav.offsetHeight) {
-        nav.classList.add('nav--dark');
-        nav.classList.remove('nav--light', 'is-scrolled');
+        nav.classList.add('nav--light');
+        nav.classList.remove('nav--dark', 'is-scrolled');
       } else {
         nav.classList.remove('nav--dark');
         nav.classList.add('nav--light', 'is-scrolled');
