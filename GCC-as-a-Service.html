@@ -1083,6 +1083,173 @@
       .case-card__heading { font-size: 28px; line-height: 34px; }
     }
 
+    /* ─────────────────────────────────────────
+       INSIGHTS
+    ───────────────────────────────────────── */
+    .insights {
+      background: var(--white);
+      padding: var(--sec-py) 0;
+    }
+
+    .insights__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+    }
+
+    /* Split header: H2 left, CTA right */
+    .insights__header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 56px;
+    }
+
+    .insights__header em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    /* 3-column grid */
+    .insights__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap);
+    }
+
+    /* Card */
+    .insight-card {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--white);
+      transition: box-shadow 0.25s var(--ease), transform 0.25s var(--ease),
+                  border-color 0.25s var(--ease);
+      cursor: pointer;
+    }
+    .insight-card:hover {
+      box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+      transform: translateY(-4px);
+      border-color: var(--neutral-300);
+    }
+
+    /* Image placeholder */
+    .insight-card__media {
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      background: var(--neutral-50);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s var(--ease);
+    }
+    .insight-card:hover .insight-card__media {
+      background: var(--neutral-100);
+    }
+
+    /* Animated corner accent on hover */
+    .insight-card__media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(243,117,44,0.08) 0%,
+        transparent 60%
+      );
+      opacity: 0;
+      transition: opacity 0.4s var(--ease);
+    }
+    .insight-card:hover .insight-card__media::after { opacity: 1; }
+
+    /* Category tag inside media */
+    .insight-card__tag {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      font-family: var(--f-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--orange);
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    /* Content area */
+    .insight-card__body {
+      padding: 28px 28px 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 0;
+    }
+
+    .insight-card__heading {
+      font-family: var(--f-display);
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 30px;
+      letter-spacing: -0.8px;
+      color: var(--ink);
+      margin-bottom: 14px;
+      transition: color 0.2s var(--ease);
+    }
+    .insight-card:hover .insight-card__heading { color: var(--orange-dark); }
+
+    .insight-card__excerpt {
+      font-family: var(--f-ui);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      color: var(--mid);
+      flex: 1;
+      margin-bottom: 24px;
+    }
+
+    /* Footer row */
+    .insight-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .insight-card__meta {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--neutral-400);
+      letter-spacing: 0;
+    }
+
+    .insight-card__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--f-ui);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      transition: color 0.2s var(--ease), gap 0.2s var(--ease);
+    }
+    .insight-card:hover .insight-card__link {
+      color: var(--orange);
+      gap: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .insights__grid { grid-template-columns: 1fr; }
+      .insights__header { flex-direction: column; align-items: flex-start; gap: 20px; }
+    }
+
   </style>
 </head>
 <body>
@@ -1405,6 +1572,81 @@
 
       </div>
 
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       INSIGHTS
+  ══════════════════════════════════════ -->
+  <section id="insights" class="insights" aria-labelledby="insights-heading">
+    <div class="insights__inner">
+
+      <div class="insights__header reveal">
+        <h2 id="insights-heading" class="t-h2">Get the <em>latest insights</em></h2>
+        <a href="#" class="btn btn--secondary t-btn">View all insights <span class="btn-arrow">→</span></a>
+      </div>
+
+      <div class="insights__grid">
+
+        <!-- Card 1 -->
+        <article class="insight-card reveal">
+          <div class="insight-card__media">
+            <span class="insight-card__tag">GCC Strategy</span>
+          </div>
+          <div class="insight-card__body">
+            <h3 class="insight-card__heading">
+              Lorem ipsum dolor sit amet consectetur, adipiscing elit sed do eiusmod tempor
+            </h3>
+            <p class="insight-card__excerpt">
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat.
+            </p>
+            <div class="insight-card__footer">
+              <span class="insight-card__meta">May 2025 &nbsp;·&nbsp; 5 min read</span>
+              <a href="#" class="insight-card__link">Read more <span>→</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="insight-card reveal reveal-d2">
+          <div class="insight-card__media">
+            <span class="insight-card__tag">Talent &amp; Hiring</span>
+          </div>
+          <div class="insight-card__body">
+            <h3 class="insight-card__heading">
+              Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi
+            </h3>
+            <p class="insight-card__excerpt">
+              Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum perspiciatis.
+            </p>
+            <div class="insight-card__footer">
+              <span class="insight-card__meta">Apr 2025 &nbsp;·&nbsp; 7 min read</span>
+              <a href="#" class="insight-card__link">Read more <span>→</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="insight-card reveal reveal-d3">
+          <div class="insight-card__media">
+            <span class="insight-card__tag">AI Engineering</span>
+          </div>
+          <div class="insight-card__body">
+            <h3 class="insight-card__heading">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+            </h3>
+            <p class="insight-card__excerpt">
+              Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos ratione.
+            </p>
+            <div class="insight-card__footer">
+              <span class="insight-card__meta">Mar 2025 &nbsp;·&nbsp; 4 min read</span>
+              <a href="#" class="insight-card__link">Read more <span>→</span></a>
+            </div>
+          </div>
+        </article>
+
+      </div>
     </div>
   </section>
 
