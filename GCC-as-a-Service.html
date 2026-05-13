@@ -767,6 +767,117 @@
       .bot-tabs__media { min-height: 240px; }
     }
 
+    /* ─────────────────────────────────────────
+       CORE CAPABILITIES — accordion
+    ───────────────────────────────────────── */
+    .capabilities {
+      background: var(--white);
+      padding: var(--sec-py) 0;
+    }
+
+    .capabilities__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .capabilities__left {
+      position: sticky;
+      top: calc(var(--nav-h) + 40px);
+    }
+
+    .capabilities__left em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    /* Accordion list */
+    .acc-list {
+      border-top: 1px solid var(--border);
+    }
+
+    .acc-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .acc-item__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      width: 100%;
+      padding: 24px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .acc-item__title {
+      font-family: var(--f-display);
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 34px;
+      letter-spacing: -1px;
+      color: var(--ink);
+      transition: color 0.2s var(--ease);
+    }
+    .acc-item.is-open .acc-item__title { color: var(--orange); }
+
+    .acc-item__icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--neutral-500);
+      transition: background 0.2s var(--ease), border-color 0.2s var(--ease),
+                  color 0.2s var(--ease), transform 0.3s var(--ease);
+      line-height: 1;
+    }
+    .acc-item.is-open .acc-item__icon {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: var(--white);
+      transform: rotate(45deg);
+    }
+
+    .acc-item__body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .acc-item.is-open .acc-item__body {
+      max-height: 160px;
+    }
+
+    .acc-item__text {
+      font-family: var(--f-ui);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 23px;
+      color: var(--mid);
+      padding-bottom: 24px;
+      max-width: 480px;
+    }
+
+    @media (max-width: 768px) {
+      .capabilities__inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .capabilities__left { position: static; }
+    }
+
   </style>
 </head>
 <body>
@@ -937,6 +1048,87 @@
 
 
   <!-- ══════════════════════════════════════
+       CORE CAPABILITIES
+  ══════════════════════════════════════ -->
+  <section id="capabilities" class="capabilities" aria-labelledby="cap-heading">
+    <div class="capabilities__inner">
+
+      <!-- Left: sticky heading -->
+      <div class="capabilities__left reveal">
+        <span class="t-label-s eyebrow">Core capabilities</span>
+        <h2 id="cap-heading" class="t-h2">How we make it <em>possible</em></h2>
+      </div>
+
+      <!-- Right: accordion -->
+      <div class="acc-list reveal reveal-d1" role="list">
+
+        <div class="acc-item" role="listitem">
+          <button class="acc-item__header" aria-expanded="false">
+            <span class="acc-item__title">Strategic Control</span>
+            <span class="acc-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="acc-item__body">
+            <p class="acc-item__text">Improve strategic decision-making with AI-driven intelligence, enterprise knowledge access, and business-aligned AI models.</p>
+          </div>
+        </div>
+
+        <div class="acc-item" role="listitem">
+          <button class="acc-item__header" aria-expanded="false">
+            <span class="acc-item__title">Cost Efficiency</span>
+            <span class="acc-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="acc-item__body">
+            <p class="acc-item__text">Reduce operational overhead through intelligent workload allocation, automation-first delivery, and AI-driven service management.</p>
+          </div>
+        </div>
+
+        <div class="acc-item" role="listitem">
+          <button class="acc-item__header" aria-expanded="false">
+            <span class="acc-item__title">Talent Excellence</span>
+            <span class="acc-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="acc-item__body">
+            <p class="acc-item__text">Enhance talent acquisition and productivity with AI-led sourcing, automated assessments, and copilot-assisted engineering workflows.</p>
+          </div>
+        </div>
+
+        <div class="acc-item" role="listitem">
+          <button class="acc-item__header" aria-expanded="false">
+            <span class="acc-item__title">Operational Resilience</span>
+            <span class="acc-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="acc-item__body">
+            <p class="acc-item__text">Improve operational continuity with self-healing systems, predictive incident management, and SLA-driven IT operations.</p>
+          </div>
+        </div>
+
+        <div class="acc-item" role="listitem">
+          <button class="acc-item__header" aria-expanded="false">
+            <span class="acc-item__title">Innovation Engine</span>
+            <span class="acc-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="acc-item__body">
+            <p class="acc-item__text">Accelerate innovation with embedded AI labs, rapid GenAI prototyping, and enterprise-ready AI and LLM toolkits.</p>
+          </div>
+        </div>
+
+        <div class="acc-item" role="listitem">
+          <button class="acc-item__header" aria-expanded="false">
+            <span class="acc-item__title">Compliance & Security</span>
+            <span class="acc-item__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="acc-item__body">
+            <p class="acc-item__text">Strengthen enterprise security with AI-driven threat detection, automated governance, and proactive cloud risk visibility.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
        SCRIPTS
   ══════════════════════════════════════ -->
   <script>
@@ -1046,6 +1238,30 @@
 
     // Scroll-driven typewriter for all h2 headings
     document.querySelectorAll('.t-h2').forEach(el => setupScrollTypewriter(el));
+  })();
+  </script>
+
+  <!-- ── Accordion ── -->
+  <script>
+  (function () {
+    document.querySelectorAll('.acc-item__header').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item   = btn.closest('.acc-item');
+        const isOpen = item.classList.contains('is-open');
+
+        // Close all
+        document.querySelectorAll('.acc-item').forEach(el => {
+          el.classList.remove('is-open');
+          el.querySelector('.acc-item__header').setAttribute('aria-expanded', 'false');
+        });
+
+        // Open clicked (unless it was already open)
+        if (!isOpen) {
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
   })();
   </script>
 
