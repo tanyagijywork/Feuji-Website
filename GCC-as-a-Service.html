@@ -731,7 +731,7 @@
     <div class="intro__inner">
 
       <div class="intro__heading">
-        <h2 id="intro-heading" class="t-h2 reveal">Simplify the path to <em>AI-native</em> global operations</h2>
+        <h2 id="intro-heading" class="t-h2">Simplify the path to <em>AI-native</em> global operations</h2>
       </div>
 
       <div class="intro__body t-body-l reveal reveal-d1">
@@ -809,7 +809,34 @@
       return chars;
     }
 
-    // Timed typewriter — fires on page load (heading already visible)
+    // Quill — Scroll: scroll-driven reveal for h2 headings
+    function setupScrollTypewriter(el) {
+      const chars = buildTypewriterDOM(el);
+      const total = chars.length;
+
+      // Make container visible once it enters viewport
+      const visObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { el.classList.add('is-visible'); visObs.unobserve(el); }
+        });
+      }, { threshold: 0.05 });
+      visObs.observe(el);
+
+      function onScroll() {
+        const rect = el.getBoundingClientRect();
+        const vh   = window.innerHeight;
+        // Reveal zone: heading enters bottom → reaches 38% from top
+        const raw  = (vh - rect.top) / (vh * 0.62);
+        const prog = Math.max(0, Math.min(1, raw));
+        const show = Math.round(prog * total);
+        chars.forEach((s, i) => s.classList.toggle('is-visible', i < show));
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    // Quill — Timed: fires on page load (heading already visible)
     function setupHeroTypewriter(el) {
       if (!el) return;
       const chars = buildTypewriterDOM(el);
