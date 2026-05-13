@@ -32,7 +32,7 @@
       --muted:     #848484;
       --border:    var(--neutral-200);
       --border-dk: var(--neutral-800);
-      --surface:   #F5F5F5;
+      --surface:   var(--neutral-50);
       --white:     #FFFFFF;
 
       /* layout */
@@ -715,7 +715,7 @@
       color: var(--border);
       transition: color 0.22s;
     }
-    .card:hover .card__num { color: #C0C0C0; }
+    .card:hover .card__num { color: var(--neutral-300); }
 
     .card__title {
       font-family: var(--f-ui);
@@ -1036,7 +1036,7 @@
       z-index: 1;
     }
     .case-card:hover .case-card__label {
-      color: rgba(255,255,255,0.9);
+      color: var(--white);
     }
 
     .case-card__heading {
@@ -2239,7 +2239,7 @@
       width: 16px;
       height: 16px;
       flex-shrink: 0;
-      color: rgba(255,255,255,0.45);
+      color: var(--neutral-500);
       transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .footer__acc.is-open .footer__acc-chevron {
@@ -2480,7 +2480,7 @@
             <span class="ai-tab-img__label">AI Innovation Suite</span>
           </div>
 
-          <div class="ai-tab-img" data-tab="3" style="background: #0A0A0A;">
+          <div class="ai-tab-img" data-tab="3" style="background: var(--ink);">
             <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
               <source src="Assets/images/ai-engineering/gettyimages-1415599817-640_adpp.mp4" type="video/mp4">
             </video>
