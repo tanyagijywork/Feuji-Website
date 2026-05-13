@@ -583,7 +583,7 @@
       font-weight: 400;
       line-height: 28px;
       letter-spacing: -1px;
-      color: rgba(255,255,255,0.90);
+      color: var(--neutral-100);
       max-width: 420px;
       text-align: center;
     }
@@ -604,13 +604,13 @@
       flex-direction: column;
       align-items: center;
       gap: 12px;
-      color: rgba(255,255,255,0.65);
+      color: var(--neutral-300);
       z-index: 4;
     }
     .hero__scroll-line {
       width: 1px;
       height: 40px;
-      background: rgba(255,255,255,0.45);
+      background: var(--neutral-500);
       position: relative;
       overflow: hidden;
     }
@@ -2900,8 +2900,8 @@
           <!-- Orange glow centred on the content area -->
           <radialGradient id="orbit-glow" gradientUnits="userSpaceOnUse"
                           cx="720" cy="470" r="300">
-            <stop offset="0%"   stop-color="#C84020" stop-opacity="0.60"/>
-            <stop offset="45%"  stop-color="#8A2010" stop-opacity="0.22"/>
+            <stop offset="0%"   stop-color="#F3752C" stop-opacity="0.60"/>
+            <stop offset="45%"  stop-color="#DA6A29" stop-opacity="0.22"/>
             <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
           </radialGradient>
           <!-- Circular clip paths for orbit image placeholders -->
@@ -2916,13 +2916,13 @@
 
         <!-- ── Arc strokes — sweep=1 = clockwise = curves UPWARD in SVG screen coords ── -->
         <path class="join-orbit__arc" d="M 340 560 A 380 380 0 0 1 1100 560"
-              stroke="#242424" stroke-width="1"/>
+              stroke="#292929" stroke-width="1"/>
         <path class="join-orbit__arc" d="M 220 560 A 500 500 0 0 1 1220 560"
-              stroke="#242424" stroke-width="1"/>
+              stroke="#292929" stroke-width="1"/>
 
         <!-- ── Separator line at base with horizontal margin ── -->
         <line x1="80" y1="558" x2="1360" y2="558"
-              stroke="#242424" stroke-width="1"/>
+              stroke="#292929" stroke-width="1"/>
 
         <!-- ── Orbit image circles — clipped to circle shape ── -->
 
