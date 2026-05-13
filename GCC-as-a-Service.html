@@ -878,6 +878,106 @@
       .capabilities__left { position: static; }
     }
 
+    /* ─────────────────────────────────────────
+       IMPACT NUMBERS
+    ───────────────────────────────────────── */
+    .impact {
+      background: var(--neutral-50);
+      padding: var(--sec-py) 0;
+    }
+
+    .impact__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+    }
+
+    .impact__header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .impact__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap);
+    }
+
+    .impact-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 48px;
+      padding-left: 20px;
+      border-top: 1px solid var(--orange);
+      transition: border-color 0.4s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+    .impact-stat:hover { border-color: var(--orange-dark); }
+    .impact-stat:hover .impact-stat__val { color: var(--orange-dark); }
+
+    /* Glow on hover */
+    .impact-stat::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 50%;
+      background: radial-gradient(ellipse 100% 100% at 50% 0%,
+        rgba(243, 117, 44, 0.18) 0%,
+        rgba(243, 117, 44, 0) 93%
+      );
+      opacity: 0;
+      transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .impact-stat:hover::before { opacity: 1; }
+
+    /* Fade-up animation */
+    @keyframes impact-fade-up {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .impact-stat--animate { opacity: 0; }
+    .impact-stat--animate.is-visible {
+      animation: impact-fade-up 0.7s cubic-bezier(0,0,0.2,1) forwards;
+    }
+    .impact-stat--animate.is-visible:nth-child(1) { animation-delay: 0.1s; }
+    .impact-stat--animate.is-visible:nth-child(2) { animation-delay: 0.4s; }
+    .impact-stat--animate.is-visible:nth-child(3) { animation-delay: 0.7s; }
+
+    .impact-stat__val {
+      font-family: var(--f-display);
+      font-size: 80px;
+      font-weight: 500;
+      line-height: 80px;
+      letter-spacing: -3px;
+      color: var(--ink);
+      transition: color 0.22s var(--ease);
+      position: relative;
+      z-index: 1;
+    }
+
+    .impact-stat__label {
+      font-family: var(--f-ui);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 26px;
+      letter-spacing: -0.5px;
+      color: var(--mid);
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .impact__grid { grid-template-columns: 1fr; }
+      .impact-stat__val { font-size: 56px; line-height: 56px; }
+    }
+
   </style>
 </head>
 <body>
@@ -1129,6 +1229,42 @@
 
 
   <!-- ══════════════════════════════════════
+       IMPACT NUMBERS
+  ══════════════════════════════════════ -->
+  <section id="impact" class="impact" aria-labelledby="impact-heading">
+    <div class="impact__inner">
+
+      <div class="impact__header">
+        <span class="t-label-s eyebrow reveal">Impact numbers</span>
+        <h2 id="impact-heading" class="t-h2 reveal" style="margin-top:20px; max-width:640px; margin-left:auto; margin-right:auto;">
+          Accelerate to value with <em>measurable outcomes</em>
+        </h2>
+      </div>
+
+      <div class="impact__grid" aria-label="Impact statistics">
+
+        <div class="impact-stat impact-stat--animate">
+          <span class="impact-stat__val">40–70%</span>
+          <p class="impact-stat__label">cost savings vs U.S. onshore teams</p>
+        </div>
+
+        <div class="impact-stat impact-stat--animate">
+          <span class="impact-stat__val">90 Days</span>
+          <p class="impact-stat__label">from contract to execution</p>
+        </div>
+
+        <div class="impact-stat impact-stat--animate">
+          <span class="impact-stat__val">3x</span>
+          <p class="impact-stat__label">faster time-to-value vs traditional DIY GCC model</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
        SCRIPTS
   ══════════════════════════════════════ -->
   <script>
@@ -1238,6 +1374,60 @@
 
     // Scroll-driven typewriter for all h2 headings
     document.querySelectorAll('.t-h2').forEach(el => setupScrollTypewriter(el));
+  })();
+  </script>
+
+  <!-- ── Impact numbers: fade-up + scramble ── -->
+  <script>
+  (function () {
+    const animStats = document.querySelectorAll('.impact-stat--animate');
+    const grid      = document.querySelector('.impact__grid');
+    if (!animStats.length || !grid) return;
+
+    function scramble(el, delay) {
+      const original = el.textContent.trim();
+      const m = original.match(/^(\d+)(.*)$/);
+      if (!m) return; // non-numeric (e.g. "40–70%") — skip scramble, just fade
+      const numStr = m[1];
+      const suffix = m[2] || '';
+      const digits = '0123456789';
+      const frameDur    = 90;
+      const totalFrames = 20;
+      let frame = 0;
+
+      setTimeout(() => {
+        const iv = setInterval(() => {
+          frame++;
+          const progress = frame / totalFrames;
+          const resolved = Math.floor(progress * (numStr.length + 1));
+          let display = '';
+          for (let i = 0; i < numStr.length; i++) {
+            display += i < resolved
+              ? numStr[i]
+              : digits[Math.floor(Math.random() * digits.length)];
+          }
+          el.textContent = display + suffix;
+          if (frame >= totalFrames) {
+            clearInterval(iv);
+            el.textContent = original;
+          }
+        }, frameDur);
+      }, delay);
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        animStats.forEach((stat, i) => {
+          stat.classList.add('is-visible');
+          const val = stat.querySelector('.impact-stat__val');
+          if (val) scramble(val, i * 200);
+        });
+        observer.disconnect();
+      });
+    }, { threshold: 0.5, rootMargin: '0px 0px -80px 0px' });
+
+    observer.observe(grid);
   })();
   </script>
 
