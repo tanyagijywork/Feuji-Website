@@ -613,6 +613,50 @@
     .btn--tertiary-inv:hover .btn-arrow { transform: translateX(4px); }
 
     /* ─────────────────────────────────────────
+       PANEL-SCOPED HOVER OVERRIDES
+       Primary
+    ───────────────────────────────────────── */
+
+    /* Light bg — primary hover: black, white text */
+    .btn-panel--light .btn--primary-orange:hover {
+      background: var(--neutral-900); border-color: var(--neutral-900); color: #fff;
+    }
+    /* Dark bg — primary hover: white, black text */
+    .btn-panel--dark .btn--primary-orange:hover {
+      background: #fff; border-color: #fff; color: var(--neutral-900);
+    }
+    /* Green bg — primary hover: orange, white text */
+    .btn-panel--green .btn--primary-inv:hover {
+      background: var(--orange-500); border-color: var(--orange-500); color: #fff;
+    }
+    /* Orange bg — primary hover: black, white text */
+    .btn-panel--orange .btn--primary-inv:hover {
+      background: var(--neutral-900); border-color: var(--neutral-900); color: #fff;
+    }
+
+    /* ─────────────────────────────────────────
+       PANEL-SCOPED HOVER OVERRIDES
+       Secondary
+    ───────────────────────────────────────── */
+
+    /* Light bg — secondary hover: orange, white text */
+    .btn-panel--light .btn--secondary:hover {
+      background: var(--orange-500); border-color: var(--orange-500); color: #fff;
+    }
+    /* Dark bg — secondary hover: orange, white text */
+    .btn-panel--dark .btn--secondary-inv:hover {
+      background: var(--orange-500); border-color: var(--orange-500); color: #fff;
+    }
+    /* Green bg — secondary hover: white, black text */
+    .btn-panel--green .btn--secondary-inv:hover {
+      background: #fff; border-color: #fff; color: var(--neutral-900);
+    }
+    /* Orange bg — secondary hover: white, black text */
+    .btn-panel--orange .btn--secondary-inv:hover {
+      background: #fff; border-color: #fff; color: var(--neutral-900);
+    }
+
+    /* ─────────────────────────────────────────
        STYLESCAPE
     ───────────────────────────────────────── */
     .stylescape-page { padding: 48px var(--pad-h) 80px; }
