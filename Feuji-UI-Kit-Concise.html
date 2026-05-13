@@ -116,7 +116,7 @@
       /* ── Semantic aliases ── */
       --ink:     var(--neutral-900);
       --white:   #FFFFFF;
-      --surface: #F5F5F5;
+      --surface: var(--neutral-100);
       --border:  var(--neutral-200);
       --muted:   var(--neutral-400);
       --mid:     var(--neutral-600);
@@ -244,7 +244,7 @@
     .chip {
       font-size: 12px; color: var(--neutral-700);
       padding: 4px 12px; border: 1px solid var(--divider);
-      border-radius: 100px; background: #FAFAFA;
+      border-radius: 100px; background: var(--neutral-100);
     }
 
     /* Category header */
@@ -275,8 +275,8 @@
       border-bottom: 1px solid var(--divider);
     }
     .type-row--dark { background: var(--neutral-900); }
-    .type-row--dark .type-meta { border-right-color: #222; }
-    .type-row--tinted { background: #FAFAFA; }
+    .type-row--dark .type-meta { border-right-color: var(--neutral-800); }
+    .type-row--tinted { background: var(--neutral-100); }
 
     .type-meta {
       padding: 32px 32px 32px var(--pad-h);
@@ -395,9 +395,9 @@
     .type-table thead th:last-child  { padding-right: var(--pad-h); }
 
     .type-table tbody tr { border-bottom: 1px solid var(--divider); }
-    .type-table tbody tr:hover { background: #FAFAFA; }
+    .type-table tbody tr:hover { background: var(--neutral-100); }
     .type-table tbody tr.row--dark { background: var(--neutral-900); }
-    .type-table tbody tr.row--dark:hover { background: #111; }
+    .type-table tbody tr.row--dark:hover { background: var(--neutral-800); }
 
     .type-table td {
       padding: 14px 20px;
@@ -408,19 +408,19 @@
     .type-table td:last-child  { padding-right: var(--pad-h); }
 
     .td-token { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; color: var(--muted); white-space: nowrap; }
-    .row--dark .td-token { color: #555; }
+    .row--dark .td-token { color: var(--neutral-600); }
     .td-name  { font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap; }
     .row--dark .td-name { color: #fff; }
     .td-face  { color: var(--mid); white-space: nowrap; font-size: 13px; }
-    .row--dark .td-face { color: #666; }
+    .row--dark .td-face { color: var(--neutral-600); }
     .face-cormorant { font-family: var(--f-display); font-style: italic; }
     .td-size  { color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
     .row--dark .td-size { color: rgba(255,255,255,0.75); }
     .sz-main { font-weight: 600; font-size: 14px; display: block; }
     .sz-sub  { font-size: 11px; color: var(--muted); margin-top: 2px; display: block; }
-    .row--dark .sz-sub { color: #555; }
-    .sz-same { font-size: 11px; color: #D0D0D0; display: block; }
-    .row--dark .sz-same { color: #333; }
+    .row--dark .sz-sub { color: var(--neutral-600); }
+    .sz-same { font-size: 11px; color: var(--neutral-300); display: block; }
+    .row--dark .sz-same { color: var(--neutral-600); }
 
     .type-table .group-row td {
       padding: 10px 20px 6px;
@@ -438,18 +438,18 @@
     .resp-scale-wrap { margin-top: 8px; overflow-x: auto; }
     .resp-scale { width: 100%; border-collapse: collapse; font-family: var(--f-ui); }
     /* Colgroup tints — cells inherit these when no td background is set */
-    .col-desk { background: #BAE0CA; }
-    .col-tab  { background: #C4C0EC; }
-    .col-mob  { background: #F6CBAA; }
+    .col-desk { background: var(--green-100); }
+    .col-tab  { background: var(--violet-100); }
+    .col-mob  { background: var(--orange-100); }
     /* Breakpoint group header row */
     .resp-scale .bp-head {
       font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
       padding: 10px 20px; text-align: center; color: rgba(0,0,0,0.75);
       border-bottom: 1px solid rgba(0,0,0,0.14);
     }
-    .resp-scale .bp-head--desk { background: #89C9A6; }
-    .resp-scale .bp-head--tab  { background: #968FD4; color: rgba(255,255,255,0.9); }
-    .resp-scale .bp-head--mob  { background: #E8A97E; }
+    .resp-scale .bp-head--desk { background: var(--green-300); }
+    .resp-scale .bp-head--tab  { background: var(--violet-700); color: rgba(255,255,255,0.9); }
+    .resp-scale .bp-head--mob  { background: var(--orange-300); }
     .resp-scale .bp-head-token { background: #fff; border-bottom: 1px solid rgba(0,0,0,0.14); }
     /* Sub-column header row (SIZE / LINE HEIGHT / TRACKING) */
     .resp-scale .sub-head {
@@ -457,9 +457,9 @@
       padding: 8px 20px; text-align: right; white-space: nowrap;
       border-bottom: 2px solid rgba(0,0,0,0.18);
     }
-    .resp-scale .sub-head--desk { background: #A0D2B8; color: rgba(0,0,0,0.6); }
-    .resp-scale .sub-head--tab  { background: #AFAAE2; color: rgba(255,255,255,0.85); }
-    .resp-scale .sub-head--mob  { background: #EDB98E; color: rgba(0,0,0,0.65); }
+    .resp-scale .sub-head--desk { background: var(--green-200); color: rgba(0,0,0,0.6); }
+    .resp-scale .sub-head--tab  { background: var(--violet-500); color: rgba(255,255,255,0.9); }
+    .resp-scale .sub-head--mob  { background: var(--orange-200); color: rgba(0,0,0,0.65); }
     .resp-scale .sub-head-token {
       font-size: 8px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase;
       padding: 8px var(--pad-h); text-align: left; color: var(--muted);
@@ -476,7 +476,7 @@
     .resp-scale td.td-tok {
       background: #fff; padding: 14px var(--pad-h);
       font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap;
-      border-right: 1px solid #E0E0E0; border-bottom: 1px solid #EBEBEB;
+      border-right: 1px solid var(--neutral-200); border-bottom: 1px solid var(--neutral-100);
     }
     /* Number value cells — no background set so colgroup shows through */
     .resp-scale td.td-n {
@@ -503,7 +503,7 @@
     .swatch__block { width: 100%; height: 80px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.07); }
     .swatch__name  { font-size: 12px; font-weight: 600; color: var(--ink); line-height: 1.2; }
     .swatch__hex   { font-size: 11px; color: var(--muted); font-family: 'Courier New', monospace; margin-top: 2px; }
-    .swatch__token { font-size: 10px; font-weight: 600; letter-spacing: 0.5px; color: #BDBDBD; text-transform: uppercase; margin-top: 1px; }
+    .swatch__token { font-size: 10px; font-weight: 600; letter-spacing: 0.5px; color: var(--neutral-300); text-transform: uppercase; margin-top: 1px; }
     /* Scale swatch (smaller, for full 50–900 rows) */
     .swatch--sm { width: 108px; }
     .swatch--sm .swatch__block { height: 64px; border-radius: 8px; }
@@ -530,7 +530,7 @@
       border-radius: 16px; overflow: hidden;
     }
     .btn-panel { padding: 40px 36px; }
-    .btn-panel--light  { background: #F0F0F0; }
+    .btn-panel--light  { background: var(--neutral-100); }
     .btn-panel--dark   { background: var(--neutral-900); }
     .btn-panel--green  { background: var(--green-900); }
     .btn-panel--orange { background: var(--orange-500); }
@@ -572,7 +572,7 @@
 
     /* Primary — white fill (dark/green bg) */
     .btn--primary-inv { background: #fff; color: var(--neutral-900); border-color: #fff; }
-    .btn--primary-inv:hover { background: #E8E8E8; border-color: #E8E8E8; }
+    .btn--primary-inv:hover { background: var(--neutral-200); border-color: var(--neutral-200); }
 
     /* Secondary — black outline */
     .btn--secondary { background: transparent; color: var(--neutral-900); border-color: var(--neutral-900); }
@@ -659,7 +659,7 @@
 
     /* ── Keywords card ── */
     .bcard--keywords {
-      background: #F8F7F4;
+      background: var(--neutral-100);
       padding: 36px;
       display: flex; flex-direction: column; gap: 20px;
     }
@@ -679,7 +679,7 @@
 
     /* ── Mood card ── */
     .bcard--mood {
-      background: linear-gradient(160deg, #FEF0E4 0%, #EBF6F1 45%, #F0EDE8 75%, #FEF3EC 100%);
+      background: linear-gradient(160deg, var(--orange-100) 0%, var(--green-100) 45%, var(--neutral-100) 75%, var(--orange-100) 100%);
       display: flex; flex-direction: column; justify-content: flex-start;
       padding: 36px;
       gap: 0;
@@ -805,7 +805,7 @@
 
     /* ── Typeface card ── */
     .bcard--typeface {
-      background: #F2F2F0;
+      background: var(--neutral-100);
       padding: 32px 44px;
       display: flex; align-items: center; gap: 52px;
     }
@@ -830,7 +830,7 @@
 
     /* ── Typefaces mini card ── */
     .bcard--faces {
-      background: #F5F5F3;
+      background: var(--neutral-100);
       padding: 28px 32px;
       display: flex; flex-direction: column; justify-content: space-between;
     }
@@ -863,11 +863,11 @@
       grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
       grid-template-rows: 160px 100px;
       gap: 3px;
-      background: #111;
+      background: var(--neutral-900);
       height: 100%;
       width: 100%;
     }
-    .collage-cell { overflow: hidden; position: relative; background: #1a1a1a; }
+    .collage-cell { overflow: hidden; position: relative; background: var(--neutral-900); }
     .collage-cell img,
     .collage-cell video {
       width: 100%; height: 100%;
@@ -987,13 +987,13 @@
             <div class="colour-stripe" style="background:var(--neutral-900);"></div>
             <div class="colour-stripe" style="background:var(--neutral-700);"></div>
             <div class="colour-stripe" style="background:var(--orange-500);"></div>
-            <div class="colour-stripe" style="background:#E8A97E;"></div>
-            <div class="colour-stripe" style="background:#FEF3EC;"></div>
-            <div class="colour-stripe" style="background:#ECFDF8;"></div>
+            <div class="colour-stripe" style="background:var(--orange-200);"></div>
+            <div class="colour-stripe" style="background:var(--orange-100);"></div>
+            <div class="colour-stripe" style="background:var(--green-100);"></div>
             <div class="colour-stripe" style="background:var(--green-500);"></div>
             <div class="colour-stripe" style="background:var(--green-900);"></div>
           </div>
-          <p class="colour-stripe-label">Ink · Charcoal · Orange · Peach · Warm White · Mint · Green · Forest</p>
+          <p class="colour-stripe-label">Ink · Charcoal · Orange · Peach · Blush · Mint · Green · Forest</p>
         </div>
 
         <!-- TYPEFACE SPECIMEN — spans cols 2–3 -->
