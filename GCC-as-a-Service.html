@@ -978,6 +978,98 @@
       .impact-stat__val { font-size: 56px; line-height: 56px; }
     }
 
+    /* ─────────────────────────────────────────
+       CASE STUDIES
+    ───────────────────────────────────────── */
+    .section-dark { background: var(--ink); }
+
+    .section__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: var(--sec-py) var(--pad-x);
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+    }
+
+    .case-card {
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      background:
+        linear-gradient(var(--ink), var(--ink)) padding-box,
+        linear-gradient(to bottom, transparent 0%, rgba(200, 70, 20, 0.35) 100%) border-box;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: background 0.6s ease, transform 0.4s var(--ease);
+    }
+
+    /* Rising sun glow */
+    .case-card::before {
+      content: '';
+      position: absolute;
+      bottom: -10%;
+      left: 50%;
+      transform: translateX(-50%) translateY(60%) scale(1);
+      transform-origin: center bottom;
+      width: 100%;
+      height: 70%;
+      background: radial-gradient(ellipse at center bottom,
+        rgba(190, 60, 15, 0.85) 0%,
+        rgba(140, 35, 10, 0.45) 45%,
+        transparent 72%
+      );
+      border-radius: 50%;
+      transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity  1.4s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .case-card:hover {
+      background:
+        linear-gradient(var(--ink), var(--ink)) padding-box,
+        linear-gradient(to bottom, transparent 0%, rgba(243, 117, 44, 0.65) 100%) border-box;
+      transform: translateY(-2px);
+    }
+    .case-card:hover::before {
+      transform: translateX(-50%) translateY(0%) scale(2);
+      opacity: 1;
+    }
+
+    .case-card__label {
+      color: var(--orange);
+      transition: color 0.4s var(--ease);
+      position: relative;
+      z-index: 1;
+    }
+    .case-card:hover .case-card__label { color: var(--white); }
+
+    .case-card__heading {
+      font-family: var(--f-display);
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 38px;
+      letter-spacing: -1px;
+      color: var(--white);
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .case-grid { grid-template-columns: 1fr; }
+      .case-card { padding: 36px 24px; }
+      .case-card__heading { font-size: 28px; line-height: 34px; }
+    }
+
   </style>
 </head>
 <body>
@@ -1265,6 +1357,46 @@
 
 
   <!-- ══════════════════════════════════════
+       CASE STUDIES
+  ══════════════════════════════════════ -->
+  <section id="case-studies" class="section-dark" aria-labelledby="gcc-cases-heading">
+    <div class="section__inner">
+
+      <div style="margin-bottom: 72px; text-align: center;">
+        <h2 id="gcc-cases-heading" class="t-h2 reveal" style="color: var(--white); margin-top: 16px;">
+          See the impact <em>we deliver</em>
+        </h2>
+      </div>
+
+      <div class="case-grid">
+
+        <article class="case-card reveal" tabindex="0" role="article">
+          <p class="t-label-s case-card__label">Case Study</p>
+          <h3 class="case-card__heading">
+            Lorem ipsum dolor sit amet consectetur, adipiscing elit sed do eiusmod tempor incididunt?
+          </h3>
+          <a href="#" class="btn btn--tertiary-inv t-btn">
+            Discover now <span class="btn-arrow">→</span>
+          </a>
+        </article>
+
+        <article class="case-card reveal reveal-d2" tabindex="0" role="article">
+          <p class="t-label-s case-card__label">Case Study</p>
+          <h3 class="case-card__heading">
+            Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi aliquip?
+          </h3>
+          <a href="#" class="btn btn--tertiary-inv t-btn">
+            Discover now <span class="btn-arrow">→</span>
+          </a>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
        SCRIPTS
   ══════════════════════════════════════ -->
   <script>
@@ -1375,6 +1507,18 @@
     // Scroll-driven typewriter for all h2 headings
     document.querySelectorAll('.t-h2').forEach(el => setupScrollTypewriter(el));
   })();
+  </script>
+
+  <!-- ── Case cards: keyboard interaction ── -->
+  <script>
+  document.querySelectorAll('.case-card[tabindex]').forEach(card => {
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const link = card.querySelector('a');
+        if (link) { e.preventDefault(); link.click(); }
+      }
+    });
+  });
   </script>
 
   <!-- ── Impact numbers: fade-up + scramble ── -->
