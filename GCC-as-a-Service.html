@@ -360,6 +360,16 @@
     .nav--light .nav__link { color: var(--ink); }
 
     /* ─────────────────────────────────────────
+       TYPEWRITER
+    ───────────────────────────────────────── */
+    .tw-char {
+      opacity: 0;
+      transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline;
+    }
+    .tw-char.is-visible { opacity: 1; }
+
+    /* ─────────────────────────────────────────
        PAGE BANNER
     ───────────────────────────────────────── */
     .page-banner {
@@ -631,6 +641,65 @@
 
     window.addEventListener('scroll', updateNav, { passive: true });
     updateNav();
+  </script>
+
+  <!-- ── Typewriter: banner heading ── -->
+  <script>
+  (function () {
+    // Wrap each character in a .tw-char span
+    function buildTypewriterDOM(el) {
+      const chars = [];
+
+      function processChildren(parent) {
+        const nodes = Array.from(parent.childNodes);
+        nodes.forEach(node => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            const raw  = node.textContent;
+            const text = /^\n/.test(raw)
+              ? raw.replace(/^\s+/, '').replace(/[\n\r\t]+$/, '')
+              : raw.replace(/[\n\r\t]+$/, '');
+            if (!text.trim()) { parent.removeChild(node); return; }
+            const frag = document.createDocumentFragment();
+            for (const char of text) {
+              const span = document.createElement('span');
+              span.className = 'tw-char';
+              span.textContent = char;
+              frag.appendChild(span);
+              chars.push(span);
+            }
+            parent.replaceChild(frag, node);
+          } else if (node.nodeName === 'BR') {
+            // leave <br> untouched
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            processChildren(node);
+          }
+        });
+      }
+
+      processChildren(el);
+      el.classList.add('typewriter-heading');
+      return chars;
+    }
+
+    // Timed typewriter — fires on page load (heading already visible)
+    function setupHeroTypewriter(el) {
+      if (!el) return;
+      const chars = buildTypewriterDOM(el);
+      el.classList.add('is-visible');
+      let i = 0;
+      const tick = setInterval(() => {
+        if (i < chars.length) {
+          chars[i].classList.add('is-visible');
+          i++;
+        } else {
+          clearInterval(tick);
+        }
+      }, 80);
+    }
+
+    // Start 500ms after load — lets fonts and nav settle first
+    setTimeout(() => setupHeroTypewriter(document.querySelector('.page-banner__heading')), 500);
+  })();
   </script>
 
   <!-- ── Mobile nav toggle ── -->
