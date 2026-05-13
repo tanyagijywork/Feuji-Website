@@ -21,13 +21,15 @@
       --neutral-100: #EAEAEA;
       --neutral-300: #C1C1C1;
       --neutral-400: #A2A2A2;
+      --neutral-500: #848484;
+      --neutral-800: #292929;
       --ink:       #0A0A0A;
       --ink-90:    #1A1A1A;
       --ink-70:    #333333;
       --mid:       #656565;
       --muted:     #848484;
       --border:    #E0E0E0;
-      --border-dk: #242424;
+      --border-dk: var(--neutral-800);
       --surface:   #F5F5F5;
       --white:     #FFFFFF;
 
@@ -1560,7 +1562,7 @@
     .footer-reveal__copyright {
       font-family: var(--f-ui);
       font-size: 13px;
-      color: rgba(255,255,255,0.5);
+      color: var(--neutral-500);
     }
 
     .footer-reveal__policy {
@@ -1571,11 +1573,11 @@
     .footer-reveal__policy a {
       font-family: var(--f-ui);
       font-size: 13px;
-      color: rgba(255,255,255,0.5);
+      color: var(--neutral-500);
       transition: color 0.18s;
       text-decoration: none;
     }
-    .footer-reveal__policy a:hover { color: rgba(255,255,255,0.85); }
+    .footer-reveal__policy a:hover { color: var(--white); }
 
     /* Footer — light theme, merges with section above */
     .footer {
@@ -1617,7 +1619,7 @@
       font-weight: 400;
       line-height: 21px;
       letter-spacing: 0;
-      color: rgba(255,255,255,0.45);
+      color: var(--neutral-500);
       transition: color 0.18s;
     }
     .footer__link:hover { color: var(--white); }
@@ -1966,7 +1968,7 @@
       display: block;
       width: 22px;
       height: 1.5px;
-      background: #fff;
+      background: var(--white);
       border-radius: 2px;
       transition: transform 0.3s ease, opacity 0.3s ease;
       transform-origin: center;
@@ -1983,7 +1985,7 @@
       gap: 0;
       position: fixed;
       inset: 0;
-      background: #0A0A0A;
+      background: var(--ink);
       z-index: 200;
       padding: 100px 32px 48px;
       transform: translateY(-100%);
@@ -2000,13 +2002,13 @@
       font-family: var(--f-display);
       font-size: 36px;
       font-weight: 500;
-      color: rgba(255,255,255,0.85);
+      color: var(--neutral-100);
       text-decoration: none;
       padding: 14px 0;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       transition: color 0.2s;
     }
-    .mobile-nav__link:hover { color: #F3752C; }
+    .mobile-nav__link:hover { color: var(--orange); }
     .mobile-nav__cta { margin-top: auto; }
 
     /* ── Hero ── */
@@ -2064,7 +2066,7 @@
     .ai-mobile-progress__fill {
       height: 100%;
       width: 0;
-      background: #D8582B;
+      background: var(--orange-dark);
       border-radius: 999px;
     }
     .ai-mobile-progress__fill.is-running {
