@@ -153,9 +153,18 @@
       overflow: hidden;
     }
     .pg-header__eyebrow {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 16px;
+    }
+    .pg-header__logo {
+      height: 22px; width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.85;
+    }
+    .pg-header__label {
       font-size: 11px; font-weight: 700;
       letter-spacing: 1px; text-transform: uppercase;
-      color: rgba(255,255,255,0.7); margin-bottom: 16px;
+      color: rgba(255,255,255,0.7);
     }
     .pg-header__title {
       font-family: var(--f-display);
@@ -883,8 +892,11 @@
   <!-- ── PAGE HEADER ── -->
   <header class="pg-header">
     <div>
-      <p class="pg-header__eyebrow">Feuji Website · Design System</p>
-      <h1 class="pg-header__title">UI <em>Kit</em></h1>
+      <div class="pg-header__eyebrow">
+        <img class="pg-header__logo" src="Assets/images/feuji-orange-logo.png" alt="Feuji" />
+        <span class="pg-header__label">Feuji</span>
+      </div>
+      <h1 class="pg-header__title"><em>Flow</em> Design System</h1>
     </div>
   </header>
 
