@@ -19,6 +19,8 @@
       /* neutral palette */
       --neutral-50:  #F9F9F9;
       --neutral-100: #EAEAEA;
+      --neutral-300: #C1C1C1;
+      --neutral-400: #A2A2A2;
       --ink:       #0A0A0A;
       --ink-90:    #1A1A1A;
       --ink-70:    #333333;
@@ -1335,7 +1337,7 @@
       margin-bottom: 16px;
       transition: color 0.4s var(--ease);
     }
-    .comm-card.is-revealed:hover .comm-card__title { color: #22c55e; }
+    .comm-card.is-revealed:hover .comm-card__title { color: var(--green-400); }
 
     .comm-card__body {
       font-family: var(--f-ui);
@@ -1343,7 +1345,7 @@
       font-weight: 400;
       line-height: 25px;
       letter-spacing: -1px;
-      color: rgba(255,255,255,0.8);
+      color: var(--neutral-300);
       flex: 1;
       margin-bottom: 24px;
     }
@@ -1660,6 +1662,7 @@
       --orange:      #F3752C;  /* Orange 600 — Brand Primary */
       --orange-light: #FEF3EC;
       --orange-dark:  #DA6A29; /* Orange 700 */
+      --green-400:   #00BE91;  /* Green 400 — Community accent */
     }
 
     /* Active nav underline → orange */
@@ -1672,7 +1675,7 @@
     .comm-card__link:hover { color: var(--white); }
 
     /* Community section — inverse text on green background */
-    .comm-sticky-stage .eyebrow { color: rgba(255,255,255,0.55); }
+    .comm-sticky-stage .eyebrow { color: var(--neutral-400); }
     .comm-sticky-stage .t-h2 { color: var(--white); }
     .comm-sticky-stage .t-h2 em { color: var(--white); }
 
