@@ -854,34 +854,41 @@
     }
 
     /* ── Media collage card ── */
-    .bcard--collage { grid-column: 1 / 4; grid-row: 5; }
+    .bcard--collage {
+      grid-column: 1 / 4; grid-row: 5;
+      display: flex; flex-direction: column;
+      background: var(--neutral-900);
+    }
+    .collage-header {
+      padding: 18px 26px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .collage-header__label {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+    }
+    .collage-header__tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .collage-tag {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.2px;
+      color: rgba(255,255,255,0.72);
+      padding: 4px 13px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 100px;
+    }
     .collage-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-      grid-template-rows: 160px 100px;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: 1fr 1fr;
       gap: 3px;
-      background: var(--neutral-900);
-      height: 100%;
-      width: 100%;
+      flex: 1;
     }
-    .collage-cell { overflow: hidden; position: relative; background: var(--neutral-900); }
+    .collage-cell { overflow: hidden; position: relative; background: var(--neutral-800); }
     .collage-cell img,
     .collage-cell video {
       width: 100%; height: 100%;
       object-fit: cover; object-position: center;
       display: block;
-    }
-    /* hero video spans 2 rows on left */
-    .collage-cell--hero { grid-column: 1; grid-row: 1 / 3; }
-    /* last cell of row 2 spans 2 cols */
-    .collage-cell--wide  { grid-column: 4 / 6; grid-row: 2; }
-    .collage-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
-      padding: 18px 22px 16px;
-      font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
-      color: rgba(255,255,255,0.65);
-      pointer-events: none;
     }
 
   </style>
@@ -1076,65 +1083,65 @@
           </div>
         </div>
 
-        <!-- MEDIA COLLAGE — full width, row 5 -->
+        <!-- IMAGERY STYLE — full width, row 5 -->
         <div class="bcard bcard--collage">
-          <div class="collage-grid">
 
-            <!-- Hero banner video — spans 2 rows, left side -->
-            <div class="collage-cell collage-cell--hero">
-              <video autoplay muted loop playsinline>
-                <source src="Assets/images/banner-video.mp4" type="video/mp4">
-              </video>
+          <div class="collage-header">
+            <p class="collage-header__label">Imagery Style</p>
+            <div class="collage-header__tags">
+              <span class="collage-tag">Real</span>
+              <span class="collage-tag">Warm</span>
+              <span class="collage-tag">Technical</span>
+              <span class="collage-tag">Purposeful</span>
+              <span class="collage-tag">Grounded</span>
+              <span class="collage-tag">Human</span>
             </div>
+          </div>
 
-            <!-- Row 1, col 2: About / team video -->
+          <div class="collage-grid">
+            <!-- Row 1 -->
             <div class="collage-cell">
               <video autoplay muted loop playsinline>
                 <source src="Assets/images/hf_20260303_071415_7a7d4099-8c41-47e9-b050-3c4aae423622.mp4" type="video/mp4">
               </video>
             </div>
-
-            <!-- Row 1, col 3: Services — Consulting -->
             <div class="collage-cell">
               <img src="Assets/images/home-services-v002/Consulting.png" alt="Consulting" />
             </div>
-
-            <!-- Row 1, col 4: AI engineering video -->
             <div class="collage-cell">
               <video autoplay muted loop playsinline>
                 <source src="Assets/images/ai-engineering/gettyimages-2188313395-640_adpp.mp4" type="video/mp4">
               </video>
             </div>
-
-            <!-- Row 1, col 5: Services — Cybersecurity -->
             <div class="collage-cell">
               <img src="Assets/images/home-services-v002/Cybersecurity.png" alt="Cybersecurity" />
             </div>
+            <div class="collage-cell">
+              <video autoplay muted loop playsinline>
+                <source src="Assets/images/ai-engineering/gettyimages-2182400108-640_adpp.mp4" type="video/mp4">
+              </video>
+            </div>
 
-            <!-- Row 2, col 2: Services — Digital Engineering -->
+            <!-- Row 2 -->
             <div class="collage-cell">
               <img src="Assets/images/home-services-v002/Digital-Engineering.png" alt="Digital Engineering" />
             </div>
-
-            <!-- Row 2, col 3: AI engineering video 2 -->
             <div class="collage-cell">
               <video autoplay muted loop playsinline>
                 <source src="Assets/images/ai-engineering/gettyimages-2151855243-640_adpp.mp4" type="video/mp4">
               </video>
             </div>
-
-            <!-- Row 2, col 4: Mt Fuji illustrated -->
             <div class="collage-cell">
               <img src="Assets/images/Firefly_Gemini-Flash-mountain.png" alt="Mt Fuji" />
             </div>
-
-            <!-- Row 2, col 5: Connect / atmospheric image -->
             <div class="collage-cell">
               <img src="Assets/images/3-AdobeStock_1715180662.png" alt="Connect" />
-              <div class="collage-overlay">Visual Assets · Homepage</div>
             </div>
-
+            <div class="collage-cell">
+              <img src="Assets/images/AdobeStock_535425457-1.png" alt="People" />
+            </div>
           </div>
+
         </div>
 
       </div><!-- /bento -->
