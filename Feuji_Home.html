@@ -1170,13 +1170,13 @@
       gap: 16px;
       padding-top: 48px;
       padding-left: 20px;
-      border-top: 1px solid #00B784;
+      border-top: 1px solid var(--green-500);
       transition: border-color 0.4s var(--ease);
       position: relative;
       overflow: hidden;
     }
-    .stat:hover { border-color: #00B784; }
-    .stat:hover .stat__val { color: #15803d; }
+    .stat:hover { border-color: var(--green-500); }
+    .stat:hover .stat__val { color: var(--green-700); }
 
 
     /* ── Glow — hidden by default, appears on hover ── */
@@ -1663,6 +1663,8 @@
       --orange-light: #FEF3EC;
       --orange-dark:  #DA6A29; /* Orange 700 */
       --green-400:   #00BE91;  /* Green 400 — Community accent */
+      --green-500:   #00B784;  /* Green 500 — Stats accent */
+      --green-700:   #00805D;  /* Green 700 — Stats hover */
     }
 
     /* Active nav underline → orange */
