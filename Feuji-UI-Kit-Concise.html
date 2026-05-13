@@ -13,23 +13,60 @@
     :root {
       --f-display: 'Cormorant Garamond', Georgia, serif;
       --f-ui:      'DM Sans', system-ui, sans-serif;
-      --ink:       #0A0A0A;
-      --white:     #FFFFFF;
-      --surface:   #F5F5F5;
-      --border:    #E8E8E8;
-      --muted:     #A2A2A2;
-      --mid:       #656565;
-      --orange:    #F3752C;
-      --col-meta:  220px;
-      --pad-h:     80px;
-      --divider:   #E8E8E8;
+
+      /* ── Neutrals ── */
+      --neutral-100: #EAEAEA;
+      --neutral-200: #DFDFDF;
+      --neutral-300: #C1C1C1;
+      --neutral-400: #A2A2A2;
+      --neutral-500: #848484;
+      --neutral-600: #656565;
+      --neutral-700: #474747;
+      --neutral-800: #292929;
+      --neutral-900: #0A0A0A;
+
+      /* ── Orange ── */
+      --orange-100: #FDD7C3;
+      --orange-200: #FBBA9A;
+      --orange-300: #F89F71;
+      --orange-400: #F58345;
+      --orange-500: #F3752C;
+      --orange-600: #DA6A29;
+      --orange-700: #AA5220;
+      --orange-800: #7A3B17;
+      --orange-900: #49230E;
+
+      /* ── Green ── */
+      --green-100: #A4EBDB;
+      --green-200: #5DDCC2;
+      --green-300: #00CEA9;
+      --green-400: #00BE91;
+      --green-500: #00B784;
+      --green-600: #00A577;
+      --green-700: #00805D;
+      --green-800: #005C43;
+      --green-900: #003727;
+
+      /* ── Semantic aliases ── */
+      --ink:     var(--neutral-900);
+      --white:   #FFFFFF;
+      --surface: #F5F5F5;
+      --border:  var(--neutral-200);
+      --muted:   var(--neutral-400);
+      --mid:     var(--neutral-600);
+      --orange:  var(--orange-500);
+      --green:   var(--green-500);
+
+      --col-meta: 220px;
+      --pad-h:    80px;
+      --divider:  var(--neutral-200);
     }
 
     /* ── RESET ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background: #fff;
-      color: #141414;
+      color: var(--neutral-900);
       font-family: var(--f-ui);
       -webkit-font-smoothing: antialiased;
     }
@@ -123,11 +160,11 @@
     .ff-block__label {
       font-size: 11px; font-weight: 700;
       letter-spacing: 1.2px; text-transform: uppercase;
-      color: #A2A2A2; margin-bottom: 4px;
+      color: var(--neutral-400); margin-bottom: 4px;
     }
     .ff-block__name {
       font-size: 14px; font-weight: 700;
-      color: #141414; margin-bottom: 20px;
+      color: var(--neutral-900); margin-bottom: 20px;
     }
     .ff-block__sample { font-size: 44px; line-height: 1; letter-spacing: -2px; color: #000; }
     .ff-block__sample--display { font-family: var(--f-display); font-weight: 500; }
@@ -139,7 +176,7 @@
       border-top: 1px solid var(--divider);
     }
     .chip {
-      font-size: 12px; color: #474747;
+      font-size: 12px; color: var(--neutral-700);
       padding: 4px 12px; border: 1px solid var(--divider);
       border-radius: 100px; background: #FAFAFA;
     }
@@ -163,7 +200,7 @@
       font-size: 13px; font-weight: 700;
       letter-spacing: 0.6px; color: #000;
     }
-    .cat-desc { font-size: 13px; color: #656565; }
+    .cat-desc { font-size: 13px; color: var(--neutral-600); }
 
     /* Type row */
     .type-row {
@@ -171,7 +208,7 @@
       grid-template-columns: var(--col-meta) 1fr;
       border-bottom: 1px solid var(--divider);
     }
-    .type-row--dark { background: #0A0A0A; }
+    .type-row--dark { background: var(--neutral-900); }
     .type-row--dark .type-meta { border-right-color: #222; }
     .type-row--tinted { background: #FAFAFA; }
 
@@ -182,18 +219,18 @@
     .type-meta__token {
       font-size: 11px; font-weight: 700;
       letter-spacing: 0.8px; text-transform: uppercase;
-      color: #A2A2A2; margin-bottom: 6px;
+      color: var(--neutral-400); margin-bottom: 6px;
     }
     .type-meta__label {
       font-size: 14px; font-weight: 700;
-      color: #141414; margin-bottom: 14px;
+      color: var(--neutral-900); margin-bottom: 14px;
     }
     .type-row--dark .type-meta__label { color: #fff; }
     .type-meta__spec {
-      font-size: 12px; line-height: 1.9; color: #656565;
+      font-size: 12px; line-height: 1.9; color: var(--neutral-600);
     }
-    .type-meta__spec b { font-weight: 600; color: #292929; }
-    .type-row--dark .type-meta__spec b { color: #A2A2A2; }
+    .type-meta__spec b { font-weight: 600; color: var(--neutral-800); }
+    .type-row--dark .type-meta__spec b { color: var(--neutral-400); }
 
     .type-body {
       padding: 32px var(--pad-h);
@@ -213,26 +250,26 @@
     .s-h2 em { font-style: italic; }
     .s-h3 { font-family: var(--f-display); font-size: 40px; font-weight: 500; line-height: 1; letter-spacing: -2px; color: #000; }
     .s-h3 em { font-style: italic; }
-    .s-h4 { font-family: var(--f-ui); font-size: 32px; font-weight: 500; line-height: 1.1; letter-spacing: -1px; color: #141414; }
-    .s-h5 { font-family: var(--f-ui); font-size: 24px; font-weight: 500; line-height: 1.2; letter-spacing: -1px; color: #141414; }
-    .s-body-xl { font-family: var(--f-ui); font-size: 20px; font-weight: 400; line-height: 1.4; letter-spacing: -1px; color: #474747; }
-    .s-body-xl b { font-weight: 700; color: #141414; }
-    .s-body-l  { font-family: var(--f-ui); font-size: 18px; font-weight: 400; line-height: 1.4; letter-spacing: -1px; color: #474747; }
-    .s-body-l b { font-weight: 700; color: #141414; }
-    .s-body-m  { font-family: var(--f-ui); font-size: 16px; font-weight: 400; line-height: 1.5; color: #656565; }
-    .s-body-s  { font-family: var(--f-ui); font-size: 14px; font-weight: 400; line-height: 1.5; color: #656565; }
-    .s-label-m { font-family: var(--f-ui); font-size: 14px; font-weight: 600; line-height: 1.1; letter-spacing: 1px; text-transform: uppercase; color: #656565; }
-    .s-label-s { font-family: var(--f-ui); font-size: 12px; font-weight: 600; line-height: 1.1; letter-spacing: 1px; text-transform: uppercase; color: #656565; }
+    .s-h4 { font-family: var(--f-ui); font-size: 32px; font-weight: 500; line-height: 1.1; letter-spacing: -1px; color: var(--neutral-900); }
+    .s-h5 { font-family: var(--f-ui); font-size: 24px; font-weight: 500; line-height: 1.2; letter-spacing: -1px; color: var(--neutral-900); }
+    .s-body-xl { font-family: var(--f-ui); font-size: 20px; font-weight: 400; line-height: 1.4; letter-spacing: -1px; color: var(--neutral-700); }
+    .s-body-xl b { font-weight: 700; color: var(--neutral-900); }
+    .s-body-l  { font-family: var(--f-ui); font-size: 18px; font-weight: 400; line-height: 1.4; letter-spacing: -1px; color: var(--neutral-700); }
+    .s-body-l b { font-weight: 700; color: var(--neutral-900); }
+    .s-body-m  { font-family: var(--f-ui); font-size: 16px; font-weight: 400; line-height: 1.5; color: var(--neutral-600); }
+    .s-body-s  { font-family: var(--f-ui); font-size: 14px; font-weight: 400; line-height: 1.5; color: var(--neutral-600); }
+    .s-label-m { font-family: var(--f-ui); font-size: 14px; font-weight: 600; line-height: 1.1; letter-spacing: 1px; text-transform: uppercase; color: var(--neutral-600); }
+    .s-label-s { font-family: var(--f-ui); font-size: 12px; font-weight: 600; line-height: 1.1; letter-spacing: 1px; text-transform: uppercase; color: var(--neutral-600); }
     .s-stats-l { font-family: var(--f-display); font-size: 80px; font-weight: 500; line-height: 1; letter-spacing: -3px; color: #000; }
     .s-stats-m { font-family: var(--f-display); font-size: 48px; font-weight: 500; line-height: 1; letter-spacing: -2px; color: #000; }
     .s-stats-s { font-family: var(--f-ui); font-size: 24px; font-weight: 500; line-height: 1.2; letter-spacing: -1px; color: #000; }
     .stat-item { display: flex; flex-direction: column; gap: 10px; }
-    .stat-item__sub { font-size: 16px; font-weight: 400; line-height: 1.4; letter-spacing: -1px; color: #656565; }
+    .stat-item__sub { font-size: 16px; font-weight: 400; line-height: 1.4; letter-spacing: -1px; color: var(--neutral-600); }
     .stats-row { display: flex; gap: 48px; align-items: flex-end; }
 
     /* Display canvas */
     .disp-canvas {
-      background: #0A0A0A; border-radius: 12px;
+      background: var(--neutral-900); border-radius: 12px;
       padding: 48px; overflow: hidden;
     }
     .disp-canvas .s-disp-l { color: #fff; }
@@ -245,13 +282,13 @@
       font-family: var(--f-ui); font-size: 16px; font-weight: 400;
       line-height: 18px; letter-spacing: 0; cursor: default;
     }
-    .spec-btn--primary  { background: #0A0A0A; color: #fff; border-color: #0A0A0A; }
-    .spec-btn--orange   { background: #F3752C; color: #fff; border-color: #F3752C; }
-    .spec-btn--outline  { background: transparent; color: #0A0A0A; border-color: #0A0A0A; }
+    .spec-btn--primary  { background: var(--neutral-900); color: #fff; border-color: var(--neutral-900); }
+    .spec-btn--orange   { background: var(--orange-500); color: #fff; border-color: var(--orange-500); }
+    .spec-btn--outline  { background: transparent; color: var(--neutral-900); border-color: var(--neutral-900); }
     .spec-btn-arrow     { font-size: 16px; flex-shrink: 0; }
     .link-item {
       display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--f-ui); font-size: 16px; color: #0A0A0A;
+      font-family: var(--f-ui); font-size: 16px; color: var(--neutral-900);
     }
     .link-item--inv { color: rgba(255,255,255,0.85); }
     .link-arrow { width: 16px; height: 1px; background: currentColor; display: inline-block; position: relative; top: 1px; }
@@ -293,7 +330,7 @@
 
     .type-table tbody tr { border-bottom: 1px solid var(--divider); }
     .type-table tbody tr:hover { background: #FAFAFA; }
-    .type-table tbody tr.row--dark { background: #0A0A0A; }
+    .type-table tbody tr.row--dark { background: var(--neutral-900); }
     .type-table tbody tr.row--dark:hover { background: #111; }
 
     .type-table td {
@@ -364,7 +401,7 @@
     }
     /* Category section rows */
     .resp-scale .cat-row td {
-      background: #0A0A0A !important;
+      background: var(--neutral-900) !important;
       color: rgba(255,255,255,0.45);
       font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
       padding: 9px var(--pad-h); border: none;
@@ -428,9 +465,9 @@
     }
     .btn-panel { padding: 40px 36px; }
     .btn-panel--light  { background: #F0F0F0; }
-    .btn-panel--dark   { background: #0A0A0A; }
-    .btn-panel--green  { background: #003727; }
-    .btn-panel--orange { background: #F3752C; }
+    .btn-panel--dark   { background: var(--neutral-900); }
+    .btn-panel--green  { background: var(--green-900); }
+    .btn-panel--orange { background: var(--orange-500); }
     .btn-panel__label {
       font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
       color: rgba(0,0,0,0.4); margin-bottom: 36px;
@@ -464,16 +501,16 @@
     .btn:hover .btn-arrow { transform: translateX(4px); }
 
     /* Primary — orange fill */
-    .btn--primary-orange { background: #F3752C; color: #fff; border-color: #F3752C; }
-    .btn--primary-orange:hover { background: #DA6A29; border-color: #DA6A29; }
+    .btn--primary-orange { background: var(--orange-500); color: #fff; border-color: var(--orange-500); }
+    .btn--primary-orange:hover { background: var(--orange-600); border-color: var(--orange-600); }
 
     /* Primary — white fill (dark/green bg) */
-    .btn--primary-inv { background: #fff; color: #0A0A0A; border-color: #fff; }
+    .btn--primary-inv { background: #fff; color: var(--neutral-900); border-color: #fff; }
     .btn--primary-inv:hover { background: #E8E8E8; border-color: #E8E8E8; }
 
     /* Secondary — black outline */
-    .btn--secondary { background: transparent; color: #0A0A0A; border-color: #0A0A0A; }
-    .btn--secondary:hover { background: #0A0A0A; color: #fff; }
+    .btn--secondary { background: transparent; color: var(--neutral-900); border-color: var(--neutral-900); }
+    .btn--secondary:hover { background: var(--neutral-900); color: #fff; }
 
     /* Secondary inv — white outline */
     .btn--secondary-inv { background: transparent; color: #fff; border-color: rgba(255,255,255,0.4); }
@@ -481,7 +518,7 @@
 
     /* Tertiary — text + arrow, light bg */
     .btn--tertiary {
-      padding: 0; background: none; border: none; color: #0A0A0A;
+      padding: 0; background: none; border: none; color: var(--neutral-900);
       font-family: var(--f-ui); font-size: 16px; font-weight: 400; line-height: 18px;
       display: inline-flex; align-items: center; gap: 8px;
       cursor: pointer; transition: transform 0s;
@@ -625,7 +662,7 @@
 
     /* ── Flow quote card ── */
     .bcard--flow {
-      background: linear-gradient(135deg, #F3752C 0%, #E05B1A 100%);
+      background: linear-gradient(135deg, var(--orange-500) 0%, var(--orange-700) 100%);
       padding: 36px;
       display: flex; flex-direction: column; justify-content: flex-end;
     }
@@ -659,7 +696,7 @@
 
     /* ── Typography animation card ── */
     .bcard--typo-anim {
-      background: #0A0A0A;
+      background: var(--neutral-900);
       padding: 52px 56px;
       display: flex; flex-direction: column; justify-content: space-between;
     }
@@ -881,14 +918,14 @@
         <div class="bcard bcard--colours">
           <p class="bcard__title">Colour System</p>
           <div class="colour-stripes">
-            <div class="colour-stripe" style="background:#0A0A0A;"></div>
-            <div class="colour-stripe" style="background:#474747;"></div>
-            <div class="colour-stripe" style="background:#F3752C;"></div>
+            <div class="colour-stripe" style="background:var(--neutral-900);"></div>
+            <div class="colour-stripe" style="background:var(--neutral-700);"></div>
+            <div class="colour-stripe" style="background:var(--orange-500);"></div>
             <div class="colour-stripe" style="background:#E8A97E;"></div>
             <div class="colour-stripe" style="background:#FEF3EC;"></div>
             <div class="colour-stripe" style="background:#ECFDF8;"></div>
-            <div class="colour-stripe" style="background:#00B784;"></div>
-            <div class="colour-stripe" style="background:#003727;"></div>
+            <div class="colour-stripe" style="background:var(--green-500);"></div>
+            <div class="colour-stripe" style="background:var(--green-900);"></div>
           </div>
           <p class="colour-stripe-label">Ink · Charcoal · Orange · Peach · Warm White · Mint · Green · Forest</p>
         </div>
@@ -1471,7 +1508,7 @@
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#555555;"></div><div><p class="swatch__name">600</p><p class="swatch__hex">#555555</p></div></div>
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#333333;"></div><div><p class="swatch__name">700</p><p class="swatch__hex">#333333</p></div></div>
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#1A1A1A;"></div><div><p class="swatch__name">800</p><p class="swatch__hex">#1A1A1A</p></div></div>
-          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#0A0A0A;"></div><div><p class="swatch__name">900</p><p class="swatch__hex">#0A0A0A</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:var(--neutral-900);"></div><div><p class="swatch__name">900</p><p class="swatch__hex">var(--neutral-900)</p></div></div>
         </div>
       </div>
 
@@ -1484,8 +1521,8 @@
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#FBC4A0;"></div><div><p class="swatch__name">200</p><p class="swatch__hex">#FBC4A0</p></div></div>
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#F9A876;"></div><div><p class="swatch__name">300</p><p class="swatch__hex">#F9A876</p></div></div>
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#F78C52;"></div><div><p class="swatch__name">400</p><p class="swatch__hex">#F78C52</p></div></div>
-          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#F3752C;"></div><div><p class="swatch__name">500 ★</p><p class="swatch__hex">#F3752C</p></div></div>
-          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#DA6A29;"></div><div><p class="swatch__name">600</p><p class="swatch__hex">#DA6A29</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:var(--orange-500);"></div><div><p class="swatch__name">500 ★</p><p class="swatch__hex">var(--orange-500)</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:var(--orange-600);"></div><div><p class="swatch__name">600</p><p class="swatch__hex">var(--orange-600)</p></div></div>
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#D8582B;"></div><div><p class="swatch__name">700</p><p class="swatch__hex">#D8582B</p></div></div>
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#B04520;"></div><div><p class="swatch__name">800</p><p class="swatch__hex">#B04520</p></div></div>
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#8A3318;"></div><div><p class="swatch__name">900</p><p class="swatch__hex">#8A3318</p></div></div>
@@ -1501,11 +1538,11 @@
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#A7F3DC;"></div><div><p class="swatch__name">200</p><p class="swatch__hex">#A7F3DC</p></div></div>
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#6EE7C0;"></div><div><p class="swatch__name">300</p><p class="swatch__hex">#6EE7C0</p></div></div>
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#34D3A0;"></div><div><p class="swatch__name">400</p><p class="swatch__hex">#34D3A0</p></div></div>
-          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#00B784;"></div><div><p class="swatch__name">500 ★</p><p class="swatch__hex">#00B784</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:var(--green-500);"></div><div><p class="swatch__name">500 ★</p><p class="swatch__hex">var(--green-500)</p></div></div>
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#22C55E;"></div><div><p class="swatch__name">600</p><p class="swatch__hex">#22C55E</p></div></div>
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#15803D;"></div><div><p class="swatch__name">700</p><p class="swatch__hex">#15803D</p></div></div>
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#166534;"></div><div><p class="swatch__name">800</p><p class="swatch__hex">#166534</p></div></div>
-          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#003727;"></div><div><p class="swatch__name">900</p><p class="swatch__hex">#003727</p></div></div>
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:var(--green-900);"></div><div><p class="swatch__name">900</p><p class="swatch__hex">var(--green-900)</p></div></div>
         </div>
       </div>
 
