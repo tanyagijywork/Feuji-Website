@@ -986,7 +986,7 @@
       flex-direction: column;
       gap: 40px;
       background:
-        linear-gradient(#0A0806, #0A0806) padding-box,
+        linear-gradient(var(--ink), var(--ink)) padding-box,
         linear-gradient(to bottom, transparent 0%, rgba(200, 70, 20, 0.35) 100%) border-box;
       position: relative;
       overflow: hidden;
@@ -1018,7 +1018,7 @@
 
     .case-card:hover {
       background:
-        linear-gradient(#0A0806, #0A0806) padding-box,
+        linear-gradient(var(--ink), var(--ink)) padding-box,
         linear-gradient(to bottom, transparent 0%, rgba(243, 117, 44, 0.65) 100%) border-box;
       transform: translateY(-2px);
     }
@@ -1028,7 +1028,7 @@
     }
 
     .case-card__label {
-      color: #F3752C;
+      color: var(--orange);
       transition: color 0.4s var(--ease);
       position: relative;
       z-index: 1;
