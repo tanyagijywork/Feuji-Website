@@ -15,6 +15,7 @@
       --f-ui:      'DM Sans', system-ui, sans-serif;
 
       /* ── Neutrals ── */
+      --neutral-50:  #F9F9F9;
       --neutral-100: #EAEAEA;
       --neutral-200: #DFDFDF;
       --neutral-300: #C1C1C1;
@@ -116,7 +117,7 @@
       /* ── Semantic aliases ── */
       --ink:     var(--neutral-900);
       --white:   #FFFFFF;
-      --surface: var(--neutral-100);
+      --surface: var(--neutral-50);
       --border:  var(--neutral-200);
       --muted:   var(--neutral-400);
       --mid:     var(--neutral-600);
@@ -1019,6 +1020,7 @@
           <p class="bcard__title">Colour System</p>
           <div class="colour-stripes">
             <!-- Neutrals -->
+            <div class="colour-stripe" style="background:var(--neutral-50);"></div>
             <div class="colour-stripe" style="background:var(--neutral-100);"></div>
             <div class="colour-stripe" style="background:var(--neutral-200);"></div>
             <div class="colour-stripe" style="background:var(--neutral-300);"></div>
@@ -1666,6 +1668,7 @@
       <div class="colour-group">
         <p class="colour-group__title">Neutrals</p>
         <div class="colour-swatches">
+          <div class="swatch swatch--sm"><div class="swatch__block" style="background:#F9F9F9;border-color:#EAEAEA;"></div><div><p class="swatch__name">50</p><p class="swatch__hex">#F9F9F9</p></div></div>
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#EAEAEA;border-color:#DFDFDF;"></div><div><p class="swatch__name">100</p><p class="swatch__hex">#EAEAEA</p></div></div>
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#DFDFDF;border-color:#C1C1C1;"></div><div><p class="swatch__name">200</p><p class="swatch__hex">#DFDFDF</p></div></div>
           <div class="swatch swatch--sm"><div class="swatch__block" style="background:#C1C1C1;"></div><div><p class="swatch__name">300</p><p class="swatch__hex">#C1C1C1</p></div></div>
