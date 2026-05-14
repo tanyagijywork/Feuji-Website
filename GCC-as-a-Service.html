@@ -1377,25 +1377,20 @@
       gap: var(--gap);
     }
 
-    /* Card */
+    /* Card — no border, no background */
     .insight-card {
       display: flex;
       flex-direction: column;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      background: var(--white);
-      transition: box-shadow 0.25s var(--ease), transform 0.25s var(--ease),
-                  border-color 0.25s var(--ease);
+      background: none;
+      border: none;
+      transition: transform 0.25s var(--ease);
       cursor: pointer;
     }
     .insight-card:hover {
-      box-shadow: 0 16px 48px rgba(0,0,0,0.08);
       transform: translateY(-4px);
-      border-color: var(--neutral-300);
     }
 
-    /* Image placeholder */
+    /* Image — fully rounded on all four corners */
     .insight-card__media {
       width: 100%;
       aspect-ratio: 3 / 2;
@@ -1403,7 +1398,7 @@
       position: relative;
       overflow: hidden;
       flex-shrink: 0;
-      border-bottom: 1px solid var(--border);
+      border-radius: 12px;
       transition: background 0.3s var(--ease);
     }
     .insight-card:hover .insight-card__media {
@@ -1443,7 +1438,7 @@
 
     /* Content area */
     .insight-card__body {
-      padding: 28px 28px 24px;
+      padding: 20px 0 0;
       display: flex;
       flex-direction: column;
       flex: 1;
