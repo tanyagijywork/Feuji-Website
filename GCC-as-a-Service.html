@@ -892,6 +892,159 @@
     }
 
     /* ─────────────────────────────────────────
+       CAPABILITIES — OPTION A: Icon grid (3×2)
+    ───────────────────────────────────────── */
+    .cap-a {
+      background: var(--white);
+      padding: var(--sec-py) 0;
+    }
+    .cap-a__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+    }
+    .cap-a__header {
+      max-width: 640px;
+      margin-bottom: 64px;
+    }
+    .cap-a__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .cap-a-card {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 40px 40px 40px 0;
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      transition: background 0.2s var(--ease);
+    }
+    /* Remove right border on last column */
+    .cap-a-card:nth-child(3n) { border-right: none; padding-right: 0; }
+    /* Bottom row: add bottom border */
+    .cap-a-card:nth-child(n+4) { border-bottom: 1px solid var(--border); }
+    .cap-a-card:hover { background: var(--neutral-50); }
+    .cap-a-card:hover .cap-a-card__icon { color: var(--orange); }
+    .cap-a-card:hover .cap-a-card__heading { color: var(--orange-dark); }
+
+    .cap-a-card__icon {
+      width: 28px;
+      height: 28px;
+      color: var(--ink);
+      flex-shrink: 0;
+      transition: color 0.2s var(--ease);
+    }
+    .cap-a-card__heading {
+      font-family: var(--f-display);
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 28px;
+      letter-spacing: -0.8px;
+      color: var(--ink);
+      transition: color 0.2s var(--ease);
+    }
+    .cap-a-card__body {
+      font-family: var(--f-ui);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 22px;
+      color: var(--mid);
+    }
+
+    @media (max-width: 768px) {
+      .cap-a__grid { grid-template-columns: 1fr; }
+      .cap-a-card { border-right: none; padding-right: 0; }
+      .cap-a-card:nth-child(3n) { border-right: none; }
+      .cap-a-card:nth-child(n+4) { border-bottom: none; }
+      .cap-a-card { border-bottom: 1px solid var(--border); border-top: none; }
+      .cap-a-card:first-child { border-top: 1px solid var(--border); }
+    }
+
+    /* ─────────────────────────────────────────
+       CAPABILITIES — OPTION B: Icon-left rows
+    ───────────────────────────────────────── */
+    .cap-b {
+      background: var(--neutral-50);
+      padding: var(--sec-py) 0;
+    }
+    .cap-b__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .cap-b__left {
+      position: sticky;
+      top: calc(var(--nav-h) + 40px);
+    }
+    .cap-b__list {
+      display: flex;
+      flex-direction: column;
+    }
+    .cap-b-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s var(--ease);
+    }
+    .cap-b-item:first-child { border-top: 1px solid var(--border); }
+    .cap-b-item:hover .cap-b-item__badge { background: var(--ink); color: var(--white); }
+    .cap-b-item:hover .cap-b-item__heading { color: var(--orange-dark); }
+
+    .cap-b-item__badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--neutral-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--ink);
+      transition: background 0.2s var(--ease), color 0.2s var(--ease);
+      margin-top: 2px;
+    }
+    .cap-b-item__badge svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+    .cap-b-item__content {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .cap-b-item__heading {
+      font-family: var(--f-ui);
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 22px;
+      letter-spacing: -0.2px;
+      color: var(--ink);
+      transition: color 0.2s var(--ease);
+    }
+    .cap-b-item__body {
+      font-family: var(--f-ui);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      color: var(--mid);
+    }
+
+    @media (max-width: 768px) {
+      .cap-b__inner { grid-template-columns: 1fr; gap: 40px; }
+      .cap-b__left { position: static; }
+    }
+
+    /* ─────────────────────────────────────────
        IMPACT NUMBERS
     ───────────────────────────────────────── */
     .impact {
@@ -1617,82 +1770,184 @@
 
 
   <!-- ══════════════════════════════════════
-       CORE CAPABILITIES
+       CORE CAPABILITIES — OPTION A: 3×2 icon grid
   ══════════════════════════════════════ -->
-  <section id="capabilities" class="capabilities" aria-labelledby="cap-heading">
-    <div class="capabilities__inner">
+  <section id="capabilities" class="cap-a" aria-labelledby="cap-a-heading">
+    <div class="cap-a__inner">
+
+      <div class="cap-a__header reveal">
+        <span class="t-label-s eyebrow">Core capabilities</span>
+        <h2 id="cap-a-heading" class="t-h2" style="margin-top:16px;">How we make it <em>possible</em></h2>
+      </div>
+
+      <div class="cap-a__grid reveal reveal-d1">
+
+        <!-- Strategic Control -->
+        <div class="cap-a-card">
+          <svg class="cap-a-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="12" r="3"/>
+            <line x1="12" y1="2" x2="12" y2="5"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+            <line x1="2" y1="12" x2="5" y2="12"/>
+            <line x1="19" y1="12" x2="22" y2="12"/>
+          </svg>
+          <h4 class="cap-a-card__heading">Strategic Control</h4>
+          <p class="cap-a-card__body">Improve strategic decision-making with AI-driven intelligence, enterprise knowledge access, and business-aligned AI models.</p>
+        </div>
+
+        <!-- Cost Efficiency -->
+        <div class="cap-a-card">
+          <svg class="cap-a-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            <polyline points="17 6 23 6 23 12"/>
+          </svg>
+          <h4 class="cap-a-card__heading">Cost Efficiency</h4>
+          <p class="cap-a-card__body">Reduce operational overhead through intelligent workload allocation, automation-first delivery, and AI-driven service management.</p>
+        </div>
+
+        <!-- Talent Excellence -->
+        <div class="cap-a-card">
+          <svg class="cap-a-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+            <path d="M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+          <h4 class="cap-a-card__heading">Talent Excellence</h4>
+          <p class="cap-a-card__body">Enhance talent acquisition and productivity with AI-led sourcing, automated assessments, and copilot-assisted engineering workflows.</p>
+        </div>
+
+        <!-- Operational Resilience -->
+        <div class="cap-a-card">
+          <svg class="cap-a-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <h4 class="cap-a-card__heading">Operational Resilience</h4>
+          <p class="cap-a-card__body">Improve operational continuity with self-healing systems, predictive incident management, and SLA-driven IT operations.</p>
+        </div>
+
+        <!-- Innovation Engine -->
+        <div class="cap-a-card">
+          <svg class="cap-a-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="9" y1="18" x2="15" y2="18"/>
+            <line x1="10" y1="22" x2="14" y2="22"/>
+            <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0018 8 6 6 0 006 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 018.91 14z"/>
+          </svg>
+          <h4 class="cap-a-card__heading">Innovation Engine</h4>
+          <p class="cap-a-card__body">Accelerate innovation with embedded AI labs, rapid GenAI prototyping, and enterprise-ready AI and LLM toolkits.</p>
+        </div>
+
+        <!-- Compliance & Security -->
+        <div class="cap-a-card">
+          <svg class="cap-a-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0110 0v4"/>
+          </svg>
+          <h4 class="cap-a-card__heading">Compliance &amp; Security</h4>
+          <p class="cap-a-card__body">Strengthen enterprise security with AI-driven threat detection, automated governance, and proactive cloud risk visibility.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       CORE CAPABILITIES — OPTION B: Icon-left rows
+  ══════════════════════════════════════ -->
+  <section class="cap-b" aria-labelledby="cap-b-heading">
+    <div class="cap-b__inner">
 
       <!-- Left: sticky heading -->
-      <div class="capabilities__left reveal">
+      <div class="cap-b__left reveal">
         <span class="t-label-s eyebrow">Core capabilities</span>
-        <h2 id="cap-heading" class="t-h2">How we make it <em>possible</em></h2>
+        <h2 id="cap-b-heading" class="t-h2" style="margin-top:16px;">How we make it <em>possible</em></h2>
       </div>
 
-      <!-- Right: accordion -->
-      <div class="acc-list reveal reveal-d1" role="list">
+      <!-- Right: icon-left rows -->
+      <div class="cap-b__list reveal reveal-d1">
 
-        <div class="acc-item" role="listitem">
-          <button class="acc-item__header" aria-expanded="false">
-            <span class="acc-item__title">Strategic Control</span>
-            <span class="acc-item__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="acc-item__body">
-            <p class="acc-item__text">Improve strategic decision-making with AI-driven intelligence, enterprise knowledge access, and business-aligned AI models.</p>
+        <div class="cap-b-item">
+          <div class="cap-b-item__badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+              <line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/>
+              <line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/>
+            </svg>
+          </div>
+          <div class="cap-b-item__content">
+            <h5 class="cap-b-item__heading">Strategic Control</h5>
+            <p class="cap-b-item__body">Improve strategic decision-making with AI-driven intelligence, enterprise knowledge access, and business-aligned AI models.</p>
           </div>
         </div>
 
-        <div class="acc-item" role="listitem">
-          <button class="acc-item__header" aria-expanded="false">
-            <span class="acc-item__title">Cost Efficiency</span>
-            <span class="acc-item__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="acc-item__body">
-            <p class="acc-item__text">Reduce operational overhead through intelligent workload allocation, automation-first delivery, and AI-driven service management.</p>
+        <div class="cap-b-item">
+          <div class="cap-b-item__badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+              <polyline points="17 6 23 6 23 12"/>
+            </svg>
+          </div>
+          <div class="cap-b-item__content">
+            <h5 class="cap-b-item__heading">Cost Efficiency</h5>
+            <p class="cap-b-item__body">Reduce operational overhead through intelligent workload allocation, automation-first delivery, and AI-driven service management.</p>
           </div>
         </div>
 
-        <div class="acc-item" role="listitem">
-          <button class="acc-item__header" aria-expanded="false">
-            <span class="acc-item__title">Talent Excellence</span>
-            <span class="acc-item__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="acc-item__body">
-            <p class="acc-item__text">Enhance talent acquisition and productivity with AI-led sourcing, automated assessments, and copilot-assisted engineering workflows.</p>
+        <div class="cap-b-item">
+          <div class="cap-b-item__badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+          </div>
+          <div class="cap-b-item__content">
+            <h5 class="cap-b-item__heading">Talent Excellence</h5>
+            <p class="cap-b-item__body">Enhance talent acquisition and productivity with AI-led sourcing, automated assessments, and copilot-assisted engineering workflows.</p>
           </div>
         </div>
 
-        <div class="acc-item" role="listitem">
-          <button class="acc-item__header" aria-expanded="false">
-            <span class="acc-item__title">Operational Resilience</span>
-            <span class="acc-item__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="acc-item__body">
-            <p class="acc-item__text">Improve operational continuity with self-healing systems, predictive incident management, and SLA-driven IT operations.</p>
+        <div class="cap-b-item">
+          <div class="cap-b-item__badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="cap-b-item__content">
+            <h5 class="cap-b-item__heading">Operational Resilience</h5>
+            <p class="cap-b-item__body">Improve operational continuity with self-healing systems, predictive incident management, and SLA-driven IT operations.</p>
           </div>
         </div>
 
-        <div class="acc-item" role="listitem">
-          <button class="acc-item__header" aria-expanded="false">
-            <span class="acc-item__title">Innovation Engine</span>
-            <span class="acc-item__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="acc-item__body">
-            <p class="acc-item__text">Accelerate innovation with embedded AI labs, rapid GenAI prototyping, and enterprise-ready AI and LLM toolkits.</p>
+        <div class="cap-b-item">
+          <div class="cap-b-item__badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/>
+              <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0018 8 6 6 0 006 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 018.91 14z"/>
+            </svg>
+          </div>
+          <div class="cap-b-item__content">
+            <h5 class="cap-b-item__heading">Innovation Engine</h5>
+            <p class="cap-b-item__body">Accelerate innovation with embedded AI labs, rapid GenAI prototyping, and enterprise-ready AI and LLM toolkits.</p>
           </div>
         </div>
 
-        <div class="acc-item" role="listitem">
-          <button class="acc-item__header" aria-expanded="false">
-            <span class="acc-item__title">Compliance & Security</span>
-            <span class="acc-item__icon" aria-hidden="true">+</span>
-          </button>
-          <div class="acc-item__body">
-            <p class="acc-item__text">Strengthen enterprise security with AI-driven threat detection, automated governance, and proactive cloud risk visibility.</p>
+        <div class="cap-b-item">
+          <div class="cap-b-item__badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+          </div>
+          <div class="cap-b-item__content">
+            <h5 class="cap-b-item__heading">Compliance &amp; Security</h5>
+            <p class="cap-b-item__body">Strengthen enterprise security with AI-driven threat detection, automated governance, and proactive cloud risk visibility.</p>
           </div>
         </div>
 
       </div>
-
     </div>
   </section>
 
