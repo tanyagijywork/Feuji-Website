@@ -647,6 +647,50 @@
     }
 
     /* ─────────────────────────────────────────
+       INTRO — display quote, scroll-driven reveal
+    ───────────────────────────────────────── */
+    .sus-intro {
+      background: var(--white);
+      padding: 120px 0 120px;
+    }
+
+    .sus-intro__inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+      text-align: center;
+    }
+
+    .sus-intro__quote {
+      font-family: var(--f-display);
+      font-size: 44px;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.25;
+      letter-spacing: -1.5px;
+      color: var(--ink);
+      /* tw-char opacity starts at 0 via .tw-char rule — no extra opacity needed */
+    }
+
+    /* Dim characters that haven't revealed yet (sits behind .tw-char.is-visible) */
+    .sus-intro__quote .tw-char {
+      color: var(--ink);
+      opacity: 0.08; /* faint placeholder so layout is stable */
+      transition: opacity 0.4s var(--ease-out);
+    }
+    .sus-intro__quote .tw-char.is-visible {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .sus-intro { padding: 72px 0; }
+      .sus-intro__quote {
+        font-size: 28px;
+        letter-spacing: -0.5px;
+      }
+    }
+
+    /* ─────────────────────────────────────────
        CONNECT — dark CTA band
     ───────────────────────────────────────── */
     .connect {
@@ -895,6 +939,16 @@
         <!-- Image or video goes here -->
       </div>
 
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       INTRO — display quote
+  ══════════════════════════════════════ -->
+  <section class="sus-intro" aria-label="Our sustainability belief">
+    <div class="sus-intro__inner">
+      <p class="sus-intro__quote" id="susIntroQuote">We believe protecting the environment is a shared responsibility that shapes the future of our communities and our planet. Through our initiatives, we support wildlife conservation, environmental restoration, and responsible stewardship efforts that help preserve natural ecosystems. From driving rescue and rehabilitation programs to encouraging long-term environmental awareness, our efforts are centered on sustaining a stronger balance between people and nature.</p>
     </div>
   </section>
 
@@ -1152,6 +1206,10 @@
 
     setTimeout(() => setupHeroTypewriter(document.querySelector('.page-banner__heading')), 500);
     document.querySelectorAll('.t-h2').forEach(el => setupScrollTypewriter(el));
+
+    // Scroll-driven character reveal for the intro quote
+    const introQuote = document.getElementById('susIntroQuote');
+    if (introQuote) setupScrollTypewriter(introQuote);
   })();
   </script>
 
