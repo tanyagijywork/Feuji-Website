@@ -938,6 +938,7 @@
     .cap-card {
       flex-shrink: 0;
       width: 300px;
+      min-height: 220px;
       border-radius: 12px;
       background: var(--yellow-50);
       border: 1px solid var(--yellow-100);
@@ -948,9 +949,10 @@
       position: relative;
       overflow: hidden;
       cursor: default;
-      transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+      transition: background 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
     }
     .cap-card:hover {
+      background: var(--yellow-200);
       border-color: var(--yellow-200);
       box-shadow: 0 12px 40px rgba(0,0,0,0.07);
     }
@@ -961,10 +963,11 @@
       height: 28px;
       color: var(--yellow-700);
       flex-shrink: 0;
-      transition: color 0.2s var(--ease);
+      transition: color 0.25s var(--ease);
     }
+    .cap-card:hover .cap-card__icon { color: var(--ink); }
 
-    /* Heading — always visible */
+    /* Heading */
     .cap-card__heading {
       font-family: var(--f-display);
       font-size: 28px;
@@ -972,39 +975,20 @@
       line-height: 30px;
       letter-spacing: -1px;
       color: var(--ink);
-      transition: color 0.2s var(--ease);
+      transition: color 0.25s var(--ease);
     }
+    .cap-card:hover .cap-card__heading { color: var(--ink); }
 
-    /* Body — hidden by default, fades in on hover */
+    /* Body — always visible */
     .cap-card__body {
       font-family: var(--f-ui);
       font-size: 14px;
       font-weight: 400;
       line-height: 21px;
-      color: var(--mid);
-      opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: opacity 0.3s var(--ease), max-height 0.35s var(--ease);
+      color: var(--neutral-700);
+      transition: color 0.25s var(--ease);
     }
-    .cap-card:hover .cap-card__body {
-      opacity: 1;
-      max-height: 120px;
-    }
-
-    /* Subtle warm glow behind icon on hover */
-    .cap-card::before {
-      content: '';
-      position: absolute;
-      top: -20px; right: -20px;
-      width: 120px; height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(253,228,122,0.55) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s var(--ease);
-      pointer-events: none;
-    }
-    .cap-card:hover::before { opacity: 1; }
+    .cap-card:hover .cap-card__body { color: var(--ink); }
 
     /* ─────────────────────────────────────────
        (option A/B removed — carousel is live)
