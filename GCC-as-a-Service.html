@@ -706,10 +706,11 @@
       transform: scale(1.2);
     }
 
-    /* Right — stacked tab cards */
+    /* Right — stacked tab cards, top-aligned */
     .bot-tabs__cards {
       display: flex;
       flex-direction: column;
+      justify-content: flex-start;
     }
 
     .bot-tab {
@@ -770,12 +771,15 @@
       line-height: 22px;
       color: var(--mid);
       opacity: 0;
-      /* No max-height collapse — body always occupies space so height never shifts */
+      max-height: 0;
+      overflow: hidden;
       transform: translateY(4px);
+      /* Transition opacity & transform only — max-height snaps instantly, no bounce */
       transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
     }
     .bot-tab.is-active .bot-tab__body {
       opacity: 1;
+      max-height: 200px;
       transform: translateY(0);
     }
 
