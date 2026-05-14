@@ -425,10 +425,10 @@
 
     .page-banner__gif {
       width: 100%;
-      max-height: 420px;
-      object-fit: contain;
-      border-radius: 12px;
-      mix-blend-mode: multiply;
+      max-height: 480px;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
     }
 
     /* Breadcrumbs — pill track */
@@ -1795,13 +1795,16 @@
 
       </div>
 
-      <!-- Right: GIF -->
+      <!-- Right: looping banner video -->
       <div class="page-banner__right">
-        <img
-          src="Assets/gif/Stop%20Motion%20Animation%20GIF%20by%20Emanuele%20Kabu.gif"
-          alt="Abstract animation"
+        <video
           class="page-banner__gif"
-        />
+          src="Assets/gif/Feuji%20banner%20video%201.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+        ></video>
       </div>
 
     </div>
