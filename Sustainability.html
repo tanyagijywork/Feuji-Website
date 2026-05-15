@@ -864,14 +864,14 @@
 
     .sus-quote__attr {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
       gap: 16px;
     }
 
     .sus-quote__avatar {
-      width: 52px;
-      height: 52px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.2);
@@ -880,7 +880,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      /* swap src onto an <img> inside when photo is ready */
     }
 
     .sus-quote__avatar img {
@@ -890,19 +889,10 @@
       border-radius: 50%;
     }
 
-    /* Initials fallback shown when no image */
-    .sus-quote__avatar-initials {
-      font-family: var(--f-ui);
-      font-size: 16px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.5);
-      letter-spacing: 0.5px;
-    }
-
     .sus-quote__meta {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       gap: 4px;
     }
 
