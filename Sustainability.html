@@ -670,6 +670,13 @@
       color: var(--ink);
     }
 
+    /* Scroll-driven fade — JS drives opacity & translateY via inline style */
+    .scroll-fade {
+      opacity: 0;
+      transform: translateY(40px);
+      will-change: opacity, transform;
+    }
+
 
     @media (max-width: 768px) {
       .sus-intro { padding: 72px 0; }
@@ -1211,7 +1218,7 @@
   ══════════════════════════════════════ -->
   <section class="sus-intro" aria-label="Our sustainability belief">
     <div class="sus-intro__inner">
-      <p class="sus-intro__quote reveal">We believe protecting the environment is a shared responsibility that shapes the future of our communities and our planet. Through our initiatives, we support wildlife conservation, environmental restoration, and responsible stewardship efforts that help preserve natural ecosystems. From driving rescue and rehabilitation programs to encouraging long-term environmental awareness, our efforts are centered on sustaining a stronger balance between people and nature.</p>
+      <p class="sus-intro__quote scroll-fade" id="susIntroQuote">We believe protecting the environment is a shared responsibility that shapes the future of our communities and our planet. Through our initiatives, we support wildlife conservation, environmental restoration, and responsible stewardship efforts that help preserve natural ecosystems. From driving rescue and rehabilitation programs to encouraging long-term environmental awareness, our efforts are centered on sustaining a stronger balance between people and nature.</p>
     </div>
   </section>
 
@@ -1649,6 +1656,27 @@
 
     activate(0);
     startTimer();
+  })();
+  </script>
+
+  <!-- ── Scroll-fade: opacity + translateY driven by scroll position ── -->
+  <script>
+  (function () {
+    const el = document.getElementById('susIntroQuote');
+    if (!el) return;
+
+    function update() {
+      const rect = el.getBoundingClientRect();
+      const vh   = window.innerHeight;
+      // Progress: 0 when bottom of viewport just reaches element, 1 when element is 30% from top
+      const raw  = (vh - rect.top) / (vh * 0.7);
+      const prog = Math.max(0, Math.min(1, raw));
+      el.style.opacity   = prog;
+      el.style.transform = `translateY(${(1 - prog) * 40}px)`;
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    update(); // run once on load in case already in view
   })();
   </script>
 
