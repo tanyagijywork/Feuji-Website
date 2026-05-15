@@ -670,16 +670,10 @@
       color: var(--ink);
     }
 
-    /* Sentence-by-sentence stagger fade */
-    .sus-intro__sentence {
-      display: block;
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out);
-    }
-    .sus-intro__sentence.is-visible {
-      opacity: 1;
-      transform: none;
+    /* Word-by-word scroll reveal */
+    .sus-intro__word {
+      opacity: 0.15;
+      display: inline;
     }
 
 
@@ -1223,11 +1217,7 @@
   ══════════════════════════════════════ -->
   <section class="sus-intro" aria-label="Our sustainability belief">
     <div class="sus-intro__inner">
-      <p class="sus-intro__quote" id="susIntroQuote">
-        <span class="sus-intro__sentence">We believe protecting the environment is a shared responsibility that shapes the future of our communities and our planet.</span>
-        <span class="sus-intro__sentence">Through our initiatives, we support wildlife conservation, environmental restoration, and responsible stewardship efforts that help preserve natural ecosystems.</span>
-        <span class="sus-intro__sentence">From driving rescue and rehabilitation programs to encouraging long-term environmental awareness, our efforts are centered on sustaining a stronger balance between people and nature.</span>
-      </p>
+      <p class="sus-intro__quote" id="susIntroQuote">We believe protecting the environment is a shared responsibility that shapes the future of our communities and our planet. Through our initiatives, we support wildlife conservation, environmental restoration, and responsible stewardship efforts that help preserve natural ecosystems. From driving rescue and rehabilitation programs to encouraging long-term environmental awareness, our efforts are centered on sustaining a stronger balance between people and nature.</p>
     </div>
   </section>
 
@@ -1668,26 +1658,58 @@
   })();
   </script>
 
-  <!-- ── Intro: sentence-by-sentence stagger fade ── -->
+  <!-- ── Intro: word-by-word scroll-driven opacity reveal ── -->
   <script>
   (function () {
-    const container = document.getElementById('susIntroQuote');
-    if (!container) return;
+    const el = document.getElementById('susIntroQuote');
+    if (!el) return;
 
-    const sentences = container.querySelectorAll('.sus-intro__sentence');
-    const delays    = [0, 360, 720];
+    // Split text into word spans, preserving whitespace between words
+    const raw = el.textContent.trim();
+    el.innerHTML = '';
+    const wordSpans = [];
 
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        sentences.forEach((s, i) => {
-          setTimeout(() => s.classList.add('is-visible'), delays[i]);
-        });
-        obs.unobserve(container);
+    raw.split(/(\s+)/).forEach(chunk => {
+      if (!chunk) return;
+      if (/^\s+$/.test(chunk)) {
+        el.appendChild(document.createTextNode(chunk));
+      } else {
+        const span = document.createElement('span');
+        span.className = 'sus-intro__word';
+        span.textContent = chunk;
+        el.appendChild(span);
+        wordSpans.push(span);
+      }
+    });
+
+    const total = wordSpans.length;
+
+    function update() {
+      const rect  = el.getBoundingClientRect();
+      const vh    = window.innerHeight;
+
+      // Progress 0 → when element top hits viewport bottom
+      // Progress 1 → when element has scrolled so its bottom is ~40% from top
+      const scrollIn   = vh - rect.top;
+      const totalRange = rect.height + vh * 0.55;
+      const prog = Math.max(0, Math.min(1, scrollIn / totalRange));
+
+      const lit = prog * total;
+
+      wordSpans.forEach((span, i) => {
+        if (i < lit - 1) {
+          span.style.opacity = 1;
+        } else if (i < lit) {
+          // smooth leading edge — fractional word
+          span.style.opacity = 0.15 + (lit - i) * 0.85;
+        } else {
+          span.style.opacity = 0.15;
+        }
       });
-    }, { threshold: 0.2, rootMargin: '0px 0px -48px 0px' });
+    }
 
-    obs.observe(container);
+    window.addEventListener('scroll', update, { passive: true });
+    update();
   })();
   </script>
 
