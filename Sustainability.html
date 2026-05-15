@@ -817,25 +817,22 @@
     .ini-tab__link {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       margin-top: 20px;
-      padding: 14px 28px;
-      border: 1px solid var(--ink);
-      border-radius: 999px;
-      background: var(--ink);
-      color: var(--white);
+      padding: 0;
+      background: none;
+      border: none;
+      color: var(--ink);
       font-family: var(--f-ui);
       font-size: 16px;
       font-weight: 400;
       line-height: 18px;
-      transition: background 0.2s var(--ease), border-color 0.2s var(--ease),
-                  color 0.2s var(--ease), transform 0.18s var(--ease);
+      transition: color 0.22s var(--ease);
     }
-    .ini-tab__link:hover {
-      transform: translateY(-1px);
-    }
-    .ini-tab__link:active {
-      transform: translateY(0);
+    .ini-tab__link:hover { color: var(--ink); }
+    .ini-tab__link:hover .btn-arrow { transform: translateX(4px); }
+    .ini-tab__link .btn-arrow {
+      transition: transform 0.2s var(--ease);
     }
 
     @media (max-width: 768px) {
