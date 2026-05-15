@@ -836,6 +836,73 @@
     }
 
     /* ─────────────────────────────────────────
+       CEO QUOTE
+    ───────────────────────────────────────── */
+    .sus-quote {
+      background: var(--green-900);
+      padding: 120px 0;
+    }
+
+    .sus-quote__inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .sus-quote__mark {
+      font-family: var(--f-display);
+      font-size: 120px;
+      line-height: 0.6;
+      color: var(--green-500);
+      user-select: none;
+      display: block;
+    }
+
+    .sus-quote__text {
+      font-family: var(--f-display);
+      font-size: 40px;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.25;
+      letter-spacing: -1.5px;
+      color: var(--white);
+    }
+
+    .sus-quote__attr {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sus-quote__name {
+      font-family: var(--f-ui);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: var(--white);
+    }
+
+    .sus-quote__role {
+      font-family: var(--f-ui);
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.2px;
+    }
+
+    @media (max-width: 768px) {
+      .sus-quote { padding: 80px 0; }
+      .sus-quote__text { font-size: 26px; letter-spacing: -0.5px; }
+      .sus-quote__mark { font-size: 80px; }
+    }
+
+    /* ─────────────────────────────────────────
        CONNECT — dark CTA band
     ───────────────────────────────────────── */
     .connect {
@@ -1167,6 +1234,23 @@
       </div><!-- /ini-tabs -->
 
     </div><!-- /ini__inner -->
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       CEO QUOTE
+  ══════════════════════════════════════ -->
+  <section class="sus-quote" aria-label="CEO quote">
+    <div class="sus-quote__inner">
+      <span class="sus-quote__mark reveal" aria-hidden="true">"</span>
+      <blockquote class="sus-quote__text reveal reveal-d1">
+        The way we care for our environment today will define the quality of life we leave behind for the generations that follow.
+      </blockquote>
+      <div class="sus-quote__attr reveal reveal-d2">
+        <span class="sus-quote__name">Manohar Reddy</span>
+        <span class="sus-quote__role">CEO, Feuji</span>
+      </div>
+    </div>
   </section>
 
 
