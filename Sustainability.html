@@ -766,14 +766,14 @@
       border-radius: 999px;
     }
 
-    /* Progress fill — green accent */
+    /* Progress fill — orange, matches BOT model on GCC page */
     .ini-tab::after {
       content: '';
       position: absolute;
       top: -1px; left: 0;
       height: 2px;
       width: 0;
-      background: var(--green-500);
+      background: var(--orange-dark);
       border-radius: 999px;
     }
     .ini-tab.is-active::after {
@@ -817,17 +817,25 @@
     .ini-tab__link {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      margin-top: 16px;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 14px 28px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--white);
       font-family: var(--f-ui);
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--green-700);
-      transition: gap 0.2s var(--ease), color 0.2s var(--ease);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 18px;
+      transition: background 0.2s var(--ease), border-color 0.2s var(--ease),
+                  color 0.2s var(--ease), transform 0.18s var(--ease);
     }
     .ini-tab__link:hover {
-      color: var(--green-900);
-      gap: 10px;
+      transform: translateY(-1px);
+    }
+    .ini-tab__link:active {
+      transform: translateY(0);
     }
 
     @media (max-width: 768px) {
@@ -1265,7 +1273,7 @@
             <h3 class="ini-tab__title">Energy and water Conservation</h3>
             <div class="ini-tab__body">
               <p>By promoting rainwater harvesting, constructing soak pits, and enabling energy-efficient infrastructure like LED lighting, we are helping rural communities conserve critical natural resources and improve access to reliable water and power.</p>
-              <a href="#" class="ini-tab__link">Learn more <span>→</span></a>
+              <a href="#" class="ini-tab__link">Learn more <span class="btn-arrow">→</span></a>
             </div>
           </div>
 
@@ -1273,7 +1281,7 @@
             <h3 class="ini-tab__title">Soil-health Enrichment</h3>
             <div class="ini-tab__body">
               <p>Working alongside agricultural experts, we are helping farmers improve soil health and crop productivity through soil health cards, sustainable irrigation support, check dams, and soil enrichment initiatives like vermicomposting.</p>
-              <a href="#" class="ini-tab__link">Learn more <span>→</span></a>
+              <a href="#" class="ini-tab__link">Learn more <span class="btn-arrow">→</span></a>
             </div>
           </div>
 
@@ -1281,7 +1289,7 @@
             <h3 class="ini-tab__title">Waste Management System</h3>
             <div class="ini-tab__body">
               <p>By building toilets, sewage infrastructure, solid waste management systems, and a vermicompost plant, we are helping villages improve sanitation and create cleaner shared community spaces.</p>
-              <a href="#" class="ini-tab__link">Learn more <span>→</span></a>
+              <a href="#" class="ini-tab__link">Learn more <span class="btn-arrow">→</span></a>
             </div>
           </div>
 
@@ -1289,7 +1297,7 @@
             <h3 class="ini-tab__title">Wildlife Conservation</h3>
             <div class="ini-tab__body">
               <p>In collaboration with the Rescate Wildlife Rescue Center in Alajuela, Costa Rica, we are supporting animal rescue, habitat maintenance, and rehabilitation programs that protect endangered wildlife and enable their return to natural ecosystems.</p>
-              <a href="#" class="ini-tab__link">Learn more <span>→</span></a>
+              <a href="#" class="ini-tab__link">Learn more <span class="btn-arrow">→</span></a>
             </div>
           </div>
 
