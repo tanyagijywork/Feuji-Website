@@ -670,11 +670,11 @@
       color: var(--ink);
     }
 
-    /* Dim characters that haven't revealed yet (sits behind .tw-char.is-visible) */
+    /* Unrevealed characters sit at low opacity; scroll drives them to full */
     .sus-intro__quote .tw-char {
       color: var(--ink);
-      opacity: 0.08; /* faint placeholder so layout is stable */
-      transition: opacity 0.4s var(--ease-out);
+      opacity: 0.2;
+      transition: opacity 0.5s var(--ease-out);
     }
     .sus-intro__quote .tw-char.is-visible {
       opacity: 1;
