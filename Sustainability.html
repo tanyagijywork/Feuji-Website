@@ -1312,7 +1312,7 @@
   <section class="sus-quote" aria-label="CEO quote">
     <div class="sus-quote__inner">
       <span class="sus-quote__mark reveal" aria-hidden="true">"</span>
-      <blockquote class="sus-quote__text reveal reveal-d1">
+      <blockquote class="sus-quote__text">
         The way we care for our environment today will define the quality of life we leave behind for the generations that follow.
       </blockquote>
       <div class="sus-quote__attr reveal reveal-d2">
@@ -1580,7 +1580,7 @@
     }
 
     setTimeout(() => setupHeroTypewriter(document.querySelector('.page-banner__heading')), 500);
-    document.querySelectorAll('h2').forEach(el => setupScrollTypewriter(el));
+    document.querySelectorAll('h2, .sus-quote__text').forEach(el => setupScrollTypewriter(el));
 
   })();
   </script>
