@@ -875,9 +875,46 @@
 
     .sus-quote__attr {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
-      gap: 6px;
+      gap: 16px;
+    }
+
+    .sus-quote__avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      flex-shrink: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* swap src onto an <img> inside when photo is ready */
+    }
+
+    .sus-quote__avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    /* Initials fallback shown when no image */
+    .sus-quote__avatar-initials {
+      font-family: var(--f-ui);
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.5px;
+    }
+
+    .sus-quote__meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
     }
 
     .sus-quote__name {
@@ -1247,8 +1284,14 @@
         The way we care for our environment today will define the quality of life we leave behind for the generations that follow.
       </blockquote>
       <div class="sus-quote__attr reveal reveal-d2">
-        <span class="sus-quote__name">Manohar Reddy</span>
-        <span class="sus-quote__role">CEO, Feuji</span>
+        <div class="sus-quote__avatar" aria-hidden="true">
+          <!-- Replace with: <img src="Assets/images/manohar-reddy.jpg" alt="Manohar Reddy" /> -->
+          <span class="sus-quote__avatar-initials">MR</span>
+        </div>
+        <div class="sus-quote__meta">
+          <span class="sus-quote__name">Manohar Reddy</span>
+          <span class="sus-quote__role">CEO, Feuji</span>
+        </div>
       </div>
     </div>
   </section>
