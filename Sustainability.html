@@ -670,15 +670,6 @@
       color: var(--ink);
     }
 
-    /* Unrevealed characters sit at low opacity; scroll drives them to full */
-    .sus-intro__quote .tw-char {
-      color: var(--ink);
-      opacity: 0.2;
-      transition: opacity 0.5s var(--ease-out);
-    }
-    .sus-intro__quote .tw-char.is-visible {
-      opacity: 1;
-    }
 
     @media (max-width: 768px) {
       .sus-intro { padding: 72px 0; }
@@ -1230,7 +1221,7 @@
   ══════════════════════════════════════ -->
   <section class="sus-intro" aria-label="Our sustainability belief">
     <div class="sus-intro__inner">
-      <p class="sus-intro__quote" id="susIntroQuote">We believe protecting the environment is a shared responsibility that shapes the future of our communities and our planet. Through our initiatives, we support wildlife conservation, environmental restoration, and responsible stewardship efforts that help preserve natural ecosystems. From driving rescue and rehabilitation programs to encouraging long-term environmental awareness, our efforts are centered on sustaining a stronger balance between people and nature.</p>
+      <p class="sus-intro__quote reveal">We believe protecting the environment is a shared responsibility that shapes the future of our communities and our planet. Through our initiatives, we support wildlife conservation, environmental restoration, and responsible stewardship efforts that help preserve natural ecosystems. From driving rescue and rehabilitation programs to encouraging long-term environmental awareness, our efforts are centered on sustaining a stronger balance between people and nature.</p>
     </div>
   </section>
 
@@ -1584,9 +1575,6 @@
     setTimeout(() => setupHeroTypewriter(document.querySelector('.page-banner__heading')), 500);
     document.querySelectorAll('.t-h2').forEach(el => setupScrollTypewriter(el));
 
-    // Scroll-driven character reveal for the intro quote
-    const introQuote = document.getElementById('susIntroQuote');
-    if (introQuote) setupScrollTypewriter(introQuote);
   })();
   </script>
 
