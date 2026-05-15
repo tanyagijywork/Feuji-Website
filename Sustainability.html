@@ -670,11 +670,16 @@
       color: var(--ink);
     }
 
-    /* Scroll-driven fade — JS drives opacity & translateY via inline style */
-    .scroll-fade {
+    /* Sentence-by-sentence stagger fade */
+    .sus-intro__sentence {
+      display: block;
       opacity: 0;
-      transform: translateY(40px);
-      will-change: opacity, transform;
+      transform: translateY(24px);
+      transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out);
+    }
+    .sus-intro__sentence.is-visible {
+      opacity: 1;
+      transform: none;
     }
 
 
@@ -1218,7 +1223,11 @@
   ══════════════════════════════════════ -->
   <section class="sus-intro" aria-label="Our sustainability belief">
     <div class="sus-intro__inner">
-      <p class="sus-intro__quote scroll-fade" id="susIntroQuote">We believe protecting the environment is a shared responsibility that shapes the future of our communities and our planet. Through our initiatives, we support wildlife conservation, environmental restoration, and responsible stewardship efforts that help preserve natural ecosystems. From driving rescue and rehabilitation programs to encouraging long-term environmental awareness, our efforts are centered on sustaining a stronger balance between people and nature.</p>
+      <p class="sus-intro__quote" id="susIntroQuote">
+        <span class="sus-intro__sentence">We believe protecting the environment is a shared responsibility that shapes the future of our communities and our planet.</span>
+        <span class="sus-intro__sentence">Through our initiatives, we support wildlife conservation, environmental restoration, and responsible stewardship efforts that help preserve natural ecosystems.</span>
+        <span class="sus-intro__sentence">From driving rescue and rehabilitation programs to encouraging long-term environmental awareness, our efforts are centered on sustaining a stronger balance between people and nature.</span>
+      </p>
     </div>
   </section>
 
@@ -1659,24 +1668,26 @@
   })();
   </script>
 
-  <!-- ── Scroll-fade: opacity + translateY driven by scroll position ── -->
+  <!-- ── Intro: sentence-by-sentence stagger fade ── -->
   <script>
   (function () {
-    const el = document.getElementById('susIntroQuote');
-    if (!el) return;
+    const container = document.getElementById('susIntroQuote');
+    if (!container) return;
 
-    function update() {
-      const rect = el.getBoundingClientRect();
-      const vh   = window.innerHeight;
-      // Progress: 0 when bottom of viewport just reaches element, 1 when element is 30% from top
-      const raw  = (vh - rect.top) / (vh * 0.7);
-      const prog = Math.max(0, Math.min(1, raw));
-      el.style.opacity   = prog;
-      el.style.transform = `translateY(${(1 - prog) * 40}px)`;
-    }
+    const sentences = container.querySelectorAll('.sus-intro__sentence');
+    const delays    = [0, 360, 720];
 
-    window.addEventListener('scroll', update, { passive: true });
-    update(); // run once on load in case already in view
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        sentences.forEach((s, i) => {
+          setTimeout(() => s.classList.add('is-visible'), delays[i]);
+        });
+        obs.unobserve(container);
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -48px 0px' });
+
+    obs.observe(container);
   })();
   </script>
 
