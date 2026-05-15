@@ -464,6 +464,11 @@
       display: block;
     }
 
+    /* Blend image into dark green banner background */
+    .page-banner__gif--blend {
+      mix-blend-mode: multiply;
+    }
+
     /* Breadcrumbs — pill track */
     .breadcrumb {
       display: inline-flex;
@@ -1203,9 +1208,11 @@
 
       </div>
 
-      <!-- Right: visual placeholder — add image/video here -->
+      <!-- Right: banner image -->
       <div class="page-banner__right">
-        <!-- Image or video goes here -->
+        <img src="Assets/images/services-gcc-BOT-model/transfer.jpg"
+             alt="Sustainability"
+             class="page-banner__gif page-banner__gif--blend" />
       </div>
 
     </div>
